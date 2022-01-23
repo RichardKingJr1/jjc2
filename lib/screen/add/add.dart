@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 
 import 'package:jjc/screen/widgets/app_botton.dart';
+import 'package:jjc/screen/widgets/menuDrawer.dart';
 
 class addPosicao extends StatefulWidget {
   //final url = Uri.parse('http://10.0.2.2:4000/criar_conta');
@@ -38,6 +39,7 @@ class _addPosicaoState extends State<addPosicao> {
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.white,
+      endDrawer: menuDrawer(),
       appBar: AppBar(
         title: const Text('Adicionar Técnica'),
       ),

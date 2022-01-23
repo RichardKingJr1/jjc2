@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:jjc/screen/widgets/menuDrawer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
@@ -64,6 +65,7 @@ class _AulaState extends State<Aula> {
           );
         } else {
           return Scaffold(
+            endDrawer: menuDrawer(),
             appBar: AppBar(
               title: Text('Aula'),
             ),

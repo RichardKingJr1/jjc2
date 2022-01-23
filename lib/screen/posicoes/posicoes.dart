@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 
 import 'package:jjc/screen/widgets/app_botton.dart';
+import 'package:jjc/screen/widgets/menuDrawer.dart';
 
 class Posicoes extends StatefulWidget {
   final String data;
@@ -21,6 +22,7 @@ class _PosicoesState extends State<Posicoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: menuDrawer(),
       appBar: AppBar(
         title: const Text('Posicoes'),
       ),

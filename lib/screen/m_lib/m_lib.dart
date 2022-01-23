@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 
 import 'package:jjc/screen/widgets/app_botton.dart';
+import 'package:jjc/screen/widgets/menuDrawer.dart';
 
 class MLib extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class _MLibState extends State<MLib> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: menuDrawer(),
       appBar: AppBar(
         title: const Text('Meus Movimentos'),
       ),
@@ -27,31 +29,6 @@ class _MLibState extends State<MLib> {
       ),
     );
   }
-
-  /*@override
-  void initState() {
-    getData();
-    super.initState();
-  }
-
-  void getData() async {
-    Map dataObj = {'lib': global.myLib};
-
-    //String S_dataObj = jsonEncode(dataObj);
-
-     await http
-        .post(widget.url,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
-      setState(() {
-        print(response.body);
-        posicoes = jsonDecode(response.body);
-      });
-    });
-
-    print(posicoes);
-  }*/
 }
 
 //Cartoes onde serão marcados os exercicios
