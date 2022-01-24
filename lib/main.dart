@@ -5,6 +5,7 @@ import 'package:jjc/router_generator.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
+import 'package:loader_overlay/loader_overlay.dart';
 
 void main() async {
   await getData();
@@ -22,13 +23,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Jiu Lib',
-      initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
-      theme: ThemeData.dark().copyWith(
-          primaryColor: Colors.lightBlue,
-          scaffoldBackgroundColor: Colors.white),
+    return GlobalLoaderOverlay(
+      child: MaterialApp(
+        title: 'Jiu Lib',
+        initialRoute: '/',
+        onGenerateRoute: RouteGenerator.generateRoute,
+        theme: ThemeData.dark().copyWith(
+            primaryColor: Colors.lightBlue,
+            scaffoldBackgroundColor: Colors.white),
+      ),
     );
   }
 }

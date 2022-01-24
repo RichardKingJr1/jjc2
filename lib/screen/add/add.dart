@@ -6,6 +6,7 @@ import 'package:jjc/global_services/global.dart' as global;
 
 import 'package:jjc/screen/widgets/app_botton.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class addPosicao extends StatefulWidget {
   //final url = Uri.parse('http://10.0.2.2:4000/criar_conta');
@@ -20,7 +21,7 @@ class addPosicao extends StatefulWidget {
 class _addPosicaoState extends State<addPosicao> {
   String nome = '';
   String idVideo = "";
-  String agrupamento = '1';
+  String tec = '1';
   String sub = "Outra";
   String nivel = "Branca";
   String observacoes = "";
@@ -151,13 +152,17 @@ class _addPosicaoState extends State<addPosicao> {
     Map dataObj = {
       'nome': nome,
       'idVideo': idVideo,
-      'agrupamento': agrupamento,
+      'agrupamento': global.globalVar['email'],
       'nivel': nivel,
       'observacoes': observacoes,
       'inicio': inicio,
       'fim': fim,
-      'sub': sub
+      'sub': sub,
+      'regiao': global.regiao,
+      'tec': tec
     };
+
+    context.loaderOverlay.show();
 
     //String S_dataObj = jsonEncode(dataObj);
 
@@ -179,6 +184,8 @@ class _addPosicaoState extends State<addPosicao> {
         });
       }
     });
+
+    context.loaderOverlay.hide();
   }
 
   Widget dialog(BuildContext context) {
@@ -207,7 +214,7 @@ class _addPosicaoState extends State<addPosicao> {
 
   Widget dropDown_agrupamento() {
     return DropdownButton<String>(
-      value: agrupamento,
+      value: tec,
       icon: const Icon(Icons.arrow_downward),
       style: const TextStyle(color: Color(2583691263)),
       underline: Container(
@@ -216,7 +223,7 @@ class _addPosicaoState extends State<addPosicao> {
       ),
       onChanged: (String? newValue) {
         setState(() {
-          agrupamento = newValue!;
+          tec = newValue!;
         });
       },
       items: [

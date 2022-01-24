@@ -136,6 +136,7 @@ class _AulaState extends State<Aula> {
       print(response.body);
       setState(() {
         global.myLib.add(global.lib_carregada[widget.index_posicao]);
+        widget.existe = true;
       });
     });
   }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
+import 'package:loader_overlay/loader_overlay.dart';
 
 class Login extends StatefulWidget {
   //final url = Uri.parse('http://10.0.2.2:4000/login');
@@ -71,7 +72,7 @@ class _LoginState extends State<Login> {
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
                     child: Text('Login'),
-                    onPressed: () => submit(),
+                    onPressed: () => {submit()},
                   ),
                 ),
                 Container(
@@ -107,6 +108,7 @@ class _LoginState extends State<Login> {
   void submit() async {
     Map dataObj = {'email': email, 'senha': senha};
 
+    context.loaderOverlay.show();
     //String S_dataObj = jsonEncode(dataObj);
 
     await http
@@ -129,6 +131,8 @@ class _LoginState extends State<Login> {
         _controller_senha.clear();
       }
     });
+
+    context.loaderOverlay.hide();
   }
 
   Widget dialog(BuildContext context) {

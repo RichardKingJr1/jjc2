@@ -5,6 +5,7 @@ import 'package:jjc/global_services/global.dart' as global;
 
 import 'package:jjc/screen/widgets/app_botton.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
+import 'package:loader_overlay/loader_overlay.dart';
 
 class Posicoes extends StatefulWidget {
   final String data;
@@ -19,6 +20,7 @@ class Posicoes extends StatefulWidget {
 
 class _PosicoesState extends State<Posicoes> {
   dynamic posicoes;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +29,7 @@ class _PosicoesState extends State<Posicoes> {
         title: const Text('Posicoes'),
       ),
       body: Container(
-        child: cartoes(posicoes),
+        child: cartoes(posicoes, context),
       ),
       bottomNavigationBar: appBotton(cont: context, selectedIndex: 0),
     );
@@ -37,13 +39,18 @@ class _PosicoesState extends State<Posicoes> {
   void initState() {
     getData();
     super.initState();
+    context.loaderOverlay.show();
   }
 
   void getData() async {
     /* Map dataObj = {'id': ''};
     dataObj['id'] = widget.data; */
 
-    Map dataObj = {'agrupamento': widget.data};
+    Map dataObj = {
+      'tec': widget.data,
+      'agrupamento': global.agrupamento,
+      'regiao': global.regiao
+    };
 
     await http
         .post(widget.url,
@@ -55,11 +62,12 @@ class _PosicoesState extends State<Posicoes> {
         posicoes = global.lib_carregada;
       });
     });
+    context.loaderOverlay.hide();
   }
 }
 
 //Cartoes onde serão marcados os exercicios
-Widget cartoes(posicoes) {
+Widget cartoes(posicoes, cont) {
   if (posicoes == null) {
     return Text('Carregando');
   } else {

@@ -24,7 +24,7 @@ class _appBottonState extends State<appBotton> {
         BottomNavigationBarItem(
             icon: Icon(Icons.library_add), title: Container(height: 0.0)),
         BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle), title: Container(height: 0.0))
+            icon: Icon(Icons.calendar_today), title: Container(height: 0.0))
       ],
       unselectedItemColor: Colors.grey,
       selectedItemColor: Colors.white,
@@ -49,7 +49,7 @@ class _appBottonState extends State<appBotton> {
           break;
         case 3:
           Navigator.of(widget.cont).pushNamedAndRemoveUntil(
-              '/perfil', (Route<dynamic> route) => false);
+              '/plans', (Route<dynamic> route) => false);
           break;
       }
     });

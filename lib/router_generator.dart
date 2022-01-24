@@ -10,6 +10,7 @@ import 'package:jjc/screen/posicoes/posicoes.dart';
 import 'package:jjc/screen/atualize/atualiza.dart';
 
 import 'package:jjc/global_services/global.dart' as global;
+import 'package:jjc/screen/t_plans/t_plans.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -45,7 +46,13 @@ class RouteGenerator {
       case '/login':
         return MaterialPageRoute(builder: (_) => Login());
       case '/add':
-        return MaterialPageRoute(builder: (_) => addPosicao());
+        if (global.globalVar['logado'] == true) {
+          return MaterialPageRoute(builder: (_) => addPosicao());
+        } else {
+          return MaterialPageRoute(builder: (_) => Login());
+        }
+      case '/plans':
+        return MaterialPageRoute(builder: (_) => t_plans());
 
       default:
         // If there is no such named route in the switch statement, e.g. /third

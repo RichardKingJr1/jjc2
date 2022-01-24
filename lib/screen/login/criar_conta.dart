@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:jjc/global_services/global.dart' as global;
+import 'package:loader_overlay/loader_overlay.dart';
 
 class criarConta extends StatefulWidget {
   //final url = Uri.parse('http://10.0.2.2:4000/criar_conta');
@@ -102,7 +103,7 @@ class _criarContaState extends State<criarConta> {
   void submit() async {
     if (senha == csenha) {
       Map dataObj = {'email': email, 'senha': senha};
-
+      context.loaderOverlay.show();
       //String S_dataObj = jsonEncode(dataObj);
 
       await http
@@ -118,6 +119,7 @@ class _criarContaState extends State<criarConta> {
           }
         });
       });
+      context.loaderOverlay.hide();
     }
   }
 

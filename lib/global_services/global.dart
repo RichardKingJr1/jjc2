@@ -5,6 +5,9 @@ dynamic globalVar = {'email': '', 'id_user': '', 'logado': false};
 List myLib = [];
 String versao = '1';
 bool uptodate = false;
+String regiao = 'br';
+String agrupamento = '1';
+
 /* class globalVar {
   String email = '';
   String id = '';
