@@ -116,7 +116,7 @@ class _LoginState extends State<Login> {
             headers: {"Content-Type": "application/json"},
             body: jsonEncode(dataObj))
         .then((response) {
-      dynamic data = json.decode(response.body);
+      dynamic data = json.decode(utf8.decode(response.bodyBytes));
 
       if (response.statusCode == 200) {
         //Fazer login no global service

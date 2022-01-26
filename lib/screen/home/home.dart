@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       endDrawer: menuDrawer(),
       appBar: AppBar(
-        title: const Text('Jiu Jitsu Club'),
+        title: const Text('Jiu Jitsu Club çâãé'),
       ),
       body: Container(
         //margin: const EdgeInsets.only(top: 5),

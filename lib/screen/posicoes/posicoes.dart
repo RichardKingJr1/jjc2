@@ -57,7 +57,7 @@ class _PosicoesState extends State<Posicoes> {
             headers: {"Content-Type": "application/json"},
             body: jsonEncode(dataObj))
         .then((response) {
-      global.lib_carregada = jsonDecode(response.body);
+      global.lib_carregada = jsonDecode(utf8.decode(response.bodyBytes));
       setState(() {
         posicoes = global.lib_carregada;
       });
