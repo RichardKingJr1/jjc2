@@ -68,6 +68,10 @@ class _AulaState extends State<Aula> {
             endDrawer: menuDrawer(),
             appBar: AppBar(
               title: Text('Aula'),
+              leading: IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
             ),
             body: corpoElemento(),
             bottomNavigationBar: appBotton(cont: context, selectedIndex: 0),

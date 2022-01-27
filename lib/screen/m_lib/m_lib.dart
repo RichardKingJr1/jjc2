@@ -73,7 +73,7 @@ Widget cartoes(posicoes) {
                             style: TextStyle(color: Colors.grey, fontSize: 15),
                           ),
                           Text(
-                            ' - ' + posicoes[index]["observacoes"],
+                            ' - ' + posicoes[index]["sub"],
                             style: TextStyle(color: Colors.grey, fontSize: 15),
                           ),
                         ]),

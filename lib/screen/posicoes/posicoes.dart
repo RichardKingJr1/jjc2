@@ -27,6 +27,10 @@ class _PosicoesState extends State<Posicoes> {
       endDrawer: menuDrawer(),
       appBar: AppBar(
         title: const Text('Posicoes'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: Container(
         child: cartoes(posicoes, context),

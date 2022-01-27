@@ -49,7 +49,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.jjc"
+        applicationId "com.jiujitsuclub.jiujitsuclub"
         minSdkVersion 17
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
@@ -64,7 +64,7 @@ android {
            storePassword keystoreProperties['storePassword']
        }
    }
-   
+
    buildTypes {
        release {
            signingConfig signingConfigs.release
