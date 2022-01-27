@@ -27,6 +27,7 @@ class _addPosicaoState extends State<addPosicao> {
   String observacoes = "";
   String inicio = "0";
   String fim = "null";
+  String passo = "";
 
   TextEditingController _controller_nome = TextEditingController();
   TextEditingController _controller_id = TextEditingController();
@@ -35,6 +36,7 @@ class _addPosicaoState extends State<addPosicao> {
   TextEditingController _controller_observacoes = TextEditingController();
   TextEditingController _controller_inicio = TextEditingController();
   TextEditingController _controller_fim = TextEditingController();
+  TextEditingController _controller_passo = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -126,7 +128,19 @@ class _addPosicaoState extends State<addPosicao> {
                     child: dropDown_sub(),
                   ),
                   Container(
-                    margin: EdgeInsets.only(top: 30),
+                    margin: EdgeInsets.only(bottom: 10),
+                    child: TextFormField(
+                      maxLines: 8,
+                      controller: _controller_passo,
+                      decoration: InputDecoration(
+                        hintText: "Passo a passo da técnica",
+                        border: OutlineInputBorder(),
+                      ),
+                      onChanged: (value) => passo = value,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 15),
                     child: ElevatedButton(
                       style:
                           ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
@@ -159,7 +173,8 @@ class _addPosicaoState extends State<addPosicao> {
       'fim': fim,
       'sub': sub,
       'regiao': global.regiao,
-      'tec': tec
+      'tec': tec,
+      'passo': passo
     };
 
     context.loaderOverlay.show();
@@ -181,6 +196,7 @@ class _addPosicaoState extends State<addPosicao> {
           _controller_fim.clear();
           _controller_nivel.clear();
           _controller_observacoes.clear();
+          _controller_passo.clear();
         });
       }
     });

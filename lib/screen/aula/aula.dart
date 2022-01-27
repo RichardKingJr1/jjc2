@@ -89,30 +89,42 @@ class _AulaState extends State<Aula> {
         YoutubePlayer(controller: _controller),
         Container(
           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-          child: Row(
+          child: Column(
             children: [
-              Expanded(
-                flex: 9,
-                child: Text(
-                  aula_info['nome'],
-                  style: TextStyle(color: Colors.black, fontSize: 21),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 9,
+                      child: Text(
+                        aula_info['nome'],
+                        style: TextStyle(color: Colors.black, fontSize: 21),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(child: () {
+                        if (!widget.existe & global.globalVar['logado'] ==
+                            true) {
+                          return ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size.fromHeight(40)),
+                            // fromHeight use double.1infinity as width and 40 is the height
+                            child: Text('+'),
+                            onPressed: () => adicionarPosicao(),
+                          );
+                        } else {
+                          return null;
+                        }
+                      }()),
+                    ),
+                  ],
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Container(child: () {
-                  if (!widget.existe & global.globalVar['logado'] == true) {
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          minimumSize: Size.fromHeight(40)),
-                      // fromHeight use double.1infinity as width and 40 is the height
-                      child: Text('+'),
-                      onPressed: () => adicionarPosicao(),
-                    );
-                  } else {
-                    return null;
-                  }
-                }()),
+              Text(
+                aula_info['passo'] ?? '',
+                style: TextStyle(color: Colors.black, fontSize: 15),
               ),
             ],
           ),
