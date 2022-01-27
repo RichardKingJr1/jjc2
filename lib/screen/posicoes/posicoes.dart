@@ -65,6 +65,8 @@ class _PosicoesState extends State<Posicoes> {
       setState(() {
         posicoes = global.lib_carregada;
       });
+    }).onError((error, stackTrace) {
+      context.loaderOverlay.hide();
     });
     context.loaderOverlay.hide();
   }

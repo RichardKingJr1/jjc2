@@ -11,6 +11,11 @@ class menuDrawer extends StatelessWidget {
         children: [
           ListTile(
             leading: Icon(Icons.logout),
+            title: Text("Idioma"),
+            onTap: () => {},
+          ),
+          ListTile(
+            leading: Icon(Icons.logout),
             title: Text("Sair"),
             onTap: () => logout(context),
           )

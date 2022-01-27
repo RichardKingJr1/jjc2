@@ -123,6 +123,7 @@ class _LoginState extends State<Login> {
         global.globalVar['logado'] = true;
         global.globalVar['email'] = data['user']['email'];
         global.myLib = data['user']['m_tec'];
+        global.agrupamento.add(data['user']['email']);
         Navigator.of(context)
             .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
       } else {

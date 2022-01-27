@@ -6,7 +6,7 @@ List myLib = [];
 String versao = '1';
 bool uptodate = false;
 String regiao = 'br';
-String agrupamento = '1';
+List<String> agrupamento = ['1'];
 
 /* class globalVar {
   String email = '';
