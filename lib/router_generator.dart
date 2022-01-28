@@ -4,6 +4,7 @@ import 'package:jjc/screen/aula/aula.dart';
 import 'package:jjc/screen/home/home.dart';
 import 'package:jjc/screen/login/criar_conta.dart';
 import 'package:jjc/screen/login/login.dart';
+import 'package:jjc/screen/login/recuperar_senha.dart';
 import 'package:jjc/screen/m_lib/m_lib.dart';
 import 'package:jjc/screen/perfil/perfil.dart';
 import 'package:jjc/screen/posicoes/posicoes.dart';
@@ -53,6 +54,9 @@ class RouteGenerator {
         }
       case '/plans':
         return MaterialPageRoute(builder: (_) => t_plans());
+
+      case '/recuperar_senha':
+        return MaterialPageRoute(builder: (_) => RecuperarSenha());
 
       default:
         // If there is no such named route in the switch statement, e.g. /third

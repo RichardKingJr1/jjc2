@@ -88,6 +88,18 @@ class _LoginState extends State<Login> {
                 ),
                 Container(
                   child: TextButton(
+                    style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
+                    // fromHeight use double.infinity as width and 40 is the height
+                    child: Text('Recuperar senha'),
+                    onPressed: () =>
+                        //{Navigator.of(context).pushNamed('/criar_conta')},
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            '/recuperar_senha',
+                            (Route<dynamic> route) => false),
+                  ),
+                ),
+                Container(
+                  child: TextButton(
                       style:
                           ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                       // fromHeight use double.infinity as width and 40 is the height
