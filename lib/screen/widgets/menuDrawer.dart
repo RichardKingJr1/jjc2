@@ -10,7 +10,7 @@ class menuDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            leading: Icon(Icons.logout),
+            leading: Icon(Icons.chat),
             title: Text("Idioma"),
             onTap: () => {},
           ),
