@@ -23,8 +23,8 @@ class _appBottonState extends State<appBotton> {
             icon: Icon(Icons.local_library), title: Container(height: 0.0)),
         BottomNavigationBarItem(
             icon: Icon(Icons.library_add), title: Container(height: 0.0)),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today), title: Container(height: 0.0))
+        /* BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_today), title: Container(height: 0.0)) */
       ],
       unselectedItemColor: Colors.grey,
       selectedItemColor: Colors.white,

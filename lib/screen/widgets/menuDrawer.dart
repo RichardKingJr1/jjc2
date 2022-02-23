@@ -11,6 +11,16 @@ class menuDrawer extends StatelessWidget {
         children: [
           ListTile(
             leading: Icon(Icons.chat),
+            title: Text("Minhas Posições"),
+            onTap: () => visitar(context, '/minhas_posicoes'),
+          ),
+          ListTile(
+            leading: Icon(Icons.chat),
+            title: Text("Minhas Bibliotecas"),
+            onTap: () => visitar(context, '/minhas_bibliotecas'),
+          ),
+          ListTile(
+            leading: Icon(Icons.chat),
             title: Text("Idioma"),
             onTap: () => {},
           ),
@@ -24,10 +34,16 @@ class menuDrawer extends StatelessWidget {
     );
   }
 
+  visitar(cont, endereco) {
+    Navigator.of(cont).pushNamed(endereco);
+  }
+
   logout(cont) {
     global.globalVar['id_user'] = '';
     global.globalVar['logado'] = false;
     global.myLib = [];
+    global.lib_carregada = [];
+    global.agrupamento = ['1'];
     Navigator.of(cont)
         .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
   }

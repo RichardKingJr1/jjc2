@@ -1,24 +1,26 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:jjc/global_services/global.dart' as global;
 
 import 'package:jjc/screen/widgets/app_botton.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:http/http.dart' as http;
+import 'package:jjc/global_services/global.dart' as global;
+import 'dart:convert';
 
-class addPosicao extends StatefulWidget {
-  //final url = Uri.parse('http://10.0.2.2:4000/criar_conta');
-  final url = Uri.parse(global.endereco + 'add_tec');
+class Editor extends StatefulWidget {
+  final url = Uri.parse(global.endereco + 'editar_tec');
+  String index = '';
 
-  addPosicao({Key? key}) : super(key: key);
+  Editor({required this.index});
 
   @override
-  _addPosicaoState createState() => _addPosicaoState();
+  _EditorState createState() => _EditorState();
 }
 
-class _addPosicaoState extends State<addPosicao> {
+class _EditorState extends State<Editor> {
+  int index_posicao = 0;
+
+  String agrupamento = '';
   String nome = '';
   String idVideo = "";
   String tec = '1';
@@ -28,15 +30,41 @@ class _addPosicaoState extends State<addPosicao> {
   String inicio = "0";
   String fim = "null";
   String passo = "";
+  String id_posicao = '';
 
-  TextEditingController _controller_nome = TextEditingController();
-  TextEditingController _controller_id = TextEditingController();
-  TextEditingController _controller_agrupamento = TextEditingController();
-  TextEditingController _controller_nivel = TextEditingController();
-  TextEditingController _controller_observacoes = TextEditingController();
-  TextEditingController _controller_inicio = TextEditingController();
-  TextEditingController _controller_fim = TextEditingController();
-  TextEditingController _controller_passo = TextEditingController();
+  late TextEditingController _controller_nome;
+  late TextEditingController _controller_id;
+  late TextEditingController _controller_agrupamento;
+  late TextEditingController _controller_nivel;
+  late TextEditingController _controller_observacoes;
+  late TextEditingController _controller_inicio;
+  late TextEditingController _controller_fim;
+  late TextEditingController _controller_passo;
+
+  void initState() {
+    super.initState();
+    index_posicao = int.parse(widget.index);
+    agrupamento = global.prop_tec[index_posicao]['agrupamento'];
+    id_posicao = global.prop_tec[index_posicao]['id_posicao'];
+    nome = global.prop_tec[index_posicao]['nome'];
+    idVideo = global.prop_tec[index_posicao]['idVideo'];
+    tec = global.prop_tec[index_posicao]['tec'];
+    sub = global.prop_tec[index_posicao]['sub'];
+    nivel = global.prop_tec[index_posicao]['nivel'];
+    observacoes = global.prop_tec[index_posicao]['observacoes'];
+    inicio = global.prop_tec[index_posicao]['inicio'];
+    fim = global.prop_tec[index_posicao]['fim'];
+    passo = global.prop_tec[index_posicao]['passo'];
+
+    _controller_nome = TextEditingController(text: nome);
+    _controller_id = TextEditingController(text: idVideo);
+    _controller_agrupamento = TextEditingController(text: agrupamento);
+    _controller_nivel = TextEditingController(text: nivel);
+    _controller_observacoes = TextEditingController(text: observacoes);
+    _controller_inicio = TextEditingController(text: inicio);
+    _controller_fim = TextEditingController(text: fim);
+    _controller_passo = TextEditingController(text: passo);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +73,10 @@ class _addPosicaoState extends State<addPosicao> {
       endDrawer: menuDrawer(),
       appBar: AppBar(
         title: const Text('Adicionar Técnica'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
       ),
       body: Container(
         child: Material(
@@ -145,8 +177,18 @@ class _addPosicaoState extends State<addPosicao> {
                       style:
                           ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                       // fromHeight use double.infinity as width and 40 is the height
-                      child: Text('Adicionar'),
-                      onPressed: () => submit(),
+                      child: Text('Editar'),
+                      onPressed: () => update(),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 5),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.red, minimumSize: Size(400, 65)),
+                      // fromHeight use double.infinity as width and 40 is the height
+                      child: Text('Deletar'),
+                      onPressed: () => delete(),
                     ),
                   ),
                 ],
@@ -162,11 +204,12 @@ class _addPosicaoState extends State<addPosicao> {
     );
   }
 
-  void submit() async {
+  void update() async {
     Map dataObj = {
+      'id_posicao': id_posicao,
+      'agrupamento': global.globalVar['email'],
       'nome': nome,
       'idVideo': idVideo,
-      'agrupamento': global.globalVar['email'],
       'nivel': nivel,
       'observacoes': observacoes,
       'inicio': inicio,
@@ -174,7 +217,8 @@ class _addPosicaoState extends State<addPosicao> {
       'sub': sub,
       'regiao': global.regiao,
       'tec': tec,
-      'passo': passo
+      'passo': passo,
+      'index': index_posicao
     };
 
     context.loaderOverlay.show();
@@ -187,50 +231,50 @@ class _addPosicaoState extends State<addPosicao> {
             body: jsonEncode(dataObj))
         .then((response) {
       if (response.statusCode == 200) {
-        setState(() {
-          dialog(context);
-          _controller_nome.clear();
-          _controller_id.clear();
-          _controller_agrupamento.clear();
-          _controller_inicio.clear();
-          _controller_fim.clear();
-          _controller_nivel.clear();
-          _controller_observacoes.clear();
-          _controller_passo.clear();
-        });
+        dialog(context, 'Técnica Atualizada');
+        atualizar();
       }
     });
 
     context.loaderOverlay.hide();
-    atualizar();
   }
 
-  atualizar() async {
-    print('atualizar');
-    Map dataObj = {'token': global.token, 'email': global.globalVar['email']};
+  delete() async {
+    context.loaderOverlay.show();
+
+    //String S_dataObj = jsonEncode(dataObj);
+    Map dataObj = {
+      'id_posicao': id_posicao,
+      'agrupamento': global.globalVar['email'],
+      'index': index_posicao,
+      'regiao': global.regiao,
+      'tec': tec
+    };
 
     await http
-        .post(Uri.parse(global.endereco + 'update_tec'),
+        .post(Uri.parse(global.endereco + 'delete_tec'),
             headers: {"Content-Type": "application/json"},
             body: jsonEncode(dataObj))
-        .then((response) {
-      dynamic data = json.decode(utf8.decode(response.bodyBytes));
+        .then(
+          (response) => {
+            if (response.statusCode == 200)
+              {
+                atualizar(),
+                dialog(context, 'Técnica Excluida'),
+              },
+          },
+        );
 
-      if (response.statusCode == 200) {
-        //Fazer login no global service
-        //global.myLib = data['user']['m_tec'];
-        global.prop_tec = data['prop_tec'];
-      }
-    });
+    context.loaderOverlay.hide();
   }
 
-  Widget dialog(BuildContext context) {
+  Widget dialog(BuildContext context, msg) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return Container(
           child: AlertDialog(
-            title: Text("Técnica Adicionada"),
+            title: Text(msg),
             actions: [
               Align(
                 alignment: Alignment.center,
@@ -332,5 +376,27 @@ class _addPosicaoState extends State<addPosicao> {
         );
       }).toList(),
     );
+  }
+
+  atualizar() async {
+    print('atualizar');
+    Map dataObj = {'token': global.token, 'email': global.globalVar['email']};
+
+    await http
+        .post(Uri.parse(global.endereco + 'update_tec'),
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode(dataObj))
+        .then((response) {
+      dynamic data = json.decode(utf8.decode(response.bodyBytes));
+
+      if (response.statusCode == 200) {
+        //Fazer login no global service
+        //global.myLib = data['user']['m_tec'];
+        global.prop_tec = data['prop_tec'];
+
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            '/minhas_posicoes', (Route<dynamic> route) => false);
+      }
+    });
   }
 }
