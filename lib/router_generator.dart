@@ -7,6 +7,7 @@ import 'package:jjc/screen/login/login.dart';
 import 'package:jjc/screen/login/recuperar_senha.dart';
 import 'package:jjc/screen/m_lib/m_lib.dart';
 import 'package:jjc/screen/perfil/editor.dart';
+import 'package:jjc/screen/perfil/minhas_bibliotecas.dart';
 import 'package:jjc/screen/perfil/perfil.dart';
 import 'package:jjc/screen/perfil/minhas_posicoes.dart';
 import 'package:jjc/screen/posicoes/posicoes.dart';
@@ -73,6 +74,8 @@ class RouteGenerator {
           return MaterialPageRoute(builder: (_) => Editor(index: args));
         }
         return _errorRoute();
+      case '/minhas_bibliotecas':
+        return MaterialPageRoute(builder: (_) => mBibliotecas());
 
       default:
         // If there is no such named route in the switch statement, e.g. /third

@@ -132,12 +132,15 @@ class _LoginState extends State<Login> {
 
       if (response.statusCode == 200) {
         //Fazer login no global service
+        print(data);
         global.globalVar['logado'] = true;
         global.globalVar['email'] = data['user']['email'];
         global.myLib = data['user']['m_tec'];
         global.prop_tec = data['user']['prop_tec'];
         global.token = data['token'];
         global.agrupamento.add(data['user']['email']);
+        global.agrupamento =
+            global.agrupamento + (data['user']['libs'] ?? []).cast<String>();
 
         Navigator.of(context)
             .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
