@@ -19,7 +19,6 @@ class _MposicoesState extends State<Mposicoes> {
   List posicoes = global.prop_tec;
   @override
   Widget build(BuildContext context) {
-    print(global.prop_tec);
     return Scaffold(
       endDrawer: menuDrawer(),
       appBar: AppBar(

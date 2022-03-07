@@ -18,7 +18,9 @@ class mBibliotecas extends StatefulWidget {
 class _mBibliotecasState extends State<mBibliotecas> {
   String biblioteca_id = '';
 
-  late TextEditingController _controller_biblioteca_id;
+  //late TextEditingController _controller_biblioteca_id;
+  TextEditingController _controller_biblioteca_id = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,7 +131,7 @@ class _mBibliotecasState extends State<mBibliotecas> {
                                 apagar(index),
                               },
                               child: Icon(
-                                Icons.settings,
+                                Icons.delete,
                                 color: Colors.grey,
                                 size: 30.0,
                               ),
@@ -171,10 +173,10 @@ class _mBibliotecasState extends State<mBibliotecas> {
   }
 
   adicionar() async {
-    print(biblioteca_id);
+    context.loaderOverlay.show();
 
     Map dataObj = {
-      'usuario': global.globalVar['email'],
+      'email': global.globalVar['email'],
       'biblioteca_id': biblioteca_id,
     };
 
@@ -188,10 +190,11 @@ class _mBibliotecasState extends State<mBibliotecas> {
               {
                 atualizar(),
                 _controller_biblioteca_id.clear(),
-                dialog(context, 'Técnica Excluida'),
+                dialog(context, 'Lib Adicionada'),
               },
           },
         );
+    context.loaderOverlay.hide();
   }
 
   apagar(index_biblioteca) async {
@@ -199,12 +202,12 @@ class _mBibliotecasState extends State<mBibliotecas> {
 
     //String S_dataObj = jsonEncode(dataObj);
     Map dataObj = {
-      'usuario': global.globalVar['email'],
+      'email': global.globalVar['email'],
       'index': index_biblioteca,
     };
 
     await http
-        .post(Uri.parse(global.endereco + 'apagar_lib'),
+        .post(Uri.parse(global.endereco + 'excluir_lib'),
             headers: {"Content-Type": "application/json"},
             body: jsonEncode(dataObj))
         .then(
@@ -212,7 +215,7 @@ class _mBibliotecasState extends State<mBibliotecas> {
             if (response.statusCode == 200)
               {
                 atualizar(),
-                dialog(context, 'Técnica Excluida'),
+                dialog(context, 'Lib excluida'),
               },
           },
         );
@@ -220,5 +223,23 @@ class _mBibliotecasState extends State<mBibliotecas> {
     context.loaderOverlay.hide();
   }
 
-  atualizar() {}
+  atualizar() async {
+    Map dataObj = {'token': global.token, 'email': global.globalVar['email']};
+
+    await http
+        .post(Uri.parse(global.endereco + 'update_tec'),
+            headers: {"Content-Type": "application/json"},
+            body: jsonEncode(dataObj))
+        .then((response) {
+      dynamic data = json.decode(utf8.decode(response.bodyBytes));
+
+      if (response.statusCode == 200) {
+        //Fazer login no global service
+        setState(() {
+          global.agrupamento = (data['libs'] ?? []).cast<String>();
+          global.agrupamento.add(dataObj['email']);
+        });
+      }
+    });
+  }
 }
