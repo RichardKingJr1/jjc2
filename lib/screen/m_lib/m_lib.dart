@@ -16,7 +16,7 @@ class _MLibState extends State<MLib> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: menuDrawer(),
+      endDrawer: global.token != '' ? menuDrawer() : null,
       appBar: AppBar(
         title: const Text('Meus Movimentos'),
       ),

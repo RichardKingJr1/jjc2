@@ -24,7 +24,7 @@ class _PosicoesState extends State<Posicoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: menuDrawer(),
+      endDrawer: global.token != '' ? menuDrawer() : null,
       appBar: AppBar(
         title: const Text('Posicoes'),
         leading: IconButton(

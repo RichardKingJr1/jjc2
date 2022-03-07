@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jjc/screen/widgets/app_botton.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
 
+import 'package:jjc/global_services/global.dart' as global;
+
 class Home extends StatefulWidget {
   //const Home({Key? key}) : super(key: key);
 
@@ -15,7 +17,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: menuDrawer(),
+      endDrawer: global.token != '' ? menuDrawer() : null,
       appBar: AppBar(
         title: const Text('Jiu Jitsu Club'),
       ),

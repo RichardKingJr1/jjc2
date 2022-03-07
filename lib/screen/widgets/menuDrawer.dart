@@ -10,22 +10,20 @@ class menuDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            leading: Icon(Icons.chat),
             title: Text("Minhas Posições"),
             onTap: () => visitar(context, '/minhas_posicoes'),
           ),
           ListTile(
-            leading: Icon(Icons.chat),
             title: Text("Minhas Bibliotecas"),
             onTap: () => visitar(context, '/minhas_bibliotecas'),
           ),
-          ListTile(
+          /* ListTile(
             leading: Icon(Icons.chat),
             title: Text("Idioma"),
             onTap: () => {},
-          ),
+          ), */
           ListTile(
-            leading: Icon(Icons.logout),
+            //leading: Icon(Icons.logout),
             title: Text("Sair"),
             onTap: () => logout(context),
           )
@@ -44,6 +42,7 @@ class menuDrawer extends StatelessWidget {
     global.myLib = [];
     global.lib_carregada = [];
     global.agrupamento = ['1'];
+    global.token = '';
     Navigator.of(cont)
         .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
   }

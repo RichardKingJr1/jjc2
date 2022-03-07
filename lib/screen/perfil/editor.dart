@@ -70,7 +70,7 @@ class _EditorState extends State<Editor> {
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.white,
-      endDrawer: menuDrawer(),
+      endDrawer: global.token != '' ? menuDrawer() : null,
       appBar: AppBar(
         title: const Text('Adicionar Técnica'),
         leading: IconButton(
