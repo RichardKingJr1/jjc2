@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/screen/add/add.dart';
 import 'package:jjc/screen/aula/aula.dart';
+import 'package:jjc/screen/config/idioma.dart';
+import 'package:jjc/screen/config/senha.dart';
 import 'package:jjc/screen/home/home.dart';
 import 'package:jjc/screen/login/criar_conta.dart';
 import 'package:jjc/screen/login/login.dart';
@@ -74,8 +76,16 @@ class RouteGenerator {
           return MaterialPageRoute(builder: (_) => Editor(index: args));
         }
         return _errorRoute();
+
       case '/minhas_bibliotecas':
         return MaterialPageRoute(builder: (_) => mBibliotecas());
+
+      /* Config */
+      case '/idioma':
+        return MaterialPageRoute(builder: (_) => Idioma());
+
+      case '/senha':
+        return MaterialPageRoute(builder: (_) => Senha());
 
       default:
         // If there is no such named route in the switch statement, e.g. /third

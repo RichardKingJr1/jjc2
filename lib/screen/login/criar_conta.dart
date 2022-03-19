@@ -114,6 +114,8 @@ class _criarContaState extends State<criarConta> {
         setState(() {
           if (response.statusCode == 200) {
             dialog(context, 'Conta Criada');
+          } else if (response.statusCode == 401) {
+            dialog(context, 'Email já cadastrado');
           } else {
             dialog(context, 'Erro');
           }
@@ -135,9 +137,11 @@ class _criarContaState extends State<criarConta> {
                 alignment: Alignment.center,
                 child: TextButton(
                     onPressed: () {
-                      if (msg != 'Erro') {
+                      if (msg == 'Conta Criada') {
                         Navigator.of(context).pushNamedAndRemoveUntil(
                             '/login', (Route<dynamic> route) => false);
+                      } else {
+                        Navigator.pop(context);
                       }
                     },
                     child: Text("Ok")),

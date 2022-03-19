@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:html';
+//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
@@ -59,7 +59,7 @@ Widget cartoes(posicoes) {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    global.lib_carregada = global.myLib;
+                    global.lib_carregada = global.prop_tec;
                     Navigator.of(context)
                         .pushNamed('/aula', arguments: index.toString());
                   },
@@ -112,8 +112,3 @@ Widget cartoes(posicoes) {
     );
   }
 }
-
-/* Widget cartoes(posicoes) {
-  return Text('123');
-}
- */

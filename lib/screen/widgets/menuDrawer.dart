@@ -17,11 +17,14 @@ class menuDrawer extends StatelessWidget {
             title: Text("Minhas Bibliotecas"),
             onTap: () => visitar(context, '/minhas_bibliotecas'),
           ),
-          /* ListTile(
-            leading: Icon(Icons.chat),
+          ListTile(
             title: Text("Idioma"),
-            onTap: () => {},
-          ), */
+            onTap: () => visitar(context, '/idioma'),
+          ),
+          ListTile(
+            title: Text("Trocar Senha"),
+            onTap: () => visitar(context, '/senha'),
+          ),
           ListTile(
             //leading: Icon(Icons.logout),
             title: Text("Sair"),

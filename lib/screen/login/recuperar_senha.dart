@@ -19,11 +19,6 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
   TextEditingController _controller_email = TextEditingController();
 
   @override
-  void initState() {
-    print('object');
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Material(

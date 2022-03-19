@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:http/http.dart' as http;
@@ -60,8 +62,16 @@ class _AulaState extends State<Aula> {
       return OrientationBuilder(
           builder: (BuildContext context, Orientation orientation) {
         if (orientation == Orientation.landscape) {
-          return Scaffold(
-            body: corpoElemento(),
+          return WillPopScope(
+            onWillPop: () async {
+              SystemChrome.setPreferredOrientations([
+                DeviceOrientation.portraitUp,
+              ]);
+              return true;
+            },
+            child: Scaffold(
+              body: corpoElemento2(),
+            ),
           );
         } else {
           return Scaffold(
@@ -73,7 +83,7 @@ class _AulaState extends State<Aula> {
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ),
-            body: corpoElemento(),
+            body: corpoElemento1(),
             bottomNavigationBar: appBotton(cont: context, selectedIndex: 0),
           );
         }
@@ -82,7 +92,7 @@ class _AulaState extends State<Aula> {
   }
 
   //Body do elemento
-  Container corpoElemento() {
+  Container corpoElemento1() {
     return Container(
         child: Column(
       children: [
@@ -131,6 +141,12 @@ class _AulaState extends State<Aula> {
         )
       ],
     ));
+  }
+
+  //Body do elemento
+  Container corpoElemento2() {
+    return Container(
+        child: Center(child: YoutubePlayer(controller: _controller)));
   }
 
   dynamic getData() async {

@@ -144,11 +144,11 @@ class _EditorState extends State<Editor> {
                       onChanged: (value) => fim = value,
                     ),
                   ),
-                  Container(
+                  /* Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     margin: EdgeInsets.only(bottom: 20),
                     child: dropDown_agrupamento(),
-                  ),
+                  ), */
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     margin: EdgeInsets.only(bottom: 20),
