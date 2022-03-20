@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 //import 'package:flutter/services.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 
 import 'package:jjc/screen/widgets/app_botton.dart';
 
-class Aula extends StatefulWidget {
-  //final url = Uri.parse('http://10.0.2.2:4000/aula');
-  //final url1 = Uri.parse('http://10.0.2.2:4000/add_lib');
+import 'dart:developer';
+import 'package:flutter/foundation.dart';
 
+class Aula extends StatefulWidget {
   final url = Uri.parse(global.endereco + 'aula');
   final url1 = Uri.parse(global.endereco + 'add_to_lib');
 
@@ -42,61 +43,41 @@ class Aula extends StatefulWidget {
 class _AulaState extends State<Aula> {
   late YoutubePlayerController _controller;
   dynamic aula_info;
-
   dynamic index_int = 1;
-
-  //String id = 'ZnevdXDH25Q';
 
   @override
   void initState() {
-    getData();
     super.initState();
+    getData();
   }
 
   @override
-  //widget com um controle de dados e um controle da view horizontal ou vertical para controlar o appbar
   Widget build(BuildContext context) {
-    if (aula_info == null) {
-      return Text('Carregando');
-    } else {
-      return OrientationBuilder(
-          builder: (BuildContext context, Orientation orientation) {
-        if (orientation == Orientation.landscape) {
-          return WillPopScope(
-            onWillPop: () async {
-              SystemChrome.setPreferredOrientations([
-                DeviceOrientation.portraitUp,
-              ]);
-              return true;
-            },
-            child: Scaffold(
-              body: corpoElemento2(),
-            ),
-          );
-        } else {
-          return Scaffold(
-            endDrawer: menuDrawer(),
-            appBar: AppBar(
-              title: Text('Aula'),
-              leading: IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.white),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            ),
-            body: corpoElemento1(),
-            bottomNavigationBar: appBotton(cont: context, selectedIndex: 0),
-          );
-        }
-      });
-    }
+    const player = YoutubePlayerIFrame();
+    return YoutubePlayerControllerProvider(
+      // Passing controller to widgets below.
+      controller: _controller,
+      child: Scaffold(
+        endDrawer: menuDrawer(),
+        appBar: AppBar(
+          title: Text('Aula'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        ),
+        body: corpoElemento1(player),
+        bottomNavigationBar: appBotton(cont: context, selectedIndex: 0),
+      ),
+    );
   }
 
   //Body do elemento
-  Container corpoElemento1() {
+  Container corpoElemento1(player) {
     return Container(
         child: Column(
       children: [
-        YoutubePlayer(controller: _controller),
+        player,
         Container(
           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12),
           child: Column(
@@ -143,19 +124,6 @@ class _AulaState extends State<Aula> {
     ));
   }
 
-  //Body do elemento
-  Container corpoElemento2() {
-    return Container(
-        child: Center(child: YoutubePlayer(controller: _controller)));
-  }
-
-  dynamic getData() async {
-    setState(() {
-      aula_info = global.lib_carregada[widget.index_posicao];
-      runYoutubePlayer();
-    });
-  }
-
   dynamic adicionarPosicao() async {
     Map dataObj = global.lib_carregada[widget.index_posicao];
     dataObj['email'] = global.globalVar['email'];
@@ -173,22 +141,40 @@ class _AulaState extends State<Aula> {
     });
   }
 
-  void runYoutubePlayer() {
-    print(aula_info['idVideo']);
+  dynamic getData() async {
+    setState(() {
+      aula_info = global.lib_carregada[widget.index_posicao];
+      playerRun();
+    });
+  }
+
+  playerRun() {
     _controller = YoutubePlayerController(
       initialVideoId: aula_info['idVideo'],
-      //initialVideoId: '1',
-      flags: YoutubePlayerFlags(
-        autoPlay: false,
-        startAt: int.parse(aula_info['inicio']),
-        endAt: int.parse(aula_info['fim']),
+      params: YoutubePlayerParams(
+        startAt: Duration(seconds: (int.parse(aula_info['inicio']))),
+        showControls: true,
+        showFullscreenButton: true,
+        desktopMode: false,
+        privacyEnhanced: true,
+        useHybridComposition: true,
       ),
     );
+    _controller.onEnterFullscreen = () {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+      log('Entered Fullscreen');
+    };
+    _controller.onExitFullscreen = () {
+      log('Exited Fullscreen');
+    };
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller.close();
     super.dispose();
   }
 }
