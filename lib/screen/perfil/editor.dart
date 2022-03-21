@@ -28,7 +28,7 @@ class _EditorState extends State<Editor> {
   String nivel = "Branca";
   String observacoes = "";
   String inicio = "0";
-  String fim = "null";
+  String fim = "0";
   String passo = "";
   String id_posicao = '';
 
@@ -132,7 +132,7 @@ class _EditorState extends State<Editor> {
                       onChanged: (value) => inicio = value,
                     ),
                   ),
-                  Container(
+                  /* Container(
                     margin: EdgeInsets.only(bottom: 20),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
@@ -143,7 +143,7 @@ class _EditorState extends State<Editor> {
                       ),
                       onChanged: (value) => fim = value,
                     ),
-                  ),
+                  ), */
                   /* Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     margin: EdgeInsets.only(bottom: 20),

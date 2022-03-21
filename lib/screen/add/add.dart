@@ -26,7 +26,7 @@ class _addPosicaoState extends State<addPosicao> {
   String nivel = "Branca";
   String observacoes = "";
   String inicio = "0";
-  String fim = "null";
+  String fim = "0";
   String passo = "";
 
   TextEditingController _controller_nome = TextEditingController();
@@ -100,7 +100,7 @@ class _addPosicaoState extends State<addPosicao> {
                       onChanged: (value) => inicio = value,
                     ),
                   ),
-                  Container(
+                  /* Container(
                     margin: EdgeInsets.only(bottom: 20),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
@@ -111,7 +111,7 @@ class _addPosicaoState extends State<addPosicao> {
                       ),
                       onChanged: (value) => fim = value,
                     ),
-                  ),
+                  ), */
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     margin: EdgeInsets.only(bottom: 20),

@@ -102,6 +102,7 @@ Widget cartoes(posicoes, cont) {
                       Container(
                         child: Text(
                           posicoes[index]["nome"],
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(color: Colors.black, fontSize: 18),
                         ),
                       ),

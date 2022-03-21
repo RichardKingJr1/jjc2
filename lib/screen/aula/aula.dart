@@ -102,7 +102,7 @@ class _AulaState extends State<Aula> {
                             style: ElevatedButton.styleFrom(
                                 minimumSize: Size.fromHeight(40)),
                             // fromHeight use double.1infinity as width and 40 is the height
-                            child: Text('+'),
+                            child: Center(child: Text('+')),
                             onPressed: () => adicionarPosicao(),
                           );
                         } else {
