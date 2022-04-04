@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class criarConta extends StatefulWidget {
   //final url = Uri.parse('http://10.0.2.2:4000/criar_conta');
@@ -38,8 +40,7 @@ class _criarContaState extends State<criarConta> {
               children: [
                 Container(
                   margin: EdgeInsets.only(bottom: 60),
-                  child: Text(
-                    'Criar Conta',
+                  child: Text(AppLocalizations.of(context)!.criarConta,
                     style: TextStyle(fontSize: 40),
                   ),
                 ),
@@ -47,7 +48,7 @@ class _criarContaState extends State<criarConta> {
                   margin: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      hintText: "Email",
+                      hintText: AppLocalizations.of(context)!.email,
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) => setState(() => email = value),
@@ -57,7 +58,7 @@ class _criarContaState extends State<criarConta> {
                   margin: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      hintText: "Senha",
+                      hintText: AppLocalizations.of(context)!.senha,
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) => setState(() => senha = value),
@@ -67,7 +68,7 @@ class _criarContaState extends State<criarConta> {
                 Container(
                   child: TextFormField(
                     decoration: InputDecoration(
-                      hintText: "Confirmar Senha",
+                      hintText: AppLocalizations.of(context)!.csenha,
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) => setState(() => csenha = value),
@@ -79,7 +80,7 @@ class _criarContaState extends State<criarConta> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
-                    child: Text('Criar'),
+                    child: Text(AppLocalizations.of(context)!.criarConta),
                     onPressed: () => submit(),
                   ),
                 ),
@@ -87,7 +88,7 @@ class _criarContaState extends State<criarConta> {
                   child: TextButton(
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
-                    child: Text('Login'),
+                    child: Text(AppLocalizations.of(context)!.login),
                     onPressed: () =>
                         {Navigator.of(context).pushNamed('/login')},
                   ),

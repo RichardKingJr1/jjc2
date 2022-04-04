@@ -1,21 +1,16 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jjc/screen/aula/headerAula.dart';
 //import 'package:flutter/services.dart';
-import 'package:jjc/screen/widgets/menuDrawer.dart';
+import 'package:jjc/screen/widgets/scaffoldStandartBack.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-
-import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
-
-import 'package:jjc/screen/widgets/app_botton.dart';
-
 import 'dart:developer';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Aula extends StatefulWidget {
   final url = Uri.parse(global.endereco + 'aula');
-  final url1 = Uri.parse(global.endereco + 'add_to_lib');
 
   int index_posicao = 0;
   bool existe = false;
@@ -30,6 +25,8 @@ class Aula extends StatefulWidget {
             itemToCheck['id_posicao'] ==
             global.lib_carregada[this.index_posicao]['id_posicao'],
         orElse: () => false);
+
+    int indexOf = global.myLib.indexOf(global.lib_carregada[this.index_posicao]);
 
     if (teste != false) {
       existe = true;
@@ -55,21 +52,12 @@ class _AulaState extends State<Aula> {
   Widget build(BuildContext context) {
     const player = YoutubePlayerIFrame();
     return YoutubePlayerControllerProvider(
-      // Passing controller to widgets below.
-      controller: _controller,
-      child: Scaffold(
-        endDrawer: menuDrawer(),
-        appBar: AppBar(
-          title: Text('Aula'),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
-        body: corpoElemento1(player),
-        bottomNavigationBar: appBotton(cont: context, selectedIndex: 0),
-      ),
-    );
+        // Passing controller to widgets below.
+        controller: _controller,
+        child: ScaffoldStandartBack(
+          bodyElement: corpoElemento1(player),
+          titulo: AppLocalizations.of(context)!.aula,
+        ));
   }
 
   //Body do elemento
@@ -79,66 +67,23 @@ class _AulaState extends State<Aula> {
       children: [
         player,
         Container(
-          padding: EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
           child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 10),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 9,
-                      child: Text(
-                        aula_info['nome'],
-                        style: TextStyle(color: Colors.black, fontSize: 21),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(child: () {
-                        if (!widget.existe & global.globalVar['logado'] ==
-                            true) {
-                          return ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                minimumSize: Size.fromHeight(40)),
-                            // fromHeight use double.1infinity as width and 40 is the height
-                            child: Center(child: Text('+')),
-                            onPressed: () => adicionarPosicao(),
-                          );
-                        } else {
-                          return null;
-                        }
-                      }()),
-                    ),
-                  ],
-                ),
+              headerAula(
+                nomeAula: aula_info['nome'],
+                existe: widget.existe,
+                indexPosicao: widget.index_posicao,
               ),
               Text(
                 aula_info['passo'] ?? '',
-                style: TextStyle(color: Colors.black, fontSize: 15),
+                style: const TextStyle(color: Colors.black, fontSize: 15),
               ),
             ],
           ),
         )
       ],
     ));
-  }
-
-  dynamic adicionarPosicao() async {
-    Map dataObj = global.lib_carregada[widget.index_posicao];
-    dataObj['email'] = global.globalVar['email'];
-
-    await http
-        .post(widget.url1,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
-      print(response.body);
-      setState(() {
-        global.myLib.add(global.lib_carregada[widget.index_posicao]);
-        widget.existe = true;
-      });
-    });
   }
 
   dynamic getData() async {

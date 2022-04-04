@@ -53,7 +53,7 @@ Widget cartoes(posicoes) {
             Expanded(
               child: Container(
                 margin: const EdgeInsets.only(bottom: 5),
-                height: 80,
+                height: 75,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
@@ -65,13 +65,15 @@ Widget cartoes(posicoes) {
                   },
                   child: Container(
                     alignment: Alignment.topLeft,
-                    margin: const EdgeInsets.only(left: 15, top: 15),
+                    margin: const EdgeInsets.only(left: 15, top: 5),
                     child: Stack(children: [
                       Container(
+                        padding: const EdgeInsets.only(right: 55),
                         child: Text(
                           posicoes[index]["nome"],
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 18),
+                            overflow: TextOverflow.ellipsis,
+                            color: Colors.black, fontSize: 18),
                         ),
                       ),
                       Container(

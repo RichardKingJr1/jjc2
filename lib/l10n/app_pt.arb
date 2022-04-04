@@ -1,0 +1,44 @@
+{
+    "helloWorld": "Hello Flutter Engageasdasdasd!",
+    "@helloWorld": {
+        "description": "The greeting shown to the Flutter Engage attendees"
+    },
+    "tituloHome": "Jiu Jitsu Club",
+    "posicoes": "Posicoes",
+    "meusMovimentos": "Meus Movimentos",
+    "addTec": "Adicionar Técnica",
+    "aula": "Aula",
+
+    "login": "Login",
+    "email": "Email",
+    "senha": "Senha",
+    "csenha": "Confirmar Senha",
+    "criarConta": "Criar Conta",
+    "recSenha": "Recuperar Senha",
+    "contDeslogado": "Continuar Deslogado",
+    "voltar": "Voltar",
+    
+    "minhasPosicoes": "Minhas Posições",
+    "minhasBibliotecas":"Minhas Bibliotecas",
+    "idioma": "Idioma",
+    "trocarSenha": "Trocar Senha",
+    "sair": "Sair",
+    "editTec": "Editar Técnica",
+
+    "idBiblioteca": "Id Biblioteca",
+    "nomeTec": "Nome da técnica",
+    "idVideo": "Id do video",
+    "observacao": "Observação",
+    "inicioVideo": "Inicio do Video (Segundos)",
+    "passoPasso": "Passo a passo da técnica",
+
+    "guardaFechada": "Guarda Fechada",
+    "guardaAberta": "Guada Aberta",
+    "passagemEmPe": "Passagem de Pé",
+    "meiaGuarda": "Meia Guarda",
+    "cemkilos": "100 Kilos",
+    "montada": "Montada",
+    "costas": "Costas",
+    "norteSul": "Norte-Sul",
+    "quedas": "Quedas"
+ }

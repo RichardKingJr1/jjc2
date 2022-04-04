@@ -6,6 +6,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 import 'dart:convert';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Editor extends StatefulWidget {
   final url = Uri.parse(global.endereco + 'editar_tec');
@@ -72,9 +73,9 @@ class _EditorState extends State<Editor> {
       //backgroundColor: Colors.white,
       endDrawer: global.token != '' ? menuDrawer() : null,
       appBar: AppBar(
-        title: const Text('Adicionar Técnica'),
+        title: Text(AppLocalizations.of(context)!.addTec),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -98,16 +99,6 @@ class _EditorState extends State<Editor> {
                       ),
                       onChanged: (value) => setState(() => nome = value),
                     ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 20),
-                    child: TextFormField(
-                        controller: _controller_id,
-                        decoration: InputDecoration(
-                          hintText: "Id do video",
-                          border: OutlineInputBorder(),
-                        ),
-                        onChanged: (value) => setState(() => idVideo = value)),
                   ),
                   Container(
                     margin: EdgeInsets.only(bottom: 20),
@@ -280,7 +271,8 @@ class _EditorState extends State<Editor> {
                 alignment: Alignment.center,
                 child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      int count = 0;
+                      Navigator.of(context).popUntil((_) => count++ >= 2);
                     },
                     child: Text("ok")),
               )
@@ -394,8 +386,7 @@ class _EditorState extends State<Editor> {
         //global.myLib = data['user']['m_tec'];
         global.prop_tec = data['prop_tec'];
 
-        Navigator.of(context).pushNamedAndRemoveUntil(
-            '/minhas_posicoes', (Route<dynamic> route) => false);
+        //Navigator.of(context).pushNamedAndRemoveUntil('/minhas_posicoes', (Route<dynamic> route) => false);
       }
     });
   }

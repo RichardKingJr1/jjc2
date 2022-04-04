@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class menuDrawer extends StatelessWidget {
   const menuDrawer({Key? key}) : super(key: key);
@@ -10,24 +11,24 @@ class menuDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            title: Text("Minhas Posições"),
+            title: Text(AppLocalizations.of(context)!.minhasPosicoes),
             onTap: () => visitar(context, '/minhas_posicoes'),
           ),
           ListTile(
-            title: Text("Minhas Bibliotecas"),
+            title: Text(AppLocalizations.of(context)!.minhasBibliotecas),
             onTap: () => visitar(context, '/minhas_bibliotecas'),
           ),
           ListTile(
-            title: Text("Idioma"),
+            title: Text(AppLocalizations.of(context)!.idioma),
             onTap: () => visitar(context, '/idioma'),
           ),
           ListTile(
-            title: Text("Trocar Senha"),
+            title: Text(AppLocalizations.of(context)!.trocarSenha),
             onTap: () => visitar(context, '/senha'),
           ),
           ListTile(
             //leading: Icon(Icons.logout),
-            title: Text("Sair"),
+            title: Text(AppLocalizations.of(context)!.sair),
             onTap: () => logout(context),
           )
         ],

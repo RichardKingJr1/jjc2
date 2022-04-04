@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RecuperarSenha extends StatefulWidget {
   final url = Uri.parse(global.endereco + 'recuperar_senha');
@@ -29,28 +30,28 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(bottom: 60),
+                  margin: const EdgeInsets.only(bottom: 60),
                   child: Text(
-                    'Recuperação de Senha',
-                    style: TextStyle(fontSize: 40),
+                    AppLocalizations.of(context)!.recSenha,
+                    style: const TextStyle(fontSize: 40),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 20),
+                  margin: const EdgeInsets.only(bottom: 20),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      hintText: "Email",
+                      hintText: AppLocalizations.of(context)!.email,
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) => setState(() => email = value),
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10),
+                  margin: const EdgeInsets.only(top: 10),
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
+                    style: ElevatedButton.styleFrom(minimumSize: const Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
-                    child: Text('Recuperar Senha'),
+                    child: Text(AppLocalizations.of(context)!.recSenha),
                     //onPressed: () => {submit()},
                     onPressed: () => {},
                   ),
@@ -60,7 +61,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                       style:
                           ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                       // fromHeight use double.infinity as width and 40 is the height
-                      child: Text('Voltar'),
+                      child: Text(AppLocalizations.of(context)!.voltar),
                       onPressed: () =>
                           //{Navigator.of(context).pushNamed('/criar_conta')},
                           Navigator.of(context).pushNamedAndRemoveUntil(

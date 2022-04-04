@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Login extends StatefulWidget {
   //final url = Uri.parse('http://10.0.2.2:4000/login');
@@ -40,7 +41,7 @@ class _LoginState extends State<Login> {
                 Container(
                   margin: EdgeInsets.only(bottom: 60),
                   child: Text(
-                    'Login',
+                    AppLocalizations.of(context)!.login,
                     style: TextStyle(fontSize: 40),
                   ),
                 ),
@@ -48,7 +49,7 @@ class _LoginState extends State<Login> {
                   margin: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
                     decoration: InputDecoration(
-                      hintText: "Email",
+                      hintText: AppLocalizations.of(context)!.email,
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) => setState(() => email = value),
@@ -59,7 +60,7 @@ class _LoginState extends State<Login> {
                   child: TextFormField(
                     controller: _controller_senha,
                     decoration: InputDecoration(
-                      hintText: "Senha",
+                      hintText: AppLocalizations.of(context)!.senha,
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) => setState(() => senha = value),
@@ -71,7 +72,7 @@ class _LoginState extends State<Login> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
-                    child: Text('Login'),
+                    child: Text(AppLocalizations.of(context)!.login),
                     onPressed: () => {submit()},
                   ),
                 ),
@@ -79,7 +80,7 @@ class _LoginState extends State<Login> {
                   child: TextButton(
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
-                    child: Text('Criar conta'),
+                    child: Text(AppLocalizations.of(context)!.criarConta),
                     onPressed: () =>
                         //{Navigator.of(context).pushNamed('/criar_conta')},
                         Navigator.of(context).pushNamedAndRemoveUntil(
@@ -90,7 +91,7 @@ class _LoginState extends State<Login> {
                   child: TextButton(
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
-                    child: Text('Recuperar senha'),
+                    child: Text(AppLocalizations.of(context)!.recSenha),
                     onPressed: () =>
                         //{Navigator.of(context).pushNamed('/criar_conta')},
                         Navigator.of(context).pushNamedAndRemoveUntil(
@@ -103,7 +104,7 @@ class _LoginState extends State<Login> {
                       style:
                           ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                       // fromHeight use double.infinity as width and 40 is the height
-                      child: Text('Continuar deslogado'),
+                      child: Text(AppLocalizations.of(context)!.contDeslogado),
                       onPressed: () =>
                           //{Navigator.of(context).pushNamed('/criar_conta')},
                           Navigator.of(context).pushNamedAndRemoveUntil(

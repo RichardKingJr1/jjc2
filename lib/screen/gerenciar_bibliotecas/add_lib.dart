@@ -15,7 +15,6 @@ class _addLibState extends State<addLib> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white,
       endDrawer: global.token != '' ? menuDrawer() : null,
       appBar: AppBar(
         title: const Text('Adicionar Técnica'),
