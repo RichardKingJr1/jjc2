@@ -25,8 +25,6 @@ class headerAula extends StatefulWidget {
 
 class _headerAulaState extends State<headerAula> {
   //create instance of controller (cria um objeto baseado na classe)
-  
-
 
   @override
   Widget build(BuildContext context) {  

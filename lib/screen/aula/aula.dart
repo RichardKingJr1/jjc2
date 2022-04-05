@@ -20,13 +20,21 @@ class Aula extends StatefulWidget {
   Aula(String index_posicao) {
     this.index_posicao = int.parse(index_posicao);
 
-    dynamic teste = global.myLib.firstWhere(
+    dynamic teste;
+     
+    if(global.globalVar['gi']){
+      teste = global.myLib.firstWhere(
         (itemToCheck) =>
             itemToCheck['id_posicao'] ==
             global.lib_carregada[this.index_posicao]['id_posicao'],
         orElse: () => false);
-
-    int indexOf = global.myLib.indexOf(global.lib_carregada[this.index_posicao]);
+    }else{
+      teste = global.myLibNogi.firstWhere(
+        (itemToCheck) =>
+            itemToCheck['id_posicao'] ==
+            global.lib_carregada[this.index_posicao]['id_posicao'],
+        orElse: () => false);
+    }
 
     if (teste != false) {
       existe = true;

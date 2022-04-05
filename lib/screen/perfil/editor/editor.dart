@@ -19,6 +19,19 @@ class Editor extends StatefulWidget {
 }
 
 class _EditorState extends State<Editor> {
+
+  var items = [
+        'Guarda Fechada',
+        'Guarda Aberta',
+        'Passagem de pé',
+        'Meia Guarda',
+        '100 Kilos',
+        'Montada',
+        'Costas',
+        'Norte-Sul',
+        'Queda'
+      ];
+
   int index_posicao = 0;
 
   String agrupamento = '';
@@ -143,6 +156,11 @@ class _EditorState extends State<Editor> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     margin: EdgeInsets.only(bottom: 20),
+                    child: Text(items[int.parse(tec)-1]) ,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    margin: EdgeInsets.only(bottom: 20),
                     child: dropDown_nivel(),
                   ),
                   Container(
@@ -209,7 +227,8 @@ class _EditorState extends State<Editor> {
       'regiao': global.regiao,
       'tec': tec,
       'passo': passo,
-      'index': index_posicao
+      'index': index_posicao,
+      'gi': global.globalVar['gi']
     };
 
     context.loaderOverlay.show();
@@ -239,7 +258,8 @@ class _EditorState extends State<Editor> {
       'agrupamento': global.globalVar['email'],
       'index': index_posicao,
       'regiao': global.regiao,
-      'tec': tec
+      'tec': tec,
+      'gi': global.globalVar['gi']
     };
 
     await http
@@ -384,9 +404,9 @@ class _EditorState extends State<Editor> {
       if (response.statusCode == 200) {
         //Fazer login no global service
         //global.myLib = data['user']['m_tec'];
+
         global.prop_tec = data['prop_tec'];
 
-        //Navigator.of(context).pushNamedAndRemoveUntil('/minhas_posicoes', (Route<dynamic> route) => false);
       }
     });
   }

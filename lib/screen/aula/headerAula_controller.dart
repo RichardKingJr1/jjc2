@@ -20,29 +20,38 @@ class headerAula_controller {
   dynamic adicionarPosicao(indexPosicao) async {
     Map dataObj = global.lib_carregada[indexPosicao];
     dataObj['email'] = global.globalVar['email'];
+    dataObj['gi'] = global.globalVar['gi'];
 
     await http
         .post(url1,
             headers: {"Content-Type": "application/json"},
             body: jsonEncode(dataObj))
         .then((response) {
-      print(response.body);
-      /* setState(() {
+
+      if(global.globalVar['gi']){
         global.myLib.add(global.lib_carregada[indexPosicao]);
-        existe = true;
-      }); */
-      global.myLib.add(global.lib_carregada[indexPosicao]);
+      }else{
+        global.myLibNogi.add(global.lib_carregada[indexPosicao]);
+      }  
+
       existe.value = true;
     });
   }
 
   dynamic excluirPosicao(indexPosicao) async {
     
-    int index = global.myLib.indexWhere((item) =>  item['idVideo'] == global.lib_carregada[indexPosicao]['idVideo']);  
+    int index;   
+
+    if(global.globalVar['gi']){
+      index = global.myLib.indexWhere((item) =>  item['idVideo'] == global.lib_carregada[indexPosicao]['idVideo']);
+    }else{
+      index = global.myLibNogi.indexWhere((item) =>  item['idVideo'] == global.lib_carregada[indexPosicao]['idVideo']);
+    }
 
     Map dataObj = {
       'index': index,
-      'email':global.globalVar['email']
+      'email':global.globalVar['email'],
+      'gi': global.globalVar['gi']
     };
 
     await http
@@ -50,11 +59,12 @@ class headerAula_controller {
             headers: {"Content-Type": "application/json"},
             body: jsonEncode(dataObj))
         .then((response) {
-      /* setState(() {
+
+      if(global.globalVar['gi']){
         global.myLib.removeAt(index);
-        existe = false;
-      }); */
-      global.myLib.removeAt(index);
+      }else{
+        global.myLibNogi.removeAt(index);
+      }
       existe.value = false;
     });
   }

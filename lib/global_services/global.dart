@@ -3,6 +3,7 @@ String endereco =
 dynamic lib_carregada = [];
 dynamic globalVar = {'email': '', 'id_user': '', 'logado': false, 'gi': true};
 List myLib = [];
+List myLibNogi = [];
 List prop_tec = [];
 String versao = '1';
 String token = '';

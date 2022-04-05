@@ -29,6 +29,7 @@ class _addPosicaoState extends State<addPosicao> {
   String inicio = "0";
   String fim = "0";
   String passo = "";
+  String gi = "";
 
   TextEditingController _controller_nome = TextEditingController();
   TextEditingController _controller_id = TextEditingController();
@@ -94,7 +95,7 @@ class _addPosicaoState extends State<addPosicao> {
                       onChanged: (value) => fim = value,
                     ),
                   ), */
-
+                seletor(dropDown_gi()),
                 seletor(dropDown_agrupamento()),
                 seletor(dropDown_nivel()),
                 seletor(dropDown_sub()),
@@ -139,7 +140,8 @@ class _addPosicaoState extends State<addPosicao> {
       'sub': sub,
       'regiao': global.regiao,
       'tec': tec,
-      'passo': passo
+      'passo': passo,
+      'gi': gi
     };
 
     context.loaderOverlay.show();
@@ -191,6 +193,32 @@ class _addPosicaoState extends State<addPosicao> {
 
   /* DropsDowns */
 
+  Widget dropDown_gi() {
+    return DropdownButton<String>(
+      value: gi,
+      icon: const Icon(Icons.arrow_downward),
+      style: const TextStyle(color: Color(2583691263)),
+      underline: Container(
+        height: 1,
+        color: Color(2583691263),
+      ),
+      onChanged: (String? newValue) {
+        setState(() {
+          gi = newValue!;
+        });
+      },
+      items: [
+        {'nome': 'GI', 'valor': ''},
+        {'nome': 'NOGI', 'valor': '-nogi'},
+      ].map<DropdownMenuItem<String>>((Map value) {
+        return DropdownMenuItem<String>(
+          value: value['valor'],
+          child: Text(value['nome']),
+        );
+      }).toList(),
+    );
+  }
+
   Widget dropDown_agrupamento() {
     return DropdownButton<String>(
       value: tec,
@@ -213,7 +241,7 @@ class _addPosicaoState extends State<addPosicao> {
         {'nome': '100 Kilos', 'valor': '5'},
         {'nome': 'Montada', 'valor': '6'},
         {'nome': 'Costas', 'valor': '7'},
-        {'nome': 'Norte-SUl', 'valor': '8'},
+        {'nome': 'Norte-Sul', 'valor': '8'},
         {'nome': 'Queda', 'valor': '9'}
       ].map<DropdownMenuItem<String>>((Map value) {
         return DropdownMenuItem<String>(

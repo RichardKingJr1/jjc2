@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
-import 'package:jjc/screen/widgets/floatingAction.dart';
+import 'package:jjc/screen/widgets/floatingActionButton/floatingAction.dart';
 
 import 'package:jjc/screen/widgets/menuDrawer.dart';
 import 'package:jjc/screen/widgets/app_botton.dart';

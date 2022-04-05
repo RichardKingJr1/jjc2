@@ -43,7 +43,8 @@ class _PosicoesState extends State<Posicoes> {
     Map dataObj = {
       'tec': widget.data,
       'agrupamento': global.agrupamento,
-      'regiao': global.regiao
+      'regiao': global.regiao,
+      'gi': global.globalVar['gi']
     };
 
     await http

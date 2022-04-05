@@ -23,7 +23,11 @@ class Cartoes_mlib extends StatelessWidget {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    global.lib_carregada = global.myLib;
+                    if(global.globalVar['gi']){
+                      global.lib_carregada = global.myLib;
+                    }else{
+                      global.lib_carregada = global.myLibNogi;
+                    }
                     Navigator.of(context)
                         .pushNamed('/aula', arguments: index.toString());
                   },

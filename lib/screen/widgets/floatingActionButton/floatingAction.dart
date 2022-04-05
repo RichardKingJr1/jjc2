@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jjc/global_services/global.dart';
 import 'package:jjc/global_services/global.dart' as global;
+import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
 
 class floating extends StatefulWidget {
   bool button;
@@ -17,10 +17,9 @@ class _floatingState extends State<floating> {
       return FloatingActionButton(
       backgroundColor: Color.fromARGB(255, 75, 75, 75),
       foregroundColor: Color.fromARGB(255, 255, 255, 255),
-      onPressed: () {
-        print(global.globalVar['gi']);
+      onPressed: (){ 
         setState(() {
-          global.globalVar['gi'] = !global.globalVar['gi'];
+          floatinAction_controller.instance.setGi();
         });
       },
       child: Stack(
@@ -42,26 +41,3 @@ class _floatingState extends State<floating> {
     
   }
 }
-
-
-
-/* Widget floating() => FloatingActionButton(
-  backgroundColor: Color.fromARGB(255, 75, 75, 75),
-  foregroundColor: Color.fromARGB(255, 255, 255, 255),
-  onPressed: () {
-    print(global.globalVar['gi']);
-    global.globalVar['gi'] = !global.globalVar['gi'];
-  },
-  child: Stack(
-    alignment: Alignment.center,
-    children: [
-        if (global.globalVar['gi']) ...[
-          Text("GI", style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 19),),
-        ] else ...[
-          Text("GI", style: TextStyle(color: Color.fromARGB(255, 255, 255, 255), fontSize: 19),),
-          Icon(Icons.do_not_disturb_outlined, size: 55,),
-        ],
-    ],
-
-  ),
-); */

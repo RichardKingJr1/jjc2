@@ -136,6 +136,7 @@ class _LoginState extends State<Login> {
         global.globalVar['logado'] = true;
         global.globalVar['email'] = data['user']['email'];
         global.myLib = data['user']['m_tec'];
+        global.myLibNogi = data['user']['m_tec_nogi'];
         global.prop_tec = data['user']['prop_tec'];
         global.token = data['token'];
         global.agrupamento = (data['user']['libs'] ?? []).cast<String>();
