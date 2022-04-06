@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 
 import 'package:jjc/screen/widgets/app_botton.dart';
+import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
@@ -16,27 +17,28 @@ class Mposicoes extends StatefulWidget {
 }
 
 class _MposicoesState extends State<Mposicoes> {
-  List posicoes = global.prop_tec;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      endDrawer: global.token != '' ? menuDrawer() : null,
-      appBar: AppBar(
-        title: const Text('Meus Movimentos'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.of(context)
-              .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false),
+    return ValueListenableBuilder(valueListenable: floatinAction_controller.instance.propTec, builder: (context, value, child){
+      return Scaffold(
+        endDrawer: global.token != '' ? menuDrawer() : null,
+        appBar: AppBar(
+          title: const Text('Meus Movimentos'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: Colors.white),
+            onPressed: () => Navigator.of(context)
+                .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false),
+          ),
         ),
-      ),
-      body: Container(
-        child: cartoes(posicoes),
-      ),
-      bottomNavigationBar: appBotton(
-        cont: context,
-        selectedIndex: 1,
-      ),
-    );
+        body: Container(
+          child: cartoes(floatinAction_controller.instance.propTec.value),
+        ),
+        bottomNavigationBar: appBotton(
+          cont: context,
+          selectedIndex: 1,
+        ),
+      );
+    });
   }
 }
 

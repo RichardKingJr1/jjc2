@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:jjc/screen/widgets/app_botton.dart';
+import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:http/http.dart' as http;
@@ -405,8 +406,7 @@ class _EditorState extends State<Editor> {
         //Fazer login no global service
         //global.myLib = data['user']['m_tec'];
 
-        global.prop_tec = data['prop_tec'];
-
+        floatinAction_controller.instance.updateMyTec(data['prop_tec']);
       }
     });
   }

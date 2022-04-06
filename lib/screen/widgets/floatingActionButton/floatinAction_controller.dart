@@ -9,6 +9,8 @@ class floatinAction_controller {
 
   final gi = ValueNotifier<bool>(global.globalVar['gi']);
 
+  final propTec = ValueNotifier<List>(global.prop_tec);
+
   List posicoes = global.myLib;
 
   setGi(){
@@ -22,4 +24,9 @@ class floatinAction_controller {
     }
   }
 
+  updateMyTec(data){
+    print('object');
+    propTec.value = data;
+    global.prop_tec = data;
+  }
 }

@@ -11,7 +11,7 @@ import 'package:jjc/screen/m_lib/m_lib.dart';
 import 'package:jjc/screen/perfil/editor/editor.dart';
 import 'package:jjc/screen/perfil/minhas_bibliotecas.dart';
 import 'package:jjc/screen/perfil/perfil.dart';
-import 'package:jjc/screen/perfil/minhas_posicoes.dart';
+import 'package:jjc/screen/perfil/minhas%20posicoes/minhas_posicoes.dart';
 import 'package:jjc/screen/posicoes/posicoes.dart';
 import 'package:jjc/screen/atualize/atualiza.dart';
 
