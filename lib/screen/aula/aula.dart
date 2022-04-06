@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jjc/screen/aula/headerAula.dart';
-//import 'package:flutter/services.dart';
 import 'package:jjc/screen/widgets/scaffoldStandartBack.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'dart:developer';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Aula extends StatefulWidget {

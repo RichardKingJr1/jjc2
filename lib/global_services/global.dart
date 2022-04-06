@@ -1,6 +1,7 @@
 String endereco =
     'https://qmmshcm485.execute-api.us-east-2.amazonaws.com/prod/';
 dynamic lib_carregada = [];
+dynamic aulaCarregada = {};
 dynamic globalVar = {'email': '', 'id_user': '', 'logado': false, 'gi': true};
 List myLib = [];
 List myLibNogi = [];
