@@ -93,9 +93,8 @@ class _mBibliotecasState extends State<mBibliotecas> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      global.lib_carregada = global.myLib;
                       Navigator.of(context)
-                          .pushNamed('/aula', arguments: index.toString());
+                          .pushNamed('/aula', arguments: jsonEncode(global.myLib[index]));
                     },
                     child: Container(
                       alignment: Alignment.topLeft,

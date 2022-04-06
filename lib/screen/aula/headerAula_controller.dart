@@ -17,8 +17,8 @@ class headerAula_controller {
     existe.value = value;
   }
 
-  dynamic adicionarPosicao(indexPosicao) async {
-    Map dataObj = global.lib_carregada[indexPosicao];
+  dynamic adicionarPosicao(aula) async {
+    Map dataObj = aula;
     dataObj['email'] = global.globalVar['email'];
     dataObj['gi'] = global.globalVar['gi'];
 
@@ -29,23 +29,23 @@ class headerAula_controller {
         .then((response) {
 
       if(global.globalVar['gi']){
-        global.myLib.add(global.lib_carregada[indexPosicao]);
+        global.myLib.add(aula);
       }else{
-        global.myLibNogi.add(global.lib_carregada[indexPosicao]);
+        global.myLibNogi.add(aula);
       }  
 
       existe.value = true;
     });
   }
 
-  dynamic excluirPosicao(indexPosicao) async {
+  dynamic excluirPosicao(aula) async {
     
     int index;   
 
     if(global.globalVar['gi']){
-      index = global.myLib.indexWhere((item) =>  item['idVideo'] == global.lib_carregada[indexPosicao]['idVideo']);
+      index = global.myLib.indexWhere((item) =>  item['idVideo'] == aula['idVideo']);
     }else{
-      index = global.myLibNogi.indexWhere((item) =>  item['idVideo'] == global.lib_carregada[indexPosicao]['idVideo']);
+      index = global.myLibNogi.indexWhere((item) =>  item['idVideo'] == aula['idVideo']);
     }
 
     Map dataObj = {

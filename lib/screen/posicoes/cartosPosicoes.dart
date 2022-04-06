@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 class cartaoPosicao extends StatelessWidget {
@@ -24,7 +26,7 @@ class cartaoPosicao extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context)
-                          .pushNamed('/aula', arguments: index.toString());
+                          .pushNamed('/aula', arguments: jsonEncode(posicoes[index]));
                     },
                     child: Container(
                       alignment: Alignment.topLeft,

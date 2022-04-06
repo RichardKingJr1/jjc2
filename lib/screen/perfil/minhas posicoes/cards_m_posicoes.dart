@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/posicoes/posicoes.dart';
@@ -26,9 +28,8 @@ class cardsMPosicoes extends StatelessWidget {
                 ),
                 child: TextButton(
                   onPressed: () {
-                    global.lib_carregada = global.prop_tec;
                     Navigator.of(context)
-                        .pushNamed('/aula', arguments: index.toString());
+                        .pushNamed('/aula', arguments: jsonEncode(global.prop_tec[index]));
                   },
                   child: Container(
                     alignment: Alignment.topLeft,

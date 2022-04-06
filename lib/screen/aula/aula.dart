@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jjc/screen/aula/headerAula.dart';
@@ -10,13 +12,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class Aula extends StatefulWidget {
   final url = Uri.parse(global.endereco + 'aula');
 
-  int index_posicao = 0;
+  dynamic aula = 0;
   bool existe = false;
 
   //Aula({Key? key, required this.index_posicao}) : super(key: key);
 
-  Aula(String index_posicao) {
-    this.index_posicao = int.parse(index_posicao);
+  Aula(dynamic aula) {
+    this.aula = jsonDecode(aula);
 
     dynamic teste;
      
@@ -24,13 +26,13 @@ class Aula extends StatefulWidget {
       teste = global.myLib.firstWhere(
         (itemToCheck) =>
             itemToCheck['id_posicao'] ==
-            global.lib_carregada[this.index_posicao]['id_posicao'],
+            this.aula['id_posicao'],
         orElse: () => false);
     }else{
       teste = global.myLibNogi.firstWhere(
         (itemToCheck) =>
             itemToCheck['id_posicao'] ==
-            global.lib_carregada[this.index_posicao]['id_posicao'],
+            this.aula['id_posicao'],
         orElse: () => false);
     }
 
@@ -79,7 +81,7 @@ class _AulaState extends State<Aula> {
               headerAula(
                 nomeAula: aula_info['nome'],
                 existe: widget.existe,
-                indexPosicao: widget.index_posicao,
+                aula: widget.aula,
               ),
               Text(
                 aula_info['passo'] ?? '',
@@ -94,7 +96,7 @@ class _AulaState extends State<Aula> {
 
   dynamic getData() async {
     setState(() {
-      aula_info = global.lib_carregada[widget.index_posicao];
+      aula_info = widget.aula;
       playerRun();
     });
   }

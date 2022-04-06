@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/aula/headerAula_controller.dart';
@@ -29,7 +31,7 @@ class Cartoes_mlib extends StatelessWidget {
                       global.lib_carregada = global.myLibNogi;
                     }
                     Navigator.of(context)
-                        .pushNamed('/aula', arguments: index.toString());
+                        .pushNamed('/aula', arguments: jsonEncode(global.lib_carregada[index]));
                   },
                   child: Container(
                     alignment: Alignment.topLeft,

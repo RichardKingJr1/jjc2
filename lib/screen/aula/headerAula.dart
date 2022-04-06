@@ -6,7 +6,7 @@ import 'dart:convert'; */
 
 class headerAula extends StatefulWidget {
   bool existe;
-  final int indexPosicao;
+  final dynamic aula;
   final String nomeAula;
 
   /* final url1 = Uri.parse(global.endereco + 'add_to_lib');
@@ -16,7 +16,7 @@ class headerAula extends StatefulWidget {
       {Key? key,
       required this.nomeAula,
       required this.existe,
-      required this.indexPosicao})
+      required this.aula})
       : super(key: key);
 
   @override
@@ -51,7 +51,7 @@ class _headerAulaState extends State<headerAula> {
                       minimumSize: const Size.fromHeight(40)),
                   // fromHeight use double.1infinity as width and 40 is the height
                   child: const Center(child: Text('+')),
-                  onPressed: () => headerAula_controller.instance.adicionarPosicao(widget.indexPosicao),
+                  onPressed: () => headerAula_controller.instance.adicionarPosicao(widget.aula),
                 );
               } else if(global.globalVar['logado'] == true){
                 return ElevatedButton(
@@ -59,7 +59,7 @@ class _headerAulaState extends State<headerAula> {
                       minimumSize: const Size.fromHeight(40)),
                   // fromHeight use double.1infinity as width and 40 is the height
                   child: const Center(child: Text('-')),
-                  onPressed: () => headerAula_controller.instance.excluirPosicao(widget.indexPosicao),
+                  onPressed: () => headerAula_controller.instance.excluirPosicao(widget.aula),
                 );
               }
             }()),
