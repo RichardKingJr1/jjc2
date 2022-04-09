@@ -52,8 +52,8 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
                     style: ElevatedButton.styleFrom(minimumSize: const Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
                     child: Text(AppLocalizations.of(context)!.recSenha),
-                    //onPressed: () => {submit()},
-                    onPressed: () => {},
+                    onPressed: () => {submit()},
+                    //onPressed: () => {},
                   ),
                 ),
                 Container(
@@ -75,7 +75,7 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
     );
   }
 
-  /* void submit() async {
+  void submit() async {
     Map dataObj = {'email': email};
 
     context.loaderOverlay.show();
@@ -99,10 +99,10 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
     });
 
     context.loaderOverlay.hide();
-  } */
+  }
 }
 
-/* Widget dialog(BuildContext context, msg) {
+Widget dialog(BuildContext context, msg) {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -125,4 +125,3 @@ class _RecuperarSenhaState extends State<RecuperarSenha> {
   );
   return Text('dsfadsf');
 }
- */

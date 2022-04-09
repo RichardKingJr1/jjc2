@@ -36,7 +36,6 @@ class cardsMPosicoes extends StatelessWidget {
                     margin: const EdgeInsets.only(left: 15, top: 5),
                     child: Stack(children: [
                       Container(
-                        padding: const EdgeInsets.only(right: 55),
                         child: Text(
                           posicoes[index]["nome"],
                           style: const TextStyle(

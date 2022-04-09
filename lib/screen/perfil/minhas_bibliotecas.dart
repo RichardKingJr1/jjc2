@@ -93,8 +93,8 @@ class _mBibliotecasState extends State<mBibliotecas> {
                   ),
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed('/aula', arguments: jsonEncode(global.myLib[index]));
+                      /* Navigator.of(context)
+                          .pushNamed('/aula', arguments: jsonEncode(global.myLib[index])); */
                     },
                     child: Container(
                       alignment: Alignment.topLeft,
@@ -107,21 +107,6 @@ class _mBibliotecasState extends State<mBibliotecas> {
                                 color: Colors.black, fontSize: 18),
                           ),
                         ),
-                        /* Container(
-                          margin: EdgeInsets.only(top: 25),
-                          child: Row(children: [
-                            Text(
-                              posicoes[index]["nivel"],
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 15),
-                            ),
-                            Text(
-                              ' - ' + posicoes[index]["sub"],
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 15),
-                            ),
-                          ]),
-                        ), */
                         Container(
                             alignment: Alignment.centerRight,
                             margin: EdgeInsets.only(bottom: 15),

@@ -14,7 +14,6 @@ class Posicoes extends StatefulWidget {
   final String data;
 
   Posicoes({Key? key, required this.data}) : super(key: key);
-  //final url = Uri.parse('http://10.0.2.2:4000/posicoes');
   final url = Uri.parse(global.endereco + 'posicoes');
 
   @override
@@ -23,6 +22,8 @@ class Posicoes extends StatefulWidget {
 
 class _PosicoesState extends State<Posicoes> {
   dynamic posicoes;
+  List posicoes_enviar = [];
+  List subs = [];
 
   @override
   void initState() {
@@ -35,7 +36,7 @@ class _PosicoesState extends State<Posicoes> {
   Widget build(BuildContext context) {
     return ScaffoldStandartBack(
       titulo: AppLocalizations.of(context)!.posicoes,
-      bodyElement: cartaoPosicao(posicoes: posicoes),
+      bodyElement: cartaoPosicao(posicoes: posicoes_enviar, subs: subs),
     );
   }
 
@@ -55,6 +56,25 @@ class _PosicoesState extends State<Posicoes> {
       global.lib_carregada = jsonDecode(utf8.decode(response.bodyBytes));
       setState(() {
         posicoes = global.lib_carregada;
+
+
+        subs = [];
+
+        posicoes.forEach((item) {
+          var i = subs.indexWhere((x) => x == item["sub"]);
+          if (i <= -1) {
+            subs.add(item["sub"]);
+          }
+        });
+
+        var temp;
+        posicoes_enviar = [];
+
+        for(int n = 0; n < subs.length; n++ ){
+          temp = posicoes.where((i) => i['sub'] == subs[n]).toList();
+          posicoes_enviar.add(temp);
+        }
+
       });
     }).onError((error, stackTrace) {
       context.loaderOverlay.hide();
