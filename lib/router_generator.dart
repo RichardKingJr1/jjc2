@@ -5,7 +5,7 @@ import 'package:jjc/screen/config/idioma.dart';
 import 'package:jjc/screen/config/senha.dart';
 import 'package:jjc/screen/home/home.dart';
 import 'package:jjc/screen/login/criar_conta.dart';
-import 'package:jjc/screen/login/login.dart';
+import 'package:jjc/screen/login/login/login.dart';
 import 'package:jjc/screen/login/recuperar_senha.dart';
 import 'package:jjc/screen/m_lib/m_lib.dart';
 import 'package:jjc/screen/perfil/editor/editor.dart';

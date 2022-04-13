@@ -34,43 +34,50 @@ class cardsMPosicoes extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.topLeft,
                     margin: const EdgeInsets.only(left: 15, top: 5),
-                    child: Stack(children: [
-                      Container(
-                        child: Text(
-                          posicoes[index]["nome"],
-                          style: const TextStyle(
-                            overflow: TextOverflow.ellipsis,
-                            color: Colors.black, fontSize: 18),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(top: 25),
-                        child: Row(children: [
-                          Text(
-                            posicoes[index]["nivel"],
-                            style: TextStyle(color: Colors.grey, fontSize: 15),
-                          ),
-                          Text(
-                            ' - ' + posicoes[index]["sub"],
-                            style: TextStyle(color: Colors.grey, fontSize: 15),
-                          ),
-                        ]),
-                      ),
-                      Container(
-                          alignment: Alignment.centerRight,
-                          margin: EdgeInsets.only(bottom: 15),
-                          child: TextButton(
-                            onPressed: () => {
-                              Navigator.of(context).pushNamed('/editor',
-                                  arguments: index.toString())
-                            },
-                            child: Icon(
-                              Icons.settings,
-                              color: Colors.grey,
-                              size: 30.0,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Stack(children: [
+                            Container(
+                              child: Text(
+                                posicoes[index]["nome"],
+                                style: const TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                  color: Colors.black, fontSize: 18),
+                              ),
                             ),
-                          )),
-                    ]),
+                            Container(
+                              margin: EdgeInsets.only(top: 25),
+                              child: Row(children: [
+                                Text(
+                                  posicoes[index]["nivel"],
+                                  style: TextStyle(color: Colors.grey, fontSize: 15),
+                                ),
+                                Text(
+                                  ' - ' + posicoes[index]["sub"],
+                                  style: TextStyle(color: Colors.grey, fontSize: 15),
+                                ),
+                              ]),
+                            ),
+                          ]),
+                        ),
+                        Container(
+                            alignment: Alignment.centerRight,
+                            margin: EdgeInsets.only(bottom: 15),
+                            child: TextButton(
+                              onPressed: () => {
+                                Navigator.of(context).pushNamed('/editor',
+                                    arguments: index.toString())
+                              },
+                              child: Icon(
+                                Icons.settings,
+                                color: Colors.grey,
+                                size: 30.0,
+                              ),
+                            )
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

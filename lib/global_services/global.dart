@@ -10,7 +10,7 @@ String versao = '1';
 String token = '';
 bool uptodate = false;
 String regiao = 'br';
-List<String> agrupamento = ['1'];
+List<String> agrupamento = ['2'];
 
 /* class globalVar {
   String email = '';

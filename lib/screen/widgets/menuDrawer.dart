@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jjc/screen/login/login/login_controller.dart';
 
 class menuDrawer extends StatelessWidget {
   const menuDrawer({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class menuDrawer extends StatelessWidget {
           ListTile(
             //leading: Icon(Icons.logout),
             title: Text(AppLocalizations.of(context)!.sair),
-            onTap: () => logout(context),
+            onTap: () => login_controller.instance.logout(context),
           )
         ],
       ),
@@ -40,14 +41,4 @@ class menuDrawer extends StatelessWidget {
     Navigator.of(cont).pushNamed(endereco);
   }
 
-  logout(cont) {
-    global.globalVar['id_user'] = '';
-    global.globalVar['logado'] = false;
-    global.myLib = [];
-    global.lib_carregada = [];
-    global.agrupamento = ['1'];
-    global.token = '';
-    Navigator.of(cont)
-        .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-  }
 }

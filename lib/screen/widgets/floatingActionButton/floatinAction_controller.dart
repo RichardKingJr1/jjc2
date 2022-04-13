@@ -8,8 +8,8 @@ class floatinAction_controller {
   floatinAction_controller._();
 
   final gi = ValueNotifier<bool>(global.globalVar['gi']);
-
   final propTec = ValueNotifier<List>(global.prop_tec);
+  final logado = ValueNotifier<bool?>(null);
 
   List posicoes = global.myLib;
 
@@ -17,6 +17,10 @@ class floatinAction_controller {
     gi.value = !gi.value;
     global.globalVar['gi'] = !global.globalVar['gi'];
 
+    setPosicao();
+  }
+
+  setPosicao(){
     if(global.globalVar['gi']){
       posicoes = global.myLib;
     }else{
@@ -28,5 +32,10 @@ class floatinAction_controller {
     print('object');
     propTec.value = data;
     global.prop_tec = data;
+  }
+
+  logedIn(status){
+    global.globalVar['logado'] = status;
+    logado.value = status;
   }
 }

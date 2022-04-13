@@ -1,15 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:jjc/router_generator.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
+import 'package:jjc/screen/login/login/login_controller.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   await getData();
   runApp(MyApp());
-  //teste if version is open
 }
 
 class MyApp extends StatefulWidget {
@@ -52,16 +54,18 @@ class _MyAppState extends State<MyApp> {
 }
 
 Future getData() async {
-  print('teste');
-  await http
-      .get(Uri.parse(global.endereco + 'versao?versao=' + global.versao))
-      .then((response) {
+
+  await http.get(Uri.parse(global.endereco + 'versao?versao=' + global.versao))
+  .then((response) {
     if (response.statusCode == 200) {
       global.uptodate = true;
-      return true;
     } else {
       global.uptodate = false;
-      return false;
     }
+
+    login_controller.instance.login();
+    
+    return true;
   });
+
 }

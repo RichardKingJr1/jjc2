@@ -25,6 +25,7 @@ dependencies:
   flutter_localizations: # Add this package
      sdk: flutter
   intl: ^0.17.0 # Add this package
+  flutter_secure_storage: ^5.0.2
 
 dev_dependencies:
   flutter_test:

@@ -1,14 +1,11 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:jjc/global_services/global.dart' as global;
-import 'package:loader_overlay/loader_overlay.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:jjc/screen/login/login/login_controller.dart';
+
+import 'package:loader_overlay/loader_overlay.dart';
 
 class Login extends StatefulWidget {
-  //final url = Uri.parse('http://10.0.2.2:4000/login');
-  final url = Uri.parse(global.endereco + 'login');
 
   Login({Key? key}) : super(key: key);
 
@@ -20,7 +17,7 @@ class _LoginState extends State<Login> {
   String email = '';
   String senha = '';
 
-  TextEditingController _controller_senha = TextEditingController();
+  //login_controller instance = login_controller();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +55,6 @@ class _LoginState extends State<Login> {
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
-                    controller: _controller_senha,
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.senha,
                       border: OutlineInputBorder(),
@@ -73,7 +69,7 @@ class _LoginState extends State<Login> {
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
                     child: Text(AppLocalizations.of(context)!.login),
-                    onPressed: () => {submit()},
+                    onPressed: () => {login_controller.instance.submit(context, email, senha, context.loaderOverlay, true)},
                   ),
                 ),
                 Container(
@@ -117,64 +113,5 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-
-  void submit() async {
-    Map dataObj = {'email': email, 'senha': senha};
-
-    context.loaderOverlay.show();
-    //String S_dataObj = jsonEncode(dataObj);
-
-    await http
-        .post(widget.url,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
-      dynamic data = json.decode(utf8.decode(response.bodyBytes));
-
-      if (response.statusCode == 200) {
-        //Fazer login no global service
-        global.globalVar['logado'] = true;
-        global.globalVar['email'] = data['user']['email'];
-        global.myLib = data['user']['m_tec'];
-        global.myLibNogi = data['user']['m_tec_nogi'];
-        global.prop_tec = data['user']['prop_tec'];
-        global.token = data['token'];
-        global.agrupamento = (data['user']['libs'] ?? []).cast<String>();
-        global.agrupamento.add(data['user']['email']);
-
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-      } else {
-        //Alerta de senha ou email incorretos
-        dialog(context);
-        _controller_senha.clear();
-      }
-    });
-
-    context.loaderOverlay.hide();
-  }
-
-  Widget dialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Container(
-          child: AlertDialog(
-            title: Text("Email ou senha incorretos"),
-            actions: [
-              Align(
-                alignment: Alignment.center,
-                child: TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Ok")),
-              )
-            ],
-          ),
-        );
-      },
-    );
-    return Text('dsfadsf');
-  }
 }
+ 

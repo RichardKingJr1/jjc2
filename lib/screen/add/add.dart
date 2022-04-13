@@ -129,47 +129,54 @@ class _addPosicaoState extends State<addPosicao> {
   }
 
   void submit() async {
-    Map dataObj = {
-      'nome': nome,
-      'idVideo': idVideo,
-      'agrupamento': global.globalVar['email'],
-      'nivel': nivel,
-      'observacoes': observacoes,
-      'inicio': inicio,
-      'fim': fim,
-      'sub': sub,
-      'regiao': global.regiao,
-      'tec': tec,
-      'passo': passo,
-      'gi': gi
-    };
 
-    context.loaderOverlay.show();
+    if(nome != '' && idVideo != ''){
+      Map dataObj = {
+        'nome': nome,
+        'idVideo': idVideo,
+        'agrupamento': global.globalVar['email'],
+        'nivel': nivel,
+        'observacoes': observacoes,
+        'inicio': inicio,
+        'fim': fim,
+        'sub': sub,
+        'regiao': global.regiao,
+        'tec': tec,
+        'passo': passo,
+        'gi': gi
+      };
 
-    //String S_dataObj = jsonEncode(dataObj);
+      context.loaderOverlay.show();
 
-    await http
-        .post(widget.url,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
-      if (response.statusCode == 200) {
-        setState(() {
-          Dialogs.alerta(context, "Técnica Adicionada", "Ok");
-          _controller_nome.clear();
-          _controller_id.clear();
-          _controller_agrupamento.clear();
-          _controller_inicio.clear();
-          _controller_fim.clear();
-          _controller_nivel.clear();
-          _controller_observacoes.clear();
-          _controller_passo.clear();
-        });
-      }
-    });
+      //String S_dataObj = jsonEncode(dataObj);
 
-    context.loaderOverlay.hide();
-    atualizar();
+      await http
+          .post(widget.url,
+              headers: {"Content-Type": "application/json"},
+              body: jsonEncode(dataObj))
+          .then((response) {
+        if (response.statusCode == 200) {
+          setState(() {
+            Dialogs.alerta(context, "Técnica Adicionada", "Ok");
+            _controller_nome.clear();
+            _controller_id.clear();
+            _controller_agrupamento.clear();
+            _controller_inicio.clear();
+            _controller_fim.clear();
+            _controller_nivel.clear();
+            _controller_observacoes.clear();
+            _controller_passo.clear();
+          });
+        }
+      });
+
+      context.loaderOverlay.hide();
+      atualizar();
+    }else{
+      Dialogs.alerta(context, "Preencha o nome e o id do video", "Ok");
+    }
+
+    
   }
 
   atualizar() async {
