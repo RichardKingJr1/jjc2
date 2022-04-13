@@ -76,6 +76,8 @@ class login_controller {
 
       submit('cont', valores['email'], valores['senha'], 'overlayCont', false);
       
+    }else{
+      floatinAction_controller.instance.logedIn(false);
     }
   }
 

@@ -8,7 +8,7 @@ List myLibNogi = [];
 List prop_tec = [];
 String versao = '1';
 String token = '';
-bool uptodate = false;
+bool? uptodate = null;
 String regiao = 'br';
 List<String> agrupamento = ['2'];
 

@@ -9,12 +9,16 @@ import 'package:jjc/screen/login/login/login_controller.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-void main() async {
-  await getData();
+void main() {
+  //WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
+
+  MyApp() {
+    getData();
+  }
 
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState state = context.findAncestorStateOfType<_MyAppState>()!;

@@ -25,9 +25,6 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        if (global.uptodate == false) {
-          return MaterialPageRoute(builder: (_) => atualize());
-        }
         return MaterialPageRoute(builder: (_) => Home());
 
       case '/lib':
