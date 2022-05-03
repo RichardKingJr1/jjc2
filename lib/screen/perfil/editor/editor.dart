@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:jjc/screen/perfil/editor/editor_controller.dart';
 
 import 'package:jjc/screen/widgets/app_botton.dart';
-import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
-import 'dart:convert';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Editor extends StatefulWidget {
-  final url = Uri.parse(global.endereco + 'editar_tec');
+  
   String index = '';
 
   Editor({required this.index});
@@ -20,6 +18,8 @@ class Editor extends StatefulWidget {
 }
 
 class _EditorState extends State<Editor> {
+
+  late EditorController instance; 
 
   var items = [
         'Guarda Fechada',
@@ -33,52 +33,10 @@ class _EditorState extends State<Editor> {
         'Queda'
       ];
 
-  int index_posicao = 0;
-
-  String agrupamento = '';
-  String nome = '';
-  String idVideo = "";
-  String tec = '1';
-  String sub = "Outra";
-  String nivel = "Branca";
-  String observacoes = "";
-  String inicio = "0";
-  String fim = "0";
-  String passo = "";
-  String id_posicao = '';
-
-  late TextEditingController _controller_nome;
-  late TextEditingController _controller_id;
-  late TextEditingController _controller_agrupamento;
-  late TextEditingController _controller_nivel;
-  late TextEditingController _controller_observacoes;
-  late TextEditingController _controller_inicio;
-  late TextEditingController _controller_fim;
-  late TextEditingController _controller_passo;
 
   void initState() {
     super.initState();
-    index_posicao = int.parse(widget.index);
-    agrupamento = global.prop_tec[index_posicao]['agrupamento'];
-    id_posicao = global.prop_tec[index_posicao]['id_posicao'];
-    nome = global.prop_tec[index_posicao]['nome'];
-    idVideo = global.prop_tec[index_posicao]['idVideo'];
-    tec = global.prop_tec[index_posicao]['tec'];
-    sub = global.prop_tec[index_posicao]['sub'];
-    nivel = global.prop_tec[index_posicao]['nivel'];
-    observacoes = global.prop_tec[index_posicao]['observacoes'];
-    inicio = global.prop_tec[index_posicao]['inicio'];
-    fim = global.prop_tec[index_posicao]['fim'];
-    passo = global.prop_tec[index_posicao]['passo'];
-
-    _controller_nome = TextEditingController(text: nome);
-    _controller_id = TextEditingController(text: idVideo);
-    _controller_agrupamento = TextEditingController(text: agrupamento);
-    _controller_nivel = TextEditingController(text: nivel);
-    _controller_observacoes = TextEditingController(text: observacoes);
-    _controller_inicio = TextEditingController(text: inicio);
-    _controller_fim = TextEditingController(text: fim);
-    _controller_passo = TextEditingController(text: passo);
+    instance = EditorController(int.parse(widget.index));
   }
 
   @override
@@ -106,35 +64,35 @@ class _EditorState extends State<Editor> {
                   Container(
                     margin: EdgeInsets.only(top: 20, bottom: 20),
                     child: TextFormField(
-                      controller: _controller_nome,
+                      controller: instance.controller_nome,
                       decoration: InputDecoration(
                         hintText: "Nome da técnica",
                         border: OutlineInputBorder(),
                       ),
-                      onChanged: (value) => setState(() => nome = value),
+                      onChanged: (value) => setState(() => instance.nome = value),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(bottom: 20),
                     child: TextFormField(
-                      controller: _controller_observacoes,
+                      controller: instance.controller_observacoes,
                       decoration: InputDecoration(
                         hintText: "Observação",
                         border: OutlineInputBorder(),
                       ),
-                      onChanged: (value) => observacoes = value,
+                      onChanged: (value) => instance.observacoes = value,
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(bottom: 20),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
-                      controller: _controller_inicio,
+                      controller: instance.controller_inicio,
                       decoration: InputDecoration(
                         hintText: "Inicio do Video Segundos",
                         border: OutlineInputBorder(),
                       ),
-                      onChanged: (value) => inicio = value,
+                      onChanged: (value) => instance.inicio = value,
                     ),
                   ),
                   /* Container(
@@ -157,7 +115,7 @@ class _EditorState extends State<Editor> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     margin: EdgeInsets.only(bottom: 20),
-                    child: Text(items[int.parse(tec)-1]) ,
+                    child: Text(items[int.parse(instance.tec)-1]) ,
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 8),
@@ -173,12 +131,12 @@ class _EditorState extends State<Editor> {
                     margin: EdgeInsets.only(bottom: 10),
                     child: TextFormField(
                       maxLines: 8,
-                      controller: _controller_passo,
+                      controller: instance.controller_passo,
                       decoration: InputDecoration(
                         hintText: "Passo a passo da técnica",
                         border: OutlineInputBorder(),
                       ),
-                      onChanged: (value) => passo = value,
+                      onChanged: (value) => instance.passo = value,
                     ),
                   ),
                   Container(
@@ -188,7 +146,7 @@ class _EditorState extends State<Editor> {
                           ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                       // fromHeight use double.infinity as width and 40 is the height
                       child: Text('Editar'),
-                      onPressed: () => update(),
+                      onPressed: () => instance.update(context.loaderOverlay, context),
                     ),
                   ),
                   Container(
@@ -198,7 +156,7 @@ class _EditorState extends State<Editor> {
                           primary: Colors.red, minimumSize: Size(400, 65)),
                       // fromHeight use double.infinity as width and 40 is the height
                       child: Text('Deletar'),
-                      onPressed: () => delete(),
+                      onPressed: () => instance.delete(context.loaderOverlay, context),
                     ),
                   ),
                 ],
@@ -214,71 +172,7 @@ class _EditorState extends State<Editor> {
     );
   }
 
-  void update() async {
-    Map dataObj = {
-      'id_posicao': id_posicao,
-      'agrupamento': global.globalVar['email'],
-      'nome': nome,
-      'idVideo': idVideo,
-      'nivel': nivel,
-      'observacoes': observacoes,
-      'inicio': inicio,
-      'fim': fim,
-      'sub': sub,
-      'regiao': global.regiao,
-      'tec': tec,
-      'passo': passo,
-      'index': index_posicao,
-      'gi': global.globalVar['gi']
-    };
-
-    context.loaderOverlay.show();
-
-    //String S_dataObj = jsonEncode(dataObj);
-
-    await http
-        .post(widget.url,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
-      if (response.statusCode == 200) {
-        dialog(context, 'Técnica Atualizada');
-        atualizar();
-      }
-    });
-
-    context.loaderOverlay.hide();
-  }
-
-  delete() async {
-    context.loaderOverlay.show();
-
-    //String S_dataObj = jsonEncode(dataObj);
-    Map dataObj = {
-      'id_posicao': id_posicao,
-      'agrupamento': global.globalVar['email'],
-      'index': index_posicao,
-      'regiao': global.regiao,
-      'tec': tec,
-      'gi': global.globalVar['gi']
-    };
-
-    await http
-        .post(Uri.parse(global.endereco + 'delete_tec'),
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then(
-          (response) => {
-            if (response.statusCode == 200)
-              {
-                atualizar(),
-                dialog(context, 'Técnica Excluida'),
-              },
-          },
-        );
-
-    context.loaderOverlay.hide();
-  }
+  
 
   Widget dialog(BuildContext context, msg) {
     showDialog(
@@ -307,7 +201,7 @@ class _EditorState extends State<Editor> {
 
   Widget dropDown_agrupamento() {
     return DropdownButton<String>(
-      value: tec,
+      value: instance.tec,
       icon: const Icon(Icons.arrow_downward),
       style: const TextStyle(color: Color(2583691263)),
       underline: Container(
@@ -316,7 +210,7 @@ class _EditorState extends State<Editor> {
       ),
       onChanged: (String? newValue) {
         setState(() {
-          tec = newValue!;
+          instance.tec = newValue!;
         });
       },
       items: [
@@ -340,7 +234,7 @@ class _EditorState extends State<Editor> {
 
   Widget dropDown_nivel() {
     return DropdownButton<String>(
-      value: nivel,
+      value: instance.nivel,
       icon: const Icon(Icons.arrow_downward),
       style: const TextStyle(color: Color(2583691263)),
       underline: Container(
@@ -349,7 +243,7 @@ class _EditorState extends State<Editor> {
       ),
       onChanged: (String? newValue) {
         setState(() {
-          nivel = newValue!;
+          instance.nivel = newValue!;
         });
       },
       items: <String>['Branca', 'Azul', 'Roxa', 'Marrom', 'Preta']
@@ -364,7 +258,7 @@ class _EditorState extends State<Editor> {
 
   Widget dropDown_sub() {
     return DropdownButton<String>(
-      value: sub,
+      value: instance.sub,
       icon: const Icon(Icons.arrow_downward),
       style: const TextStyle(color: Color(2583691263)),
       underline: Container(
@@ -373,7 +267,7 @@ class _EditorState extends State<Editor> {
       ),
       onChanged: (String? newValue) {
         setState(() {
-          sub = newValue!;
+          instance.sub = newValue!;
         });
       },
       items: <String>[
@@ -389,25 +283,5 @@ class _EditorState extends State<Editor> {
         );
       }).toList(),
     );
-  }
-
-  atualizar() async {
-    print('atualizar');
-    Map dataObj = {'token': global.token, 'email': global.globalVar['email']};
-
-    await http
-        .post(Uri.parse(global.endereco + 'update_tec'),
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
-      dynamic data = json.decode(utf8.decode(response.bodyBytes));
-
-      if (response.statusCode == 200) {
-        //Fazer login no global service
-        //global.myLib = data['user']['m_tec'];
-
-        floatinAction_controller.instance.updateMyTec(data['prop_tec']);
-      }
-    });
   }
 }
