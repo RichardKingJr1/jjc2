@@ -9,7 +9,7 @@ class EditorController {
 
   final url = Uri.parse(global.endereco + 'editar_tec');
 
-  aulaModel aula = aulaModel();
+  late aulaModel aula; 
 
   late TextEditingController controller_nome;
   late TextEditingController controller_id;
@@ -24,12 +24,13 @@ class EditorController {
   //= TextEditingController(text: agrupamento);
 
   EditorController(this.indexPosicao) {
+    aula = aulaModel(id_posicao: '', nome: '', idVideo: "", tec: '1', sub: "Outra", nivel: "Branca", observacoes: '', inicio: "0", fim: '0', passo: '', gi: '' );
     controller_nome = TextEditingController(text: aula.nome);
     controller_id  = TextEditingController(text: aula.idVideo);
     controller_nivel  = TextEditingController(text: aula.nivel);
     controller_observacoes  = TextEditingController(text: aula.observacoes);
     controller_inicio  = TextEditingController(text: aula.inicio);
-    controller_fim  = TextEditingController(text: aula.fim);
+    controller_fim  = TextEditingController(text: aula.fim); 
     controller_passo  = TextEditingController(text: aula.passo);
   }
 
@@ -52,7 +53,7 @@ class EditorController {
 
   void update(overlay, cont) async {
     Map dataObj = {
-      'id_posicao': id_posicao,
+      'id_posicao': aula.id_posicao,
       'agrupamento': global.globalVar['email'],
       'nome': aula.nome,
       'idVideo': aula.idVideo,
@@ -91,7 +92,7 @@ class EditorController {
 
     //String S_dataObj = jsonEncode(dataObj);
     Map dataObj = {
-      'id_posicao': id_posicao,
+      'id_posicao': aula.id_posicao,
       'agrupamento': global.globalVar['email'],
       'index': indexPosicao,
       'regiao': global.regiao,
