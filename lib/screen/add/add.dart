@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/repository/aula_repository.dart';
 import 'package:jjc/screen/add/add_controller.dart';
-import 'package:jjc/screen/widgets/scaffoldStandart.dart';
+import 'package:jjc/widgets/scaffoldStandart.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

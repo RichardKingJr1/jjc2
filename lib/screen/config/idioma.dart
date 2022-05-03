@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/main.dart';
-import 'package:jjc/screen/widgets/scaffoldStandartBack.dart';
+import 'package:jjc/widgets/scaffoldStandartBack.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 

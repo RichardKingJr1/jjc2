@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/models/aula_model.dart';
+import 'package:jjc/widgets/alertDialog.dart';
 import 'dart:convert';
-import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditorController {
 
@@ -23,8 +25,32 @@ class EditorController {
 
   //= TextEditingController(text: agrupamento);
 
+  /* index_posicao = int.parse(widget.index);
+    agrupamento = global.prop_tec[index_posicao]['agrupamento'];
+    id_posicao = global.prop_tec[index_posicao]['id_posicao'];
+    nome = global.prop_tec[index_posicao]['nome'];
+    idVideo = global.prop_tec[index_posicao]['idVideo'];
+    tec = global.prop_tec[index_posicao]['tec'];
+    sub = global.prop_tec[index_posicao]['sub'];
+    nivel = global.prop_tec[index_posicao]['nivel'];
+    observacoes = global.prop_tec[index_posicao]['observacoes'];
+    inicio = global.prop_tec[index_posicao]['inicio'];
+    fim = global.prop_tec[index_posicao]['fim'];
+    passo = global.prop_tec[index_posicao]['passo']; */
+
   EditorController(this.indexPosicao) {
-    aula = aulaModel(id_posicao: '', nome: '', idVideo: "", tec: '1', sub: "Outra", nivel: "Branca", observacoes: '', inicio: "0", fim: '0', passo: '', gi: '' );
+    aula = aulaModel(
+      id_posicao: global.prop_tec[indexPosicao]['id_posicao'], 
+      nome: global.prop_tec[indexPosicao]['nome'], 
+      idVideo: global.prop_tec[indexPosicao]['idVideo'], 
+      tec: global.prop_tec[indexPosicao]['tec'], 
+      sub: global.prop_tec[indexPosicao]['sub'], 
+      nivel: global.prop_tec[indexPosicao]['nivel'], 
+      observacoes: global.prop_tec[indexPosicao]['observacoes'], 
+      inicio: global.prop_tec[indexPosicao]['inicio'], 
+      fim: global.prop_tec[indexPosicao]['fim'], 
+      passo: global.prop_tec[indexPosicao]['passo']
+    );
     controller_nome = TextEditingController(text: aula.nome);
     controller_id  = TextEditingController(text: aula.idVideo);
     controller_nivel  = TextEditingController(text: aula.nivel);
@@ -43,7 +69,6 @@ class EditorController {
   set inicio(String value) => aula.inicio = value;
   set fim(String value) => aula.fim = value;
   set passo(String value) => aula.passo = value;
-  set gi(String value) => aula.gi = value;
 
   String get gi => aula.gi;
   String get tec => aula.tec;
@@ -79,7 +104,7 @@ class EditorController {
             body: jsonEncode(dataObj))
         .then((response) {
       if (response.statusCode == 200) {
-        dialog(cont, 'Técnica Atualizada');
+        Dialogs.alerta2(cont, AppLocalizations.of(cont)!.tecAtualizada, AppLocalizations.of(cont)!.ok);
         atualizar();
       }
     });
@@ -109,7 +134,7 @@ class EditorController {
             if (response.statusCode == 200)
               {
                 atualizar(),
-                dialog(cont, 'Técnica Excluida'),
+                Dialogs.alerta2(cont, AppLocalizations.of(cont)!.tecExcluida, AppLocalizations.of(cont)!.ok),
               },
           },
         );

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:jjc/screen/atualize/atualiza.dart';
 import 'package:jjc/screen/home/cartoes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
-import 'package:jjc/screen/widgets/scaffoldStandart.dart'; // important
+import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:jjc/widgets/scaffoldStandart.dart'; // important
 import 'package:jjc/global_services/global.dart' as global;
 
 class Home extends StatefulWidget {

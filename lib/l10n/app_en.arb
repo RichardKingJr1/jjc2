@@ -40,6 +40,9 @@
     "inicioVideo": "Start at (seconds)",
     "passoPasso": "Step by step technique",
 
+    "deleteTec": "Delete",
+    "editar": "Edit",
+
     "guardaFechada": "Closed Guard",
     "guardaAberta": "Open Guard",
     "passagemEmPe": "Standing Pass",
@@ -60,6 +63,9 @@
     "alertaTecAdd": "Technique added",
     "alertaPreencha": "Enter the name and id of the video",
     "ok": "ok",
+
+    "tecAtualizada": "Technique Updated",
+    "tecExcluida": "Technique Excluded",
 
     "passagem":"Transition",
     "raspagem":"Sweep",

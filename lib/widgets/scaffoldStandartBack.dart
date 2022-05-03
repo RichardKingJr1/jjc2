@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 
-import 'package:jjc/screen/widgets/menuDrawer.dart';
-import 'package:jjc/screen/widgets/app_botton.dart';
+import 'package:jjc/widgets/menuDrawer.dart';
+import 'package:jjc/widgets/app_botton.dart';
 
 class ScaffoldStandartBack extends StatelessWidget {
   final Widget bodyElement;

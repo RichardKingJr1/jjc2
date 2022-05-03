@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jjc/screen/aula/contador_reps.dart';
 import 'package:jjc/screen/aula/headerAula.dart';
-import 'package:jjc/screen/widgets/scaffoldStandartBack.dart';
+import 'package:jjc/widgets/scaffoldStandartBack.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'dart:developer';

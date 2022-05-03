@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/aula/headerAula_controller.dart';
-import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
 
 class Cartoes_mlib extends StatelessWidget {
   final posicoes;

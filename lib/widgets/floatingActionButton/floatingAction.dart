@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
-import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
 
 class floating extends StatefulWidget {
   bool button;

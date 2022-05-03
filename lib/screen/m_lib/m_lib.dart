@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/m_lib/cartoes_mlib.dart';
-import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
-import 'package:jjc/screen/widgets/scaffoldStandart.dart';
+import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:jjc/widgets/scaffoldStandart.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class MLib extends StatefulWidget {

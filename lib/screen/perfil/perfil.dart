@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
-import 'package:jjc/screen/widgets/app_botton.dart';
+import 'package:jjc/widgets/app_botton.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:http/http.dart' as http;
-import 'package:jjc/screen/widgets/menuDrawer.dart';
+import 'package:jjc/widgets/menuDrawer.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'dart:convert';
 

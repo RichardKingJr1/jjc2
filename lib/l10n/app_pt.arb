@@ -40,6 +40,9 @@
     "inicioVideo": "Inicio do Video (Segundos)",
     "passoPasso": "Passo a passo da técnica",
 
+    "deleteTec": "Deletar",
+    "editar": "Editar",
+
     "guardaFechada": "Guarda Fechada",
     "guardaAberta": "Guada Aberta",
     "passagemEmPe": "Passagem de Pé",
@@ -56,6 +59,9 @@
     "inicioTec": "Inicio do Video - Segundos (Opcional)",
     "passoTec": "Passo a passo da técnica (Opcional)",
     "addTec": "Adicionar",
+
+    "tecAtualizada": "Técnica Atualizada",
+    "tecExcluida": "Técnica Excluida",
 
     "alertaTecAdd": "Técnica Adicionada",
     "alertaPreencha": "Preencha o nome e o id do video",

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:jjc/screen/widgets/alertDialog.dart';
+import 'package:jjc/widgets/alertDialog.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
-import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
 
 class login_controller {
 

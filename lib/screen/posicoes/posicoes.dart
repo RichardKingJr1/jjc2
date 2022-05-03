@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/posicoes/cartosPosicoes.dart';
 
-import 'package:jjc/screen/widgets/scaffoldStandartBack.dart';
+import 'package:jjc/widgets/scaffoldStandartBack.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
 
 
 class cartaoPosicao extends StatelessWidget {

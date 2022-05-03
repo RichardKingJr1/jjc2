@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/perfil/minhas%20posicoes/cards_m_posicoes.dart';
 
-import 'package:jjc/screen/widgets/app_botton.dart';
-import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
-import 'package:jjc/screen/widgets/menuDrawer.dart';
+import 'package:jjc/widgets/app_botton.dart';
+import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:jjc/widgets/menuDrawer.dart';
 
 class Mposicoes extends StatefulWidget {
   final url = Uri.parse(global.endereco + 'posicoes');

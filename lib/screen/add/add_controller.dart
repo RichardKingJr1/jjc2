@@ -4,7 +4,7 @@ import 'package:jjc/models/aula_model.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'dart:convert';
 import 'package:jjc/repository/aula_repository.dart';
-import 'package:jjc/screen/widgets/alertDialog.dart';
+import 'package:jjc/widgets/alertDialog.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AddController {
