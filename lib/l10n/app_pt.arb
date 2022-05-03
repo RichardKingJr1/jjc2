@@ -17,6 +17,14 @@
     "recSenha": "Recuperar Senha",
     "contDeslogado": "Continuar Deslogado",
     "voltar": "Voltar",
+
+    "senhaTrocar": "Trocar Senha",
+    "senhaAtual": "Senha Atual",
+    "senhaNova": "Senha Nova",
+    "confirmarSenha": "Confirmar Senha",
+    "alertaSenhaAtualizada": "Senha atualizada",
+    "alertaSenhaIncorreta": "Senha incorreta",
+    "alertaSenhaDiferente": "Senhas diferentes",
     
     "minhasPosicoes": "Minhas Posições",
     "minhasBibliotecas":"Minhas Bibliotecas",
@@ -40,5 +48,31 @@
     "montada": "Montada",
     "costas": "Costas",
     "norteSul": "Norte-Sul",
-    "quedas": "Quedas"
+    "quedas": "Quedas",
+
+    "nomeTec": "Nome da técnica",
+    "idTec": "Id do video",
+    "observacoesTec": "Observação (Opcional)",
+    "inicioTec": "Inicio do Video - Segundos (Opcional)",
+    "passoTec": "Passo a passo da técnica (Opcional)",
+    "addTec": "Adicionar",
+
+    "alertaTecAdd": "Técnica Adicionada",
+    "alertaPreencha": "Preencha o nome e o id do video",
+    "ok": "ok",
+
+    "passagem":"Passagem",
+    "raspagem":"Raspagem",
+    "finalizacao":"Finalização",
+    "reposicao":"Reposição",
+    "outra":"Outra",
+
+    "branca":"Branca",
+    "azul":"Azul",
+    "roxa":"Roxa",
+    "marrom":"Marrom",
+    "preta":"Preta",
+
+    "portugues": "Portugues",
+    "ingles": "Inglês"
  }

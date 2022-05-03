@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:jjc/screen/aula/contador_reps.dart';
 import 'package:jjc/screen/aula/headerAula.dart';
 import 'package:jjc/screen/widgets/scaffoldStandartBack.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -83,13 +84,15 @@ class _AulaState extends State<Aula> {
                 existe: widget.existe,
                 aula: widget.aula,
               ),
+              //contador(reps: aula_info['reps'] ?? 0),
               Text(
                 aula_info['passo'] ?? '',
                 style: const TextStyle(color: Colors.black, fontSize: 15),
               ),
             ],
           ),
-        )
+        ),
+        //contador(),
       ],
     ));
   }

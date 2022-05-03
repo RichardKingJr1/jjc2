@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/aula/headerAula_controller.dart';
+import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
 
 class Cartoes_mlib extends StatelessWidget {
   final posicoes;
@@ -11,6 +12,10 @@ class Cartoes_mlib extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(valueListenable: headerAula_controller.instance.existe, builder: (context, value, child){
+
+      Map faixa = floatinAction_controller.instance.getFaixa(context);
+      Map subdiv = floatinAction_controller.instance.getSub(context);
+
       return ListView.builder(
       itemCount: posicoes.length,
       itemBuilder: (BuildContext context, int index) {
@@ -46,11 +51,11 @@ class Cartoes_mlib extends StatelessWidget {
                       margin: EdgeInsets.only(top: 25),
                       child: Row(children: [
                         Text(
-                          posicoes[index]["nivel"],
+                          faixa[posicoes[index]["nivel"]],
                           style: TextStyle(color: Colors.grey, fontSize: 15),
                         ),
                         Text(
-                          ' - ' + posicoes[index]["sub"],
+                          ' - ' + subdiv[posicoes[index]["sub"]],
                           style: TextStyle(color: Colors.grey, fontSize: 15),
                         ),
                       ]),

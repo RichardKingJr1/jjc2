@@ -48,6 +48,7 @@ class _headerAulaState extends State<headerAula> {
               if (!headerAula_controller.instance.existe.value & global.globalVar['logado'] == true) {
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.all(0),
                       minimumSize: const Size.fromHeight(40)),
                   // fromHeight use double.1infinity as width and 40 is the height
                   child: const Center(child: Text('+')),
@@ -56,6 +57,7 @@ class _headerAulaState extends State<headerAula> {
               } else if(global.globalVar['logado'] == true){
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.all(0),
                       minimumSize: const Size.fromHeight(40)),
                   // fromHeight use double.1infinity as width and 40 is the height
                   child: const Center(child: Text('-')),

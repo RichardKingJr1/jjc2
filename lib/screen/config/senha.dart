@@ -5,6 +5,8 @@ import 'package:jjc/screen/widgets/menuDrawer.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'dart:convert';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class Senha extends StatefulWidget {
   Senha({Key? key}) : super(key: key);
 
@@ -29,7 +31,7 @@ class _SenhaState extends State<Senha> {
       //backgroundColor: Colors.white,
       endDrawer: global.token != '' ? menuDrawer() : null,
       appBar: AppBar(
-        title: const Text('Trocar Senha'),
+        title: Text(AppLocalizations.of(context)!.senhaTrocar),
       ),
       body: Material(
         child: SafeArea(
@@ -51,7 +53,7 @@ class _SenhaState extends State<Senha> {
                     controller: _controller_senha,
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintText: "Senha Atual",
+                      hintText: AppLocalizations.of(context)!.senhaAtual,
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) => setState(() => senha_atual = value),
@@ -63,7 +65,7 @@ class _SenhaState extends State<Senha> {
                     controller: _controller_nsenha,
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintText: "Senha Nova",
+                      hintText: AppLocalizations.of(context)!.senhaNova,
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) => setState(() => nova_senha = value),
@@ -75,7 +77,7 @@ class _SenhaState extends State<Senha> {
                     controller: _controller_csenha,
                     obscureText: true,
                     decoration: InputDecoration(
-                      hintText: "Confirmar Senha",
+                      hintText: AppLocalizations.of(context)!.confirmarSenha,
                       border: OutlineInputBorder(),
                     ),
                     onChanged: (value) =>
@@ -87,7 +89,7 @@ class _SenhaState extends State<Senha> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
-                    child: Text('Trocar Senha'),
+                    child: Text(AppLocalizations.of(context)!.senhaTrocar),
                     //onPressed: () => {submit()},
                     onPressed: () => trocarSenha(),
                   ),
@@ -97,7 +99,7 @@ class _SenhaState extends State<Senha> {
                       style:
                           ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                       // fromHeight use double.infinity as width and 40 is the height
-                      child: Text('Voltar'),
+                      child: Text(AppLocalizations.of(context)!.voltar),
                       onPressed: () =>
                           //{Navigator.of(context).pushNamed('/criar_conta')},
                           Navigator.of(context).pushNamedAndRemoveUntil(
@@ -130,14 +132,14 @@ class _SenhaState extends State<Senha> {
           .then((response) {
         if (response.statusCode == 200) {
           setState(() {
-            dialog(context, 'Senha atualizada');
+            dialog(context, AppLocalizations.of(context)!.alertaSenhaAtualizada);
             Navigator.of(context)
                 .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
             //_controller_nome.clear();
           });
         } else {
           setState(() {
-            dialog(context, 'Senha incorreta');
+            dialog(context, AppLocalizations.of(context)!.alertaSenhaIncorreta);
             _controller_senha.clear();
             _controller_nsenha.clear();
             _controller_csenha.clear();
@@ -147,7 +149,7 @@ class _SenhaState extends State<Senha> {
 
       context.loaderOverlay.hide();
     } else {
-      dialog(context, 'Senhas diferentes');
+      dialog(context, AppLocalizations.of(context)!.alertaSenhaDiferente);
     }
   }
 
@@ -165,7 +167,7 @@ class _SenhaState extends State<Senha> {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("ok")),
+                    child: Text(AppLocalizations.of(context)!.ok)),
               )
             ],
           ),

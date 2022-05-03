@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:jjc/screen/widgets/app_botton.dart';
 import 'package:jjc/screen/widgets/menuDrawer.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:http/http.dart' as http;
@@ -26,7 +27,7 @@ class _mBibliotecasState extends State<mBibliotecas> {
     return Scaffold(
       endDrawer: global.token != '' ? menuDrawer() : null,
       appBar: AppBar(
-        title: const Text('Meus Movimentos'),
+        title: Text(AppLocalizations.of(context)!.minhasBibliotecas),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.of(context)
@@ -44,7 +45,7 @@ class _mBibliotecasState extends State<mBibliotecas> {
               controller: _controller_biblioteca_id,
               decoration: InputDecoration(
                 hintStyle: TextStyle(color: Colors.grey),
-                hintText: "Id Biblioteca",
+                hintText: AppLocalizations.of(context)!.idBiblioteca,
                 enabledBorder: const UnderlineInputBorder(
                   borderSide: const BorderSide(color: Colors.grey, width: 0.0),
                 ),

@@ -61,25 +61,25 @@ class _addPosicaoState extends State<addPosicao> {
               children: [
                 inputDefault(
                   const EdgeInsets.only(top: 20, bottom: 20),
-                  "Nome da técnica",
+                  AppLocalizations.of(context)!.nomeTec,
                   _controller_nome,
                   (value) => setState(() => nome = value),
                 ),
                 inputDefault(
                   const EdgeInsets.only(bottom: 20),
-                  "Id do video",
+                  AppLocalizations.of(context)!.idTec,
                   _controller_id,
                   (value) => setState(() => idVideo = value),
                 ),
                 inputDefault(
                   const EdgeInsets.only(bottom: 20),
-                  "Observação",
+                  AppLocalizations.of(context)!.observacoesTec,
                   _controller_observacoes,
                   (value) => observacoes = value,
                 ),
                 inputDefault(
                   const EdgeInsets.only(bottom: 20),
-                  "Inicio do Video Segundos",
+                  AppLocalizations.of(context)!.inicioTec,
                   _controller_inicio,
                   (value) => inicio = value,
                 ),
@@ -100,13 +100,13 @@ class _addPosicaoState extends State<addPosicao> {
                 seletor(dropDown_nivel()),
                 seletor(dropDown_sub()),
                 Container(
-                  margin: EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 10),
                   child: TextFormField(
                     maxLines: 8,
                     controller: _controller_passo,
                     decoration: InputDecoration(
-                      hintText: "Passo a passo da técnica",
-                      border: OutlineInputBorder(),
+                      hintText: AppLocalizations.of(context)!.passoTec,
+                      border: const OutlineInputBorder(),
                     ),
                     onChanged: (value) => passo = value,
                   ),
@@ -116,7 +116,7 @@ class _addPosicaoState extends State<addPosicao> {
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
-                    child: Text('Adicionar'),
+                    child: Text(AppLocalizations.of(context)!.addTec),
                     onPressed: () => submit(),
                   ),
                 ),
@@ -157,7 +157,7 @@ class _addPosicaoState extends State<addPosicao> {
           .then((response) {
         if (response.statusCode == 200) {
           setState(() {
-            Dialogs.alerta(context, "Técnica Adicionada", "Ok");
+            Dialogs.alerta(context, AppLocalizations.of(context)!.alertaTecAdd, "Ok");
             _controller_nome.clear();
             _controller_id.clear();
             _controller_agrupamento.clear();
@@ -173,7 +173,7 @@ class _addPosicaoState extends State<addPosicao> {
       context.loaderOverlay.hide();
       atualizar();
     }else{
-      Dialogs.alerta(context, "Preencha o nome e o id do video", "Ok");
+      Dialogs.alerta(context, AppLocalizations.of(context)!.alertaPreencha, "Ok");
     }
 
     
@@ -241,15 +241,15 @@ class _addPosicaoState extends State<addPosicao> {
         });
       },
       items: [
-        {'nome': 'Guarda Fechada', 'valor': '1'},
-        {'nome': 'Guarda Aberta', 'valor': '2'},
-        {'nome': 'Passagem de pé', 'valor': '3'},
-        {'nome': 'Meia Guarda', 'valor': '4'},
-        {'nome': '100 Kilos', 'valor': '5'},
-        {'nome': 'Montada', 'valor': '6'},
-        {'nome': 'Costas', 'valor': '7'},
-        {'nome': 'Norte-Sul', 'valor': '8'},
-        {'nome': 'Queda', 'valor': '9'}
+        {'nome': AppLocalizations.of(context)!.guardaFechada, 'valor': '1'},
+        {'nome': AppLocalizations.of(context)!.guardaAberta, 'valor': '2'},
+        {'nome': AppLocalizations.of(context)!.passagemEmPe, 'valor': '3'},
+        {'nome': AppLocalizations.of(context)!.meiaGuarda, 'valor': '4'},
+        {'nome': AppLocalizations.of(context)!.cemkilos, 'valor': '5'},
+        {'nome': AppLocalizations.of(context)!.montada, 'valor': '6'},
+        {'nome': AppLocalizations.of(context)!.costas, 'valor': '7'},
+        {'nome': AppLocalizations.of(context)!.norteSul, 'valor': '8'},
+        {'nome': AppLocalizations.of(context)!.quedas, 'valor': '9'}
       ].map<DropdownMenuItem<String>>((Map value) {
         return DropdownMenuItem<String>(
           value: value['valor'],
@@ -273,11 +273,16 @@ class _addPosicaoState extends State<addPosicao> {
           nivel = newValue!;
         });
       },
-      items: <String>['Branca', 'Azul', 'Roxa', 'Marrom', 'Preta']
-          .map<DropdownMenuItem<String>>((String value) {
+      items: [
+        {'nome': AppLocalizations.of(context)!.branca, 'valor': 'Branca'},
+        {'nome': AppLocalizations.of(context)!.azul, 'valor': 'azul'},
+        {'nome': AppLocalizations.of(context)!.roxa, 'valor': 'roxa'},
+        {'nome': AppLocalizations.of(context)!.marrom, 'valor': 'marrom'},
+        {'nome': AppLocalizations.of(context)!.preta, 'valor': 'preta'}
+      ].map<DropdownMenuItem<String>>((Map value) {
         return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
+          value: value['valor'],
+          child: Text(value['nome']),
         );
       }).toList(),
     );
@@ -297,16 +302,16 @@ class _addPosicaoState extends State<addPosicao> {
           sub = newValue!;
         });
       },
-      items: <String>[
-        'Passagem',
-        'Raspagem',
-        'Finalização',
-        'Reposição',
-        'Outra'
-      ].map<DropdownMenuItem<String>>((String value) {
+      items: [
+        {'nome': AppLocalizations.of(context)!.passagem, 'valor': 'Passagem'},
+        {'nome': AppLocalizations.of(context)!.raspagem, 'valor': 'Raspagem'},
+        {'nome': AppLocalizations.of(context)!.finalizacao, 'valor': 'Finalização'},
+        {'nome': AppLocalizations.of(context)!.reposicao, 'valor': 'Reposição'},
+        {'nome': AppLocalizations.of(context)!.outra, 'valor': 'Outra'}
+      ].map<DropdownMenuItem<String>>((Map value) {
         return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
+          value: value['valor'],
+          child: Text(value['nome']),
         );
       }).toList(),
     );

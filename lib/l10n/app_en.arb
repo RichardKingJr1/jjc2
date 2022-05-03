@@ -17,6 +17,14 @@
     "recSenha": "Recover Password",
     "contDeslogado": "Continue logged out",
     "voltar": "Go back",
+
+    "senhaTrocar": "Change Password",
+    "senhaAtual": "Current Password",
+    "senhaNova": "New Password",
+    "confirmarSenha": "Confirm Password",
+    "alertaSenhaAtualizada": "Password updated",
+    "alertaSenhaIncorreta": "Wrong Password",
+    "alertaSenhaDiferente": "Different passwords",
     
     "minhasPosicoes": "My Positions",
     "minhasBibliotecas":"My Libraries",
@@ -40,6 +48,32 @@
     "montada": "Mount",
     "costas": "Back",
     "norteSul": "North-South",
-    "quedas": "TakeDowns"
+    "quedas": "TakeDowns",
+
+    "nomeTec": "Technique name",
+    "idTec": "Video Id",
+    "observacoesTec": "Notes (Optional)",
+    "inicioTec": "Video start - Seconds (Optional)",
+    "passoTec": "Step by step technique (Optional)",
+    "addTec": "Add",
+
+    "alertaTecAdd": "Technique added",
+    "alertaPreencha": "Enter the name and id of the video",
+    "ok": "ok",
+
+    "passagem":"Transition",
+    "raspagem":"Sweep",
+    "finalizacao":"Submission",
+    "reposicao":"Escape",
+    "outra":"Other",
+
+    "branca":"White",
+    "azul":"Blue",
+    "roxa":"Purple",
+    "marrom":"Brown",
+    "preta":"Black",
+
+    "portugues": "Portuguese",
+    "ingles": "English"
 
  }

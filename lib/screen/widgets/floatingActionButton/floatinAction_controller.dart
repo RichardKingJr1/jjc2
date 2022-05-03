@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:jjc/global_services/global.dart' as global;
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class floatinAction_controller {
 
 
@@ -12,6 +14,30 @@ class floatinAction_controller {
   final logado = ValueNotifier<bool?>(null);
 
   List posicoes = global.myLib;
+
+  getFaixa(cont){
+    Map faixa = {
+      'Branca': AppLocalizations.of(cont)!.branca,
+      'azul': AppLocalizations.of(cont)!.azul,
+      'roxa': AppLocalizations.of(cont)!.roxa,
+      'marrom': AppLocalizations.of(cont)!.marrom,
+      'preta': AppLocalizations.of(cont)!.preta
+    };
+
+    return faixa;
+  }
+
+  getSub(cont){
+    Map faixa = {
+      'Passagem': AppLocalizations.of(cont)!.passagem,
+      'Raspagem': AppLocalizations.of(cont)!.raspagem,
+      'Finalização': AppLocalizations.of(cont)!.finalizacao,
+      'Reposição': AppLocalizations.of(cont)!.reposicao,
+      'Outra': AppLocalizations.of(cont)!.outra
+    };
+
+    return faixa;
+  }
 
   setGi(){
     gi.value = !gi.value;

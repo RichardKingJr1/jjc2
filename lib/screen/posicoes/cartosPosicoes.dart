@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:jjc/screen/widgets/floatingActionButton/floatinAction_controller.dart';
+
 
 class cartaoPosicao extends StatelessWidget {
   final dynamic posicoes;
@@ -11,6 +13,9 @@ class cartaoPosicao extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map faixa = floatinAction_controller.instance.getFaixa(context);
+    Map subdiv = floatinAction_controller.instance.getSub(context);
+
     if (posicoes == null) {
       return Text('Carregando');
     } else {
@@ -30,7 +35,7 @@ class cartaoPosicao extends StatelessWidget {
                 //color: Colors.grey, 
                 child: Container(
                   margin: EdgeInsets.only(left: 23, top: 10, bottom: 10), 
-                  child: Text(subs[i], style: TextStyle(color: Colors.black, fontSize: 18))),
+                  child: Text(subdiv[subs[i]], style: TextStyle(color: Colors.black, fontSize: 18))),
               ),
               ListView.builder(
                 itemCount: posicoes[i].length,
@@ -62,12 +67,12 @@ class cartaoPosicao extends StatelessWidget {
                                 margin: EdgeInsets.only(top: 25),
                                 child: Row(children: [
                                   Text(
-                                    posicoes[i][index]["nivel"],
+                                    faixa[posicoes[i][index]["nivel"]],
                                     style:
                                         TextStyle(color: Colors.grey, fontSize: 15),
                                   ),
                                   Text(
-                                    ' - ' + posicoes[i][index]["sub"],
+                                    ' - ' + subdiv[posicoes[i][index]["sub"]],
                                     style:
                                         TextStyle(color: Colors.grey, fontSize: 15),
                                   ),

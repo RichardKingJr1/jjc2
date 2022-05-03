@@ -14,21 +14,24 @@ class Idioma extends StatefulWidget {
 class _IdiomaState extends State<Idioma> {
   @override
   Widget build(BuildContext context) {
+
+    List<Map> idiomas_lib = [
+      {'nome':AppLocalizations.of(context)!.portugues, 'codigo': 'pt'},
+      {'nome': AppLocalizations.of(context)!.ingles, 'codigo': 'en'}
+    ];
+
     return ScaffoldStandartBack(
       titulo: AppLocalizations.of(context)!.idioma,
-      bodyElement: const CartoesIdiomas(),
+      bodyElement: CartoesIdiomas(idiomas_lib: idiomas_lib),
     );
   }
 }
 
 
 class CartoesIdiomas extends StatelessWidget {
-  const CartoesIdiomas({ Key? key }) : super(key: key);
 
-  static const idiomas_lib = [
-    {'nome': 'Portugues', 'codigo': 'pt'},
-    {'nome': 'Ingles', 'codigo': 'en'}
-  ];
+  final idiomas_lib;
+  const CartoesIdiomas({ Key? key, required this.idiomas_lib }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
