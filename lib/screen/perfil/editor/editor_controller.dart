@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/models/aula_model.dart';
+import 'package:jjc/repository/aula_repository.dart';
 import 'package:jjc/widgets/alertDialog.dart';
 import 'dart:convert';
 import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
@@ -9,8 +10,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditorController {
 
-  final url = Uri.parse(global.endereco + 'editar_tec');
+  
 
+  aulaRepository respositorio = aulaRepository();
   late aulaModel aula; 
 
   late TextEditingController controller_nome;
@@ -22,21 +24,6 @@ class EditorController {
   late TextEditingController controller_passo;
 
   int indexPosicao;
-
-  //= TextEditingController(text: agrupamento);
-
-  /* index_posicao = int.parse(widget.index);
-    agrupamento = global.prop_tec[index_posicao]['agrupamento'];
-    id_posicao = global.prop_tec[index_posicao]['id_posicao'];
-    nome = global.prop_tec[index_posicao]['nome'];
-    idVideo = global.prop_tec[index_posicao]['idVideo'];
-    tec = global.prop_tec[index_posicao]['tec'];
-    sub = global.prop_tec[index_posicao]['sub'];
-    nivel = global.prop_tec[index_posicao]['nivel'];
-    observacoes = global.prop_tec[index_posicao]['observacoes'];
-    inicio = global.prop_tec[index_posicao]['inicio'];
-    fim = global.prop_tec[index_posicao]['fim'];
-    passo = global.prop_tec[index_posicao]['passo']; */
 
   EditorController(this.indexPosicao) {
     aula = aulaModel(
@@ -98,11 +85,8 @@ class EditorController {
 
     //String S_dataObj = jsonEncode(dataObj);
 
-    await http
-        .post(url,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
+    respositorio.editarTec(dataObj)
+    .then((response) {
       if (response.statusCode == 200) {
         Dialogs.alerta2(cont, AppLocalizations.of(cont)!.tecAtualizada, AppLocalizations.of(cont)!.ok);
         atualizar();
@@ -125,19 +109,16 @@ class EditorController {
       'gi': global.globalVar['gi']
     };
 
-    await http
-        .post(Uri.parse(global.endereco + 'delete_tec'),
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then(
-          (response) => {
-            if (response.statusCode == 200)
-              {
-                atualizar(),
-                Dialogs.alerta2(cont, AppLocalizations.of(cont)!.tecExcluida, AppLocalizations.of(cont)!.ok),
-              },
+    respositorio.deleteTec(dataObj)
+    .then(
+      (response) => {
+        if (response.statusCode == 200)
+          {
+            atualizar(),
+            Dialogs.alerta2(cont, AppLocalizations.of(cont)!.tecExcluida, AppLocalizations.of(cont)!.ok),
           },
-        );
+      },
+    );
 
     overlay.hide();
   }
@@ -146,11 +127,8 @@ class EditorController {
     print('atualizar');
     Map dataObj = {'token': global.token, 'email': global.globalVar['email']};
 
-    await http
-        .post(Uri.parse(global.endereco + 'update_tec'),
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
+      respositorio.getTec(dataObj)
+      .then((response) {
       dynamic data = json.decode(utf8.decode(response.bodyBytes));
 
       if (response.statusCode == 200) {
