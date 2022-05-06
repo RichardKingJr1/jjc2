@@ -14,7 +14,7 @@ class login_controller {
   final url = Uri.parse(global.endereco + 'login');
 
   TextEditingController controller_senha = TextEditingController();
-  final storage = new FlutterSecureStorage();
+  final localStorage = new FlutterSecureStorage();
 
   void submit(cont, email, senha, overlayCont, ctrl) async {
     Map dataObj = {'email': email, 'senha': senha};
@@ -48,7 +48,7 @@ class login_controller {
 
         if(ctrl){
           //salva login e senha localmente
-          await storage.write(key: "credenciais", value: json.encode(dataObj));
+          await localStorage.write(key: "credenciais", value: json.encode(dataObj));
 
           Navigator.of(cont)
               .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
@@ -68,7 +68,7 @@ class login_controller {
 
   void login() async {
 
-    String? credenciais = await storage.read(key: 'credenciais');
+    String? credenciais = await localStorage.read(key: 'credenciais');
 
     if(credenciais is String){
 
@@ -79,10 +79,10 @@ class login_controller {
     }else{
       floatinAction_controller.instance.logedIn(false);
     }
-  }
+  } 
 
   logout(cont) async {
-    global.globalVar['id_user'] = '';
+    /* global.globalVar['id_user'] = '';
     global.myLib = [];
     global.lib_carregada = [];
     global.agrupamento = ['2'];
@@ -90,8 +90,10 @@ class login_controller {
     Navigator.of(cont).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
 
     floatinAction_controller.instance.updateMyTec([]);
-    floatinAction_controller.instance.logedIn(false);
+    floatinAction_controller.instance.logedIn(false); */
 
-    await storage.deleteAll();
+    
+
+    await localStorage.deleteAll();
   }
 }
