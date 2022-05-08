@@ -1,24 +1,24 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:jjc/router_generator.dart';
-
-import 'package:http/http.dart' as http;
-import 'package:jjc/global_services/global.dart' as global;
-import 'package:jjc/screen/login/login/login_controller.dart';
+import 'package:jjc/stores/globalStore.dart';
+import 'package:jjc/stores/userStore.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
+  
+  GetIt getIt = GetIt.I;
+  getIt.registerSingleton<UserStore>(UserStore());
+  getIt.registerSingleton<GlobalStore>(GlobalStore());
+
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
 
-  MyApp() {
-    getData();
-  }
+  MyApp();
 
   static void setLocale(BuildContext context, Locale newLocale) {
     _MyAppState state = context.findAncestorStateOfType<_MyAppState>()!;
@@ -30,6 +30,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+
   Locale? _locale;
 
   setLocale(Locale locale) {
@@ -37,20 +38,18 @@ class _MyAppState extends State<MyApp> {
       _locale = locale;
     });
   }
-
-
-
+  
   @override
   Widget build(BuildContext context) {
 
     return GlobalLoaderOverlay(
-      child: MaterialApp(
+      child:  MaterialApp(
         localizationsDelegates:
             AppLocalizations.localizationsDelegates, // important
         supportedLocales: AppLocalizations.supportedLocales,
         title: 'Jiu Lib',
         locale: _locale,
-        initialRoute: '/',
+        initialRoute: '/pre',
         onGenerateRoute: RouteGenerator.generateRoute,
         theme: ThemeData.dark().copyWith(
             primaryColor: Colors.lightBlue,
@@ -60,19 +59,7 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-Future getData() async {
 
-  await http.get(Uri.parse(global.endereco + 'versao?versao=' + global.versao))
-  .then((response) {
-    if (response.statusCode == 200) {
-      global.uptodate = true;
-    } else {
-      global.uptodate = false;
-    }
 
-    login_controller.instance.login();
-    
-    return true;
-  });
 
-}
+

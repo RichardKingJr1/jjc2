@@ -25,6 +25,11 @@
     "alertaSenhaAtualizada": "Password updated",
     "alertaSenhaIncorreta": "Wrong Password",
     "alertaSenhaDiferente": "Different passwords",
+    "alertaSenhaEmailIncorreto": "Wrong email or password",
+
+    "contaCriada": "Created Account",
+    "emailJaCadastrado": "Email already registered",
+    "erro": "Error",
     
     "minhasPosicoes": "My Positions",
     "minhasBibliotecas":"My Libraries",

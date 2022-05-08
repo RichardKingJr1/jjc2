@@ -17,6 +17,11 @@
     "recSenha": "Recuperar Senha",
     "contDeslogado": "Continuar Deslogado",
     "voltar": "Voltar",
+    "alertaSenhaEmailIncorreto": "Email ou senha incorretos",
+
+    "contaCriada": "Conta Criada",
+    "emailJaCadastrado": "Email já cadastrado",
+    "erro": "Erro",
 
     "senhaTrocar": "Trocar Senha",
     "senhaAtual": "Senha Atual",

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:jjc/screen/add/add.dart';
 import 'package:jjc/screen/aula/aula.dart';
 import 'package:jjc/screen/config/idioma.dart';
 import 'package:jjc/screen/config/senha.dart';
 import 'package:jjc/screen/home/home.dart';
-import 'package:jjc/screen/login/criar_conta.dart';
+import 'package:jjc/screen/login/criar_conta/criar_conta.dart';
 import 'package:jjc/screen/login/login/login.dart';
 import 'package:jjc/screen/login/recuperar_senha.dart';
 import 'package:jjc/screen/m_lib/m_lib.dart';
@@ -14,21 +15,30 @@ import 'package:jjc/screen/perfil/perfil.dart';
 import 'package:jjc/screen/perfil/minhas%20posicoes/minhas_posicoes.dart';
 import 'package:jjc/screen/posicoes/posicoes.dart';
 import 'package:jjc/screen/atualize/atualiza.dart';
-
-import 'package:jjc/global_services/global.dart' as global;
+import 'package:jjc/screen/precarregamento/precarregamento.dart';
 import 'package:jjc/screen/t_plans/t_plans.dart';
+import 'package:jjc/stores/userStore.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     // Getting arguments passed in while calling Navigator.pushNamed
     final args = settings.arguments;
+    var userStore = GetIt.I.get<UserStore>();
+    print(userStore.logado);
 
     switch (settings.name) {
+
+      case '/pre':
+        return MaterialPageRoute(builder: (_) => PreCarregamento());
+
+      case '':
+        return MaterialPageRoute(builder: (_) => atualize());
+
       case '/':
         return MaterialPageRoute(builder: (_) => Home());
 
       case '/lib':
-        if (global.globalVar['logado'] == true) {
+        if (userStore.logado == true) {
           return MaterialPageRoute(builder: (_) => MLib());
         } else {
           return MaterialPageRoute(builder: (_) => Login());
@@ -47,7 +57,7 @@ class RouteGenerator {
         return _errorRoute();
 
       case '/add':
-        if (global.globalVar['logado'] == true) {
+        if (userStore.logado == true) {
           return MaterialPageRoute(builder: (_) => addPosicao());
         } else {
           return MaterialPageRoute(builder: (_) => Login());

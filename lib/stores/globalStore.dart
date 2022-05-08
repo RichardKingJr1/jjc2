@@ -5,16 +5,27 @@ class GlobalStore = GlobalStoreBase with _$GlobalStore;
 
 abstract class GlobalStoreBase with Store {
 
-  String regiao = 'br';
-  String endereco = 'https://qmmshcm485.execute-api.us-east-2.amazonaws.com/prod/';
-  String versao = '1';
-
-  
+  static const String regiao = 'br';
+  static const String endereco = 'https://qmmshcm485.execute-api.us-east-2.amazonaws.com/prod/';
+  static const String versao = '1';
 
   @observable
-  bool? uptodate = null;
+  bool? _uptodate = null;
 
   @observable
-  bool gi = true;
+  bool _gi = true;
+
+  @action
+  setUpToDate(bool value){
+    _uptodate = value;
+  }
+
+  @action
+  setGi(){
+    _gi = !_gi;
+  }
+
+  bool? get uptodate => _uptodate; 
+  bool get gi => _gi; 
 
 }

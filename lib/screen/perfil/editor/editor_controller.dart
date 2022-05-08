@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/models/aula_model.dart';
 import 'package:jjc/repository/aula_repository.dart';
+import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/alertDialog.dart';
 import 'dart:convert';
 import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditorController {
-
   
-
-  aulaRepository respositorio = aulaRepository();
+  var userStore = GetIt.I.get<UserStore>();
+  var respositorio = aulaRepository();
   late aulaModel aula; 
 
   late TextEditingController controller_nome;
@@ -124,7 +125,7 @@ class EditorController {
   }
 
   atualizar() async {
-    print('atualizar');
+    //print('atualizar');
     Map dataObj = {'token': global.token, 'email': global.globalVar['email']};
 
       respositorio.getTec(dataObj)
@@ -135,7 +136,8 @@ class EditorController {
         //Fazer login no global service
         //global.myLib = data['user']['m_tec'];
 
-        floatinAction_controller.instance.updateMyTec(data['prop_tec']);
+        //floatinAction_controller.instance.updateMyTec(data['prop_tec']);
+        userStore.updateMyTec(data['prop_tec']);
       }
     });
   }

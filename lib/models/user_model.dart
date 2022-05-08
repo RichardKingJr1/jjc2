@@ -10,7 +10,7 @@ class userModel {
 
   List prop_tec = [];
 
-  List<String> agrupamento = ['2'];
+  List agrupamento = ['2'];
 
   //teste mudando para outra lib
 

@@ -4,8 +4,21 @@ import 'dart:convert';
 
 class userRepository {
 
-  loginRequest(){
+  final url1 = Uri.parse(global.endereco + 'criar_conta');
+  final url2 = Uri.parse(global.endereco + 'login');
 
+  loginRequest(dataObj) async {
+    return await http.post(
+        url2,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(dataObj));
+  }
+
+  registerRequest(dataObj) async {
+    return await http
+      .post(url1,
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(dataObj));
   }
 
 }

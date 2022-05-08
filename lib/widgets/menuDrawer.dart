@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:jjc/screen/login/login/login_controller.dart';
+import 'package:jjc/stores/userStore.dart';
+import 'package:provider/provider.dart';
 
 class menuDrawer extends StatelessWidget {
   const menuDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+
+    var instance = loginController(userStore: GetIt.I.get<UserStore>());
+    //var instance = loginController(userStore: Provider.of<UserStore>(context));
+
     return Drawer(
       child: ListView(
         children: [
@@ -30,7 +38,7 @@ class menuDrawer extends StatelessWidget {
           ListTile(
             //leading: Icon(Icons.logout),
             title: Text(AppLocalizations.of(context)!.sair),
-            onTap: () => login_controller.instance.logout(context),
+            onTap: () => instance.logout(context),
           )
         ],
       ),

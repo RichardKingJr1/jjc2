@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:jjc/repository/user_repository.dart';
+import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/alertDialog.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:jjc/global_services/global.dart' as global;
-import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class login_controller {
+class loginController {
 
-  static final login_controller instance = login_controller._();
-  login_controller._();
+  late UserStore userStore;
 
-  final url = Uri.parse(global.endereco + 'login');
+  loginController({ required this.userStore});
+
+  var repository = userRepository();
+
+  bool get uptodate => userStore.logado;
 
   TextEditingController controller_senha = TextEditingController();
   final localStorage = new FlutterSecureStorage();
@@ -23,50 +26,38 @@ class login_controller {
       overlayCont.show();
     }
     
-    await http.post(
-        url,
-        headers: {"Content-Type": "application/json"},
-        body: jsonEncode(dataObj))
+    repository.loginRequest(dataObj)
     .then((response) async {
 
       dynamic data = json.decode(utf8.decode(response.bodyBytes));
 
       if (response.statusCode == 200) {
         //Fazer login no global service
-        //global.globalVar['logado'] = true;
-        global.globalVar['email'] = data['user']['email'];
-        global.myLib = data['user']['m_tec'];
-        global.myLibNogi = data['user']['m_tec_nogi'];
-        global.token = data['token'];
-        global.agrupamento = (data['user']['libs'] ?? []).cast<String>();
-        global.agrupamento.add(data['user']['email']);
 
-        floatinAction_controller.instance.updateMyTec(data['user']['prop_tec']);
-        floatinAction_controller.instance.logedIn(true);
-        floatinAction_controller.instance.setPosicao();
-        
+        userStore.login(data['token'], email, email, data['user']['m_tec'], data['user']['m_tec_nogi'], data['user']['prop_tec'], data['user']['libs'] ?? []);
 
         if(ctrl){
           //salva login e senha localmente
           await localStorage.write(key: "credenciais", value: json.encode(dataObj));
 
+          overlayCont.hide();
+          controller_senha.clear();
+
           Navigator.of(cont)
               .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
 
-          overlayCont.hide();
-          controller_senha.clear();
         }
       } else {
         if(ctrl){
-          Dialogs.alerta(cont, "Email ou senha incorretos", "Ok");
           controller_senha.clear();
           overlayCont.hide();
+          Dialogs.alerta(cont, AppLocalizations.of(cont)!.alertaSenhaEmailIncorreto, AppLocalizations.of(cont)!.ok);
         }
       }
     });
   }
 
-  void login() async {
+  Future<void> login() async {
 
     String? credenciais = await localStorage.read(key: 'credenciais');
 
@@ -76,24 +67,17 @@ class login_controller {
 
       submit('cont', valores['email'], valores['senha'], 'overlayCont', false);
       
-    }else{
-      floatinAction_controller.instance.logedIn(false);
     }
+    return ;
   } 
 
   logout(cont) async {
-    /* global.globalVar['id_user'] = '';
-    global.myLib = [];
-    global.lib_carregada = [];
-    global.agrupamento = ['2'];
-    global.token = '';
+
+    userStore.logout();
+
     Navigator.of(cont).pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
 
-    floatinAction_controller.instance.updateMyTec([]);
-    floatinAction_controller.instance.logedIn(false); */
-
-    
-
     await localStorage.deleteAll();
+
   }
 }

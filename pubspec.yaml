@@ -28,6 +28,8 @@ dependencies:
   flutter_secure_storage: ^5.0.2
   mobx:
   flutter_mobx:
+  provider:
+  get_it:
 
 dev_dependencies:
   flutter_test:

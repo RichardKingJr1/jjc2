@@ -24,22 +24,37 @@ mixin _$UserStore on UserStoreBase, Store {
     });
   }
 
+  late final _$tokenAtom = Atom(name: 'UserStoreBase.token', context: context);
+
+  @override
+  String get token {
+    _$tokenAtom.reportRead();
+    return super.token;
+  }
+
+  @override
+  set token(String value) {
+    _$tokenAtom.reportWrite(value, super.token, () {
+      super.token = value;
+    });
+  }
+
   late final _$UserStoreBaseActionController =
       ActionController(name: 'UserStoreBase', context: context);
 
   @override
-  dynamic storeUserData(
+  dynamic login(
       dynamic token,
       String id_user,
       String email,
       List<dynamic> myLib,
       List<dynamic> myLibNogi,
       List<dynamic> prop_tec,
-      List<String> agrupamento) {
+      List<dynamic> agrupamento) {
     final _$actionInfo = _$UserStoreBaseActionController.startAction(
-        name: 'UserStoreBase.storeUserData');
+        name: 'UserStoreBase.login');
     try {
-      return super.storeUserData(
+      return super.login(
           token, id_user, email, myLib, myLibNogi, prop_tec, agrupamento);
     } finally {
       _$UserStoreBaseActionController.endAction(_$actionInfo);
@@ -47,11 +62,11 @@ mixin _$UserStore on UserStoreBase, Store {
   }
 
   @override
-  dynamic eraseUserData() {
+  dynamic logout() {
     final _$actionInfo = _$UserStoreBaseActionController.startAction(
-        name: 'UserStoreBase.eraseUserData');
+        name: 'UserStoreBase.logout');
     try {
-      return super.eraseUserData();
+      return super.logout();
     } finally {
       _$UserStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -60,7 +75,8 @@ mixin _$UserStore on UserStoreBase, Store {
   @override
   String toString() {
     return '''
-user: ${user}
+user: ${user},
+token: ${token}
     ''';
   }
 }

@@ -9,42 +9,55 @@ part of 'globalStore.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$GlobalStore on GlobalStoreBase, Store {
-  late final _$uptodateAtom =
-      Atom(name: 'GlobalStoreBase.uptodate', context: context);
+  late final _$_uptodateAtom =
+      Atom(name: 'GlobalStoreBase._uptodate', context: context);
 
   @override
-  bool? get uptodate {
-    _$uptodateAtom.reportRead();
-    return super.uptodate;
+  bool? get _uptodate {
+    _$_uptodateAtom.reportRead();
+    return super._uptodate;
   }
 
   @override
-  set uptodate(bool? value) {
-    _$uptodateAtom.reportWrite(value, super.uptodate, () {
-      super.uptodate = value;
+  set _uptodate(bool? value) {
+    _$_uptodateAtom.reportWrite(value, super._uptodate, () {
+      super._uptodate = value;
     });
   }
 
-  late final _$giAtom = Atom(name: 'GlobalStoreBase.gi', context: context);
+  late final _$_giAtom = Atom(name: 'GlobalStoreBase._gi', context: context);
 
   @override
-  bool get gi {
-    _$giAtom.reportRead();
-    return super.gi;
+  bool get _gi {
+    _$_giAtom.reportRead();
+    return super._gi;
   }
 
   @override
-  set gi(bool value) {
-    _$giAtom.reportWrite(value, super.gi, () {
-      super.gi = value;
+  set _gi(bool value) {
+    _$_giAtom.reportWrite(value, super._gi, () {
+      super._gi = value;
     });
+  }
+
+  late final _$GlobalStoreBaseActionController =
+      ActionController(name: 'GlobalStoreBase', context: context);
+
+  @override
+  dynamic setUpToDate(bool value) {
+    final _$actionInfo = _$GlobalStoreBaseActionController.startAction(
+        name: 'GlobalStoreBase.setUpToDate');
+    try {
+      return super.setUpToDate(value);
+    } finally {
+      _$GlobalStoreBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
     return '''
-uptodate: ${uptodate},
-gi: ${gi}
+
     ''';
   }
 }

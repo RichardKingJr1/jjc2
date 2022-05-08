@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:jjc/screen/login/login/login_controller.dart';
+import 'package:jjc/stores/userStore.dart';
 
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
 
@@ -17,10 +20,12 @@ class _LoginState extends State<Login> {
   String email = '';
   String senha = '';
 
-  //login_controller instance = login_controller();
+  loginController instance = loginController(userStore: GetIt.I.get<UserStore>());
 
   @override
   Widget build(BuildContext context) {
+    //loginController instance = loginController(userStore: Provider.of<UserStore>(context));
+
     return Scaffold(
       /* appBar: AppBar(
         title: const Text('Aula'),
@@ -69,7 +74,7 @@ class _LoginState extends State<Login> {
                     style: ElevatedButton.styleFrom(minimumSize: Size(400, 65)),
                     // fromHeight use double.infinity as width and 40 is the height
                     child: Text(AppLocalizations.of(context)!.login),
-                    onPressed: () => {login_controller.instance.submit(context, email, senha, context.loaderOverlay, true)},
+                    onPressed: () => {instance.submit(context, email, senha, context.loaderOverlay, true)},
                   ),
                 ),
                 Container(

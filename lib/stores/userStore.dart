@@ -11,10 +11,11 @@ abstract class UserStoreBase with Store {
 
   bool logado = false;
 
+  @observable
   String token = '';
 
   @action
-  storeUserData(token, String id_user, String email, List myLib, List myLibNogi, List prop_tec, List<String> agrupamento){
+  void login(token, String id_user, String email, List myLib, List myLibNogi, List prop_tec, List agrupamento){
     user.id_user = id_user;
     user.email = email;
     user.myLib = myLib;
@@ -24,11 +25,14 @@ abstract class UserStoreBase with Store {
     user.agrupamento = agrupamento;
 
     logado = true;
-    token = token;
+    this.token = token;
+
+    print(user.prop_tec);
+
   }
 
   @action
-  eraseUserData(){
+  void logout(){
     user.id_user = '';
     user.email = 'email';
     user.myLib = [];
@@ -39,6 +43,24 @@ abstract class UserStoreBase with Store {
     logado = false;
     token = '';
     
+  }
+
+
+  @action
+  void updateMyTec(tec){
+    user.prop_tec = tec;
+  }
+
+  List getPosicoes(gi) {
+    if(gi){
+      return user.myLib;
+    }else{
+      return user.myLibNogi;
+    }
+  }
+
+  List getMyTec() {
+    return user.prop_tec;
   }
 
 }
