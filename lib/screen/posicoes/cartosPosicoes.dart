@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:jjc/widgets/dropDownsValues.dart';
 import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
 
 
@@ -10,11 +11,12 @@ class cartaoPosicao extends StatelessWidget {
 
   cartaoPosicao({Key? key, required this.posicoes, required this.subs}) :super(key: key);
 
+  var dropDowns = DropDownValue();
 
   @override
   Widget build(BuildContext context) {
-    Map faixa = floatinAction_controller.instance.getFaixa(context);
-    Map subdiv = floatinAction_controller.instance.getSub(context);
+    Map faixa = dropDowns.getFaixa(context);
+    Map subdiv = dropDowns.getSub(context);
 
     if (posicoes == null) {
       return Text('Carregando');

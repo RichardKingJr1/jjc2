@@ -3,18 +3,21 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/aula/headerAula_controller.dart';
+import 'package:jjc/widgets/dropDownsValues.dart';
 import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
 
 class Cartoes_mlib extends StatelessWidget {
   final posicoes;
-  const Cartoes_mlib({ Key? key, required this.posicoes }) : super(key: key);
+  Cartoes_mlib({ Key? key, required this.posicoes }) : super(key: key);
+
+  var dropDowns = DropDownValue();
 
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(valueListenable: headerAula_controller.instance.existe, builder: (context, value, child){
 
-      Map faixa = floatinAction_controller.instance.getFaixa(context);
-      Map subdiv = floatinAction_controller.instance.getSub(context);
+      Map faixa = dropDowns.getFaixa(context);
+      Map subdiv = dropDowns.getSub(context);
 
       return ListView.builder(
       itemCount: posicoes.length,
