@@ -28,8 +28,8 @@ class _headerAulaState extends State<headerAula> {
 
   @override
   Widget build(BuildContext context) {  
-    print('inicio');
     headerAula_controller.instance.setExiste(widget.existe);
+
     return ValueListenableBuilder(valueListenable: headerAula_controller.instance.existe, builder: (context, value, child){
       return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -45,7 +45,7 @@ class _headerAulaState extends State<headerAula> {
           Expanded(
             flex: 1,
             child: Container(child: () {
-              if (!headerAula_controller.instance.existe.value & global.globalVar['logado'] == true) {
+              if (!headerAula_controller.instance.existe.value & headerAula_controller.instance.userStore.logado == true) {
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.all(0),
@@ -54,7 +54,7 @@ class _headerAulaState extends State<headerAula> {
                   child: const Center(child: Text('+')),
                   onPressed: () => headerAula_controller.instance.adicionarPosicao(widget.aula),
                 );
-              } else if(global.globalVar['logado'] == true){
+              } else if(headerAula_controller.instance.userStore.logado == true){
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(0),

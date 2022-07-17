@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:jjc/global_services/global.dart' as global;
+import 'package:jjc/stores/userStore.dart';
 
 class headerAula_controller {
 
   static final headerAula_controller instance = headerAula_controller._();
   headerAula_controller._();
+
+  var userStore = GetIt.I.get<UserStore>();
 
   final url1 = Uri.parse(global.endereco + 'add_to_lib');
   final url2 = Uri.parse(global.endereco + 'exclude_from_lib');

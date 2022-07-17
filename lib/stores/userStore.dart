@@ -27,8 +27,6 @@ abstract class UserStoreBase with Store {
     logado = true;
     this.token = token;
 
-    print(user.prop_tec);
-
   }
 
   @action
