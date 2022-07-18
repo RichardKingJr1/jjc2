@@ -63,7 +63,7 @@ class _EditorState extends State<Editor> {
                   Container(
                     margin: EdgeInsets.only(top: 20, bottom: 20),
                     child: TextFormField(
-                      controller: instance.controller_nome,
+                      controller: instance.controllerNome,
                       decoration: InputDecoration(
                         hintText: AppLocalizations.of(context)!.nomeTec,
                         border: OutlineInputBorder(),
@@ -74,7 +74,7 @@ class _EditorState extends State<Editor> {
                   Container(
                     margin: EdgeInsets.only(bottom: 20),
                     child: TextFormField(
-                      controller: instance.controller_observacoes,
+                      controller: instance.controllerObservacoes,
                       decoration: InputDecoration(
                         hintText: AppLocalizations.of(context)!.observacoesTec,
                         border: OutlineInputBorder(),
@@ -86,7 +86,7 @@ class _EditorState extends State<Editor> {
                     margin: EdgeInsets.only(bottom: 20),
                     child: TextFormField(
                       keyboardType: TextInputType.number,
-                      controller: instance.controller_inicio,
+                      controller: instance.controllerInicio,
                       decoration: InputDecoration(
                         hintText: AppLocalizations.of(context)!.inicioTec,
                         border: OutlineInputBorder(),
@@ -113,7 +113,7 @@ class _EditorState extends State<Editor> {
                     margin: const EdgeInsets.only(bottom: 10),
                     child: TextFormField(
                       maxLines: 8,
-                      controller: instance.controller_passo,
+                      controller: instance.controllerPasso,
                       decoration: InputDecoration(
                         hintText: AppLocalizations.of(context)!.passoTec,
                         border: OutlineInputBorder(),

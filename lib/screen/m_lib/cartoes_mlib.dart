@@ -1,16 +1,21 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/aula/headerAula_controller.dart';
+import 'package:jjc/stores/globalStore.dart';
+import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/dropDownsValues.dart';
-import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
 
 class Cartoes_mlib extends StatelessWidget {
   final posicoes;
   Cartoes_mlib({ Key? key, required this.posicoes }) : super(key: key);
 
   var dropDowns = DropDownValue();
+
+  var globalStore = GetIt.I.get<GlobalStore>();
+  var userStore = GetIt.I.get<UserStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +35,13 @@ class Cartoes_mlib extends StatelessWidget {
               ),
               child: TextButton(
                 onPressed: () {
-                  if(global.globalVar['gi']){
-                    global.lib_carregada = global.myLib;
+                  if(globalStore.gi){
+                    userStore.setLibCarregada(userStore.user.myLib);
                   }else{
-                    global.lib_carregada = global.myLibNogi;
+                    userStore.setLibCarregada(userStore.user.myLibNogi);
                   }
                   Navigator.of(context)
-                      .pushNamed('/aula', arguments: jsonEncode(global.lib_carregada[index]));
+                      .pushNamed('/aula', arguments: jsonEncode(userStore.libCarregada[index]));
                 },
                 child: Container(
                   alignment: Alignment.topLeft,

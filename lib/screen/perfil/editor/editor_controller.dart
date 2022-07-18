@@ -15,13 +15,13 @@ class EditorController {
   var respositorio = aulaRepository();
   late aulaModel aula; 
 
-  late TextEditingController controller_nome;
-  late TextEditingController controller_id;
-  late TextEditingController controller_nivel;
-  late TextEditingController controller_observacoes;
-  late TextEditingController controller_inicio;
-  late TextEditingController controller_fim;
-  late TextEditingController controller_passo;
+  late TextEditingController controllerNome;
+  late TextEditingController controllerId;
+  late TextEditingController controllerNivel;
+  late TextEditingController controllerObservacoes;
+  late TextEditingController controllerInicio;
+  late TextEditingController controllerFim;
+  late TextEditingController controllerPasso;
 
   int indexPosicao;
 
@@ -38,13 +38,13 @@ class EditorController {
       fim: userStore.user.prop_tec[indexPosicao]['fim'], 
       passo: userStore.user.prop_tec[indexPosicao]['passo']
     );
-    controller_nome = TextEditingController(text: aula.nome);
-    controller_id  = TextEditingController(text: aula.idVideo);
-    controller_nivel  = TextEditingController(text: aula.nivel);
-    controller_observacoes  = TextEditingController(text: aula.observacoes);
-    controller_inicio  = TextEditingController(text: aula.inicio);
-    controller_fim  = TextEditingController(text: aula.fim); 
-    controller_passo  = TextEditingController(text: aula.passo);
+    controllerNome = TextEditingController(text: aula.nome);
+    controllerId  = TextEditingController(text: aula.idVideo);
+    controllerNivel  = TextEditingController(text: aula.nivel);
+    controllerObservacoes  = TextEditingController(text: aula.observacoes);
+    controllerInicio  = TextEditingController(text: aula.inicio);
+    controllerFim  = TextEditingController(text: aula.fim); 
+    controllerPasso  = TextEditingController(text: aula.passo);
   }
 
   set nome(String value) => aula.nome = value;

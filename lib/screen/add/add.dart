@@ -40,25 +40,25 @@ class _addPosicaoState extends State<addPosicao> {
                 inputDefault(
                   const EdgeInsets.only(top: 20, bottom: 20),
                   AppLocalizations.of(context)!.nomeTec,
-                  instance.controller_nome,
+                  instance.controllerNome,
                   (value) => setState(() => instance.nome = value),
                 ),
                 inputDefault(
                   const EdgeInsets.only(bottom: 20),
                   AppLocalizations.of(context)!.idTec,
-                  instance.controller_id,
+                  instance.controllerId,
                   (value) => setState(() => instance.idVideo = value),
                 ),
                 inputDefault(
                   const EdgeInsets.only(bottom: 20),
                   AppLocalizations.of(context)!.observacoesTec,
-                  instance.controller_observacoes,
+                  instance.controllerObservacoes,
                   (value) => instance.observacoes = value,
                 ),
                 inputDefault(
                   const EdgeInsets.only(bottom: 20),
                   AppLocalizations.of(context)!.inicioTec,
-                  instance.controller_inicio,
+                  instance.controllerInicio,
                   (value) => instance.inicio = value,
                 ),
                 /* Container(
@@ -81,7 +81,7 @@ class _addPosicaoState extends State<addPosicao> {
                   margin: const EdgeInsets.only(bottom: 10),
                   child: TextFormField(
                     maxLines: 8,
-                    controller: instance.controller_passo,
+                    controller: instance.controllerPasso,
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.passoTec,
                       border: const OutlineInputBorder(),

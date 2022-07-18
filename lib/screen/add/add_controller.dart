@@ -21,13 +21,13 @@ class AddController {
 
   aulaModel aula = aulaModel();
 
-  final TextEditingController controller_nome = TextEditingController();
-  final TextEditingController controller_id = TextEditingController();
-  final TextEditingController controller_nivel = TextEditingController();
-  final TextEditingController controller_observacoes = TextEditingController();
-  final TextEditingController controller_inicio = TextEditingController();
-  final TextEditingController controller_fim = TextEditingController();
-  final TextEditingController controller_passo = TextEditingController();
+  final TextEditingController controllerNome = TextEditingController();
+  final TextEditingController controllerId = TextEditingController();
+  final TextEditingController controllerNivel = TextEditingController();
+  final TextEditingController controllerObservacoes = TextEditingController();
+  final TextEditingController controllerInicio = TextEditingController();
+  final TextEditingController controllerFim = TextEditingController();
+  final TextEditingController controllerPasso = TextEditingController();
 
 
   set nome(String value) => aula.nome = value;
@@ -90,13 +90,13 @@ class AddController {
         if (response.statusCode == 200) {
 
             Dialogs.alerta(cont, AppLocalizations.of(cont)!.alertaTecAdd, "Ok");
-            controller_nome.clear();
-            controller_id.clear();
-            controller_inicio.clear();
-            controller_fim.clear();
-            controller_nivel.clear();
-            controller_observacoes.clear();
-            controller_passo.clear();
+            controllerNome.clear();
+            controllerId.clear();
+            controllerInicio.clear();
+            controllerFim.clear();
+            controllerNivel.clear();
+            controllerObservacoes.clear();
+            controllerPasso.clear();
       
         }
       });

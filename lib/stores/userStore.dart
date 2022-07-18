@@ -9,10 +9,14 @@ abstract class UserStoreBase with Store {
   @observable
   userModel user = userModel();
 
+  @observable
   bool logado = false;
 
   @observable
   String token = '';
+
+  @observable
+  List _libCarregada = [];
 
   @action
   void login(token, String id_user, String email, List myLib, List myLibNogi, List prop_tec, List agrupamento){
@@ -81,6 +85,11 @@ abstract class UserStoreBase with Store {
     user = user;
   }
 
+  @action
+  void setLibCarregada(lib){
+    _libCarregada = lib;
+  }
+
   List getPosicoes(gi) {
     if(gi){
       return user.myLib;
@@ -92,5 +101,6 @@ abstract class UserStoreBase with Store {
   List get getMyTec => user.prop_tec;
   String get getEmail => user.email;
   String get getToken => token;
+  List get libCarregada => _libCarregada;
 
 }

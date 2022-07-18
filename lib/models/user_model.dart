@@ -14,8 +14,6 @@ class userModel {
 
   //teste mudando para outra lib
 
-  List lib_carregada = [];
-
   Map aulaCarregada = {};
 
   userModel({
