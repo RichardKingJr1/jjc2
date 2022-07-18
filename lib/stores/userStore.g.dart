@@ -43,7 +43,7 @@ mixin _$UserStore on UserStoreBase, Store {
       ActionController(name: 'UserStoreBase', context: context);
 
   @override
-  dynamic login(
+  void login(
       dynamic token,
       String id_user,
       String email,
@@ -62,11 +62,33 @@ mixin _$UserStore on UserStoreBase, Store {
   }
 
   @override
-  dynamic logout() {
+  void logout() {
     final _$actionInfo = _$UserStoreBaseActionController.startAction(
         name: 'UserStoreBase.logout');
     try {
       return super.logout();
+    } finally {
+      _$UserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void atualizarLib(dynamic libs, dynamic email) {
+    final _$actionInfo = _$UserStoreBaseActionController.startAction(
+        name: 'UserStoreBase.atualizarLib');
+    try {
+      return super.atualizarLib(libs, email);
+    } finally {
+      _$UserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateMyTec(dynamic tec) {
+    final _$actionInfo = _$UserStoreBaseActionController.startAction(
+        name: 'UserStoreBase.updateMyTec');
+    try {
+      return super.updateMyTec(tec);
     } finally {
       _$UserStoreBaseActionController.endAction(_$actionInfo);
     }

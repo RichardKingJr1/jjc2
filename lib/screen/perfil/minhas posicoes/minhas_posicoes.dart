@@ -22,9 +22,8 @@ class _MposicoesState extends State<Mposicoes> {
 
   @override
   Widget build(BuildContext context) {
-    print(userStore.getMyTec());
     return Scaffold(
-      endDrawer: global.token != '' ? menuDrawer() : null,
+      endDrawer: userStore.token != '' ? menuDrawer() : null,
       appBar: AppBar(
         title: const Text('Meus Movimentos'),
         leading: IconButton(
@@ -34,7 +33,7 @@ class _MposicoesState extends State<Mposicoes> {
         ),
       ),
       body: Container(
-        child: Observer(builder: (_) => cardsMPosicoes(posicoes: userStore.getMyTec())),
+        child: Observer(builder: (_) => CardsMPosicoes(posicoes: userStore.getMyTec)),
       ),
       bottomNavigationBar: appBotton(
         cont: context,

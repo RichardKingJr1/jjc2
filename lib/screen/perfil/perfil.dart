@@ -39,7 +39,8 @@ class _PerfilState extends State<Perfil> {
   }
 
   void logout() {
-    global.globalVar['id_user'] = '';
+
+     global.globalVar['id_user'] = '';
     global.globalVar['logado'] = false;
     global.myLib = [];
     Navigator.of(context)

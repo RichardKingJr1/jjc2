@@ -4,7 +4,6 @@ import 'package:jjc/screen/perfil/editor/editor_controller.dart';
 import 'package:jjc/widgets/app_botton.dart';
 import 'package:jjc/widgets/menuDrawer.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:jjc/global_services/global.dart' as global;
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Editor extends StatefulWidget {
@@ -43,7 +42,7 @@ class _EditorState extends State<Editor> {
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.white,
-      endDrawer: global.token != '' ? menuDrawer() : null,
+      endDrawer: instance.userStore.token != '' ? menuDrawer() : null,
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.addTec),
         leading: IconButton(
@@ -156,62 +155,6 @@ class _EditorState extends State<Editor> {
   }
 
 
-  /* Widget dropDown_agrupamento() {
-    return DropdownButton<String>(
-      value: instance.tec,
-      icon: const Icon(Icons.arrow_downward),
-      style: const TextStyle(color: Color(2583691263)),
-      underline: Container(
-        height: 1,
-        color: Color(2583691263),
-      ),
-      onChanged: (String? newValue) {
-        setState(() {
-          instance.tec = newValue!;
-        });
-      },
-      items: [
-        {'nome': AppLocalizations.of(context)!.guardaFechada, 'valor': '1'},
-        {'nome': AppLocalizations.of(context)!.guardaAberta, 'valor': '2'},
-        {'nome': AppLocalizations.of(context)!.passagemEmPe, 'valor': '3'},
-        {'nome': AppLocalizations.of(context)!.meiaGuarda, 'valor': '4'},
-        {'nome': AppLocalizations.of(context)!.cemkilos, 'valor': '5'},
-        {'nome': AppLocalizations.of(context)!.montada, 'valor': '6'},
-        {'nome': AppLocalizations.of(context)!.costas, 'valor': '7'},
-        {'nome': AppLocalizations.of(context)!.norteSul, 'valor': '8'},
-        {'nome': AppLocalizations.of(context)!.quedas, 'valor': '9'}
-      ].map<DropdownMenuItem<String>>((Map value) {
-        return DropdownMenuItem<String>(
-          value: value['valor'],
-          child: Text(value['nome']),
-        );
-      }).toList(),
-    );
-  } */
-
-  /* Widget dropDown_nivel() {
-    return DropdownButton<String>(
-      value: instance.nivel,
-      icon: const Icon(Icons.arrow_downward),
-      style: const TextStyle(color: Color(2583691263)),
-      underline: Container(
-        height: 1,
-        color: Color(2583691263),
-      ),
-      onChanged: (String? newValue) {
-        setState(() {
-          instance.nivel = newValue!;
-        });
-      },
-      items: <String>['Branca', 'Azul', 'Roxa', 'Marrom', 'Preta']
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-    );
-  } */
 
   Widget dropDown_nivel() {
     return DropdownButton<String>(

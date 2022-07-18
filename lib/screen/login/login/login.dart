@@ -6,7 +6,6 @@ import 'package:jjc/screen/login/login/login_controller.dart';
 import 'package:jjc/stores/userStore.dart';
 
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
 

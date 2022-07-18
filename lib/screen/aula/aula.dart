@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:jjc/screen/aula/contador_reps.dart';
+import 'package:get_it/get_it.dart';
 import 'package:jjc/screen/aula/headerAula.dart';
+import 'package:jjc/stores/globalStore.dart';
+import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/scaffoldStandartBack.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:jjc/global_services/global.dart' as global;
@@ -11,26 +13,28 @@ import 'dart:developer';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Aula extends StatefulWidget {
+  
   final url = Uri.parse(global.endereco + 'aula');
 
   dynamic aula = 0;
   bool existe = false;
 
-  //Aula({Key? key, required this.index_posicao}) : super(key: key);
+  var userStore = GetIt.I.get<UserStore>();
+  var globalStore = GetIt.I.get<GlobalStore>();
 
   Aula(dynamic aula) {
     this.aula = jsonDecode(aula);
 
     dynamic teste;
      
-    if(global.globalVar['gi']){
-      teste = global.myLib.firstWhere(
+    if(globalStore.gi){
+      teste = userStore.user.myLib.firstWhere(
         (itemToCheck) =>
             itemToCheck['id_posicao'] ==
             this.aula['id_posicao'],
         orElse: () => false);
     }else{
-      teste = global.myLibNogi.firstWhere(
+      teste = userStore.user.myLibNogi.firstWhere(
         (itemToCheck) =>
             itemToCheck['id_posicao'] ==
             this.aula['id_posicao'],

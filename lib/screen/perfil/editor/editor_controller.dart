@@ -1,18 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
-import 'package:http/http.dart' as http;
-import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/models/aula_model.dart';
 import 'package:jjc/repository/aula_repository.dart';
+import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/alertDialog.dart';
 import 'dart:convert';
-import 'package:jjc/widgets/floatingActionButton/floatinAction_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EditorController {
   
   var userStore = GetIt.I.get<UserStore>();
+  var globalStore = GetIt.I.get<GlobalStore>();
   var respositorio = aulaRepository();
   late aulaModel aula; 
 
@@ -28,16 +27,16 @@ class EditorController {
 
   EditorController(this.indexPosicao) {
     aula = aulaModel(
-      id_posicao: global.prop_tec[indexPosicao]['id_posicao'], 
-      nome: global.prop_tec[indexPosicao]['nome'], 
-      idVideo: global.prop_tec[indexPosicao]['idVideo'], 
-      tec: global.prop_tec[indexPosicao]['tec'], 
-      sub: global.prop_tec[indexPosicao]['sub'], 
-      nivel: global.prop_tec[indexPosicao]['nivel'], 
-      observacoes: global.prop_tec[indexPosicao]['observacoes'], 
-      inicio: global.prop_tec[indexPosicao]['inicio'], 
-      fim: global.prop_tec[indexPosicao]['fim'], 
-      passo: global.prop_tec[indexPosicao]['passo']
+      id_posicao: userStore.user.prop_tec[indexPosicao]['id_posicao'], 
+      nome: userStore.user.prop_tec[indexPosicao]['nome'], 
+      idVideo: userStore.user.prop_tec[indexPosicao]['idVideo'], 
+      tec: userStore.user.prop_tec[indexPosicao]['tec'], 
+      sub: userStore.user.prop_tec[indexPosicao]['sub'], 
+      nivel: userStore.user.prop_tec[indexPosicao]['nivel'], 
+      observacoes: userStore.user.prop_tec[indexPosicao]['observacoes'], 
+      inicio: userStore.user.prop_tec[indexPosicao]['inicio'], 
+      fim: userStore.user.prop_tec[indexPosicao]['fim'], 
+      passo: userStore.user.prop_tec[indexPosicao]['passo']
     );
     controller_nome = TextEditingController(text: aula.nome);
     controller_id  = TextEditingController(text: aula.idVideo);
@@ -67,7 +66,7 @@ class EditorController {
   void update(overlay, cont) async {
     Map dataObj = {
       'id_posicao': aula.id_posicao,
-      'agrupamento': global.globalVar['email'],
+      'agrupamento': userStore.user.email,
       'nome': aula.nome,
       'idVideo': aula.idVideo,
       'nivel': nivel,
@@ -75,11 +74,11 @@ class EditorController {
       'inicio': aula.inicio,
       'fim': aula.fim,
       'sub': sub,
-      'regiao': global.regiao,
+      'regiao': globalStore.regiao,
       'tec': tec,
       'passo': aula.passo,
       'index': indexPosicao,
-      'gi': global.globalVar['gi']
+      'gi': globalStore.gi
     };
 
     overlay.show();
@@ -103,11 +102,11 @@ class EditorController {
     //String S_dataObj = jsonEncode(dataObj);
     Map dataObj = {
       'id_posicao': aula.id_posicao,
-      'agrupamento': global.globalVar['email'],
+      'agrupamento': userStore.user.email,
       'index': indexPosicao,
-      'regiao': global.regiao,
+      'regiao': globalStore.regiao,
       'tec': tec,
-      'gi': global.globalVar['gi']
+      'gi': globalStore.gi
     };
 
     respositorio.deleteTec(dataObj)
@@ -126,17 +125,14 @@ class EditorController {
 
   atualizar() async {
     //print('atualizar');
-    Map dataObj = {'token': global.token, 'email': global.globalVar['email']};
+    Map dataObj = {'token': userStore.token, 'email': userStore.user.email};
 
       respositorio.getTec(dataObj)
       .then((response) {
       dynamic data = json.decode(utf8.decode(response.bodyBytes));
 
       if (response.statusCode == 200) {
-        //Fazer login no global service
-        //global.myLib = data['user']['m_tec'];
-
-        //floatinAction_controller.instance.updateMyTec(data['prop_tec']);
+        
         userStore.updateMyTec(data['prop_tec']);
       }
     });

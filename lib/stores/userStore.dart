@@ -43,10 +43,42 @@ abstract class UserStoreBase with Store {
     
   }
 
+  @action
+  void atualizarLib(libs, email){
+    user.agrupamento = (libs ?? []).cast<String>();
+    user.agrupamento.add(email);
+
+    user = user;
+    //print(user);
+  }
 
   @action
   void updateMyTec(tec){
     user.prop_tec = tec;
+    user = user;
+  }
+
+  @action
+  void addMyLib(aula){
+    user.myLib.add(aula);
+    user = user;
+  }
+
+  @action
+  void addMyLibNoGi(aula){
+    user.myLibNogi.add(aula);
+    user = user;
+  }
+
+  @action removeMyLib(index){
+    user.myLib.removeAt(index);
+    user = user;
+  }
+
+  @action
+  void removeMyLibNoGi(index){
+    user.myLibNogi.removeAt(index);
+    user = user;
   }
 
   List getPosicoes(gi) {
@@ -57,8 +89,8 @@ abstract class UserStoreBase with Store {
     }
   }
 
-  List getMyTec() {
-    return user.prop_tec;
-  }
+  List get getMyTec => user.prop_tec;
+  String get getEmail => user.email;
+  String get getToken => token;
 
 }

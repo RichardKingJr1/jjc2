@@ -1,13 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:jjc/global_services/global.dart' as global;
-import 'package:jjc/screen/posicoes/posicoes.dart';
+import 'package:get_it/get_it.dart';
+import 'package:jjc/stores/userStore.dart';
 
-class cardsMPosicoes extends StatelessWidget {
+class CardsMPosicoes extends StatelessWidget {
   
   final List posicoes;
-  const cardsMPosicoes({ Key? key, required this.posicoes }) : super(key: key);
+  CardsMPosicoes({ Key? key, required this.posicoes }) : super(key: key);
+
+  final userStore =GetIt.I.get<UserStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +31,7 @@ class cardsMPosicoes extends StatelessWidget {
                 child: TextButton(
                   onPressed: () {
                     Navigator.of(context)
-                        .pushNamed('/aula', arguments: jsonEncode(global.prop_tec[index]));
+                        .pushNamed('/aula', arguments: jsonEncode(userStore.user.prop_tec[index]));
                   },
                   child: Container(
                     alignment: Alignment.topLeft,

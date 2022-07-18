@@ -33,7 +33,6 @@ class loginController {
 
       if (response.statusCode == 200) {
         //Fazer login no global service
-
         userStore.login(data['token'], email, email, data['user']['m_tec'], data['user']['m_tec_nogi'], data['user']['prop_tec'], data['user']['libs'] ?? []);
 
         if(ctrl){

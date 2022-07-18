@@ -55,6 +55,17 @@ mixin _$GlobalStore on GlobalStoreBase, Store {
   }
 
   @override
+  dynamic setGi() {
+    final _$actionInfo = _$GlobalStoreBaseActionController.startAction(
+        name: 'GlobalStoreBase.setGi');
+    try {
+      return super.setGi();
+    } finally {
+      _$GlobalStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 

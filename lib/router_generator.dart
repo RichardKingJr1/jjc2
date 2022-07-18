@@ -10,7 +10,7 @@ import 'package:jjc/screen/login/login/login.dart';
 import 'package:jjc/screen/login/recuperar_senha.dart';
 import 'package:jjc/screen/m_lib/m_lib.dart';
 import 'package:jjc/screen/perfil/editor/editor.dart';
-import 'package:jjc/screen/perfil/minhas_bibliotecas.dart';
+import 'package:jjc/screen/perfil/minhas_bibliotecas/minhas_bibliotecas.dart';
 import 'package:jjc/screen/perfil/perfil.dart';
 import 'package:jjc/screen/perfil/minhas%20posicoes/minhas_posicoes.dart';
 import 'package:jjc/screen/posicoes/posicoes.dart';
@@ -85,7 +85,7 @@ class RouteGenerator {
         return _errorRoute();
 
       case '/minhas_bibliotecas':
-        return MaterialPageRoute(builder: (_) => mBibliotecas());
+        return MaterialPageRoute(builder: (_) => MBibliotecas());
 
       /* Config */
       case '/idioma':
