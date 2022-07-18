@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-//import 'package:flutter/services.dart';
+import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:jjc/screen/posicoes/cartosPosicoes.dart';
+import 'package:jjc/stores/globalStore.dart';
+import 'package:jjc/stores/userStore.dart';
 
 import 'package:jjc/widgets/scaffoldStandartBack.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -25,6 +27,9 @@ class _PosicoesState extends State<Posicoes> {
   List posicoes_enviar = [];
   List subs = [];
 
+  var userStore = GetIt.I.get<UserStore>();
+  var globalStore = GetIt.I.get<GlobalStore>();
+
   @override
   void initState() {
     getData();
@@ -43,9 +48,9 @@ class _PosicoesState extends State<Posicoes> {
   void getData() async {
     Map dataObj = {
       'tec': widget.data,
-      'agrupamento': global.agrupamento,
-      'regiao': global.regiao,
-      'gi': global.globalVar['gi']
+      'agrupamento': userStore.user.agrupamento,
+      'regiao': globalStore.regiao,
+      'gi': globalStore.gi
     };
 
     await http
@@ -53,9 +58,10 @@ class _PosicoesState extends State<Posicoes> {
             headers: {"Content-Type": "application/json"},
             body: jsonEncode(dataObj))
         .then((response) {
-      global.lib_carregada = jsonDecode(utf8.decode(response.bodyBytes));
+
+      userStore.setLibCarregada(jsonDecode(utf8.decode(response.bodyBytes)));
       setState(() {
-        posicoes = global.lib_carregada;
+        posicoes = userStore.libCarregada;
 
 
         subs = [];
