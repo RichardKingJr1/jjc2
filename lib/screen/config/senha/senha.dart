@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:jjc/global_services/global.dart' as global;
-import 'package:http/http.dart' as http;
+import 'package:jjc/screen/config/senha/senha_controller.dart';
 import 'package:jjc/widgets/menuDrawer.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'dart:convert';
+
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Senha extends StatefulWidget {
   Senha({Key? key}) : super(key: key);
 
-  final url = Uri.parse(global.endereco + 'mudar_senha');
-
   @override
   State<Senha> createState() => _SenhaState();
 }
 
 class _SenhaState extends State<Senha> {
-  String senha_atual = '';
-  String nova_senha = '';
-  String confirmar_senha = '';
 
-  TextEditingController _controller_senha = TextEditingController();
-  TextEditingController _controller_nsenha = TextEditingController();
-  TextEditingController _controller_csenha = TextEditingController();
+
+  SenhaController senhaController = SenhaController();
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -40,48 +36,40 @@ class _SenhaState extends State<Senha> {
             padding: EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: [
-                /* Container(
-                  margin: EdgeInsets.only(bottom: 60),
-                  child: Text(
-                    'Trocar Senha',
-                    style: TextStyle(fontSize: 40),
-                  ),
-                ), */
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
-                    controller: _controller_senha,
+                    controller: senhaController.controllerSenha,
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.senhaAtual,
                       border: OutlineInputBorder(),
                     ),
-                    onChanged: (value) => setState(() => senha_atual = value),
+                    onChanged: senhaController.setSenhaAtual,
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
-                    controller: _controller_nsenha,
+                    controller: senhaController.controllerNsenha,
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.senhaNova,
                       border: OutlineInputBorder(),
                     ),
-                    onChanged: (value) => setState(() => nova_senha = value),
+                    onChanged: senhaController.setSenha,
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
                   child: TextFormField(
-                    controller: _controller_csenha,
+                    controller: senhaController.controllerCsenha,
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: AppLocalizations.of(context)!.confirmarSenha,
                       border: OutlineInputBorder(),
                     ),
-                    onChanged: (value) =>
-                        setState(() => confirmar_senha = value),
+                    onChanged: senhaController.setCSenha,
                   ),
                 ),
                 Container(
@@ -91,7 +79,7 @@ class _SenhaState extends State<Senha> {
                     // fromHeight use double.infinity as width and 40 is the height
                     child: Text(AppLocalizations.of(context)!.senhaTrocar),
                     //onPressed: () => {submit()},
-                    onPressed: () => trocarSenha(),
+                    onPressed: () => senhaController.trocarSenha(context, context.loaderOverlay),
                   ),
                 ),
                 Container(
@@ -113,47 +101,9 @@ class _SenhaState extends State<Senha> {
     );
   }
 
-  trocarSenha() async {
-    if (nova_senha == confirmar_senha) {
-      Map dataObj = {
-        'usuario': global.globalVar['email'],
-        'senha': senha_atual,
-        'nova_senha': nova_senha
-      };
+  
 
-      context.loaderOverlay.show();
-
-      //String S_dataObj = jsonEncode(dataObj);
-
-      await http
-          .post(widget.url,
-              headers: {"Content-Type": "application/json"},
-              body: jsonEncode(dataObj))
-          .then((response) {
-        if (response.statusCode == 200) {
-          setState(() {
-            dialog(context, AppLocalizations.of(context)!.alertaSenhaAtualizada);
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
-            //_controller_nome.clear();
-          });
-        } else {
-          setState(() {
-            dialog(context, AppLocalizations.of(context)!.alertaSenhaIncorreta);
-            _controller_senha.clear();
-            _controller_nsenha.clear();
-            _controller_csenha.clear();
-          });
-        }
-      });
-
-      context.loaderOverlay.hide();
-    } else {
-      dialog(context, AppLocalizations.of(context)!.alertaSenhaDiferente);
-    }
-  }
-
-  Widget dialog(BuildContext context, String msg) {
+  /* Widget dialog(BuildContext context, String msg) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -175,5 +125,5 @@ class _SenhaState extends State<Senha> {
       },
     );
     return Text('dsfadsf');
-  }
+  } */
 }

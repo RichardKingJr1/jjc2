@@ -3,7 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:jjc/screen/add/add.dart';
 import 'package:jjc/screen/aula/aula.dart';
 import 'package:jjc/screen/config/idioma.dart';
-import 'package:jjc/screen/config/senha.dart';
+import 'package:jjc/screen/config/senha/senha.dart';
 import 'package:jjc/screen/home/home.dart';
 import 'package:jjc/screen/login/criar_conta/criar_conta.dart';
 import 'package:jjc/screen/login/login/login.dart';
