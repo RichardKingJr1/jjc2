@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jjc/models/aula_model.dart';
+import 'package:jjc/models/reponse_login_model.dart';
 import 'package:jjc/repository/user_repository.dart';
 import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/alertDialog.dart';
@@ -29,11 +31,12 @@ class loginController {
     repository.loginRequest(dataObj)
     .then((response) async {
 
-      dynamic data = json.decode(utf8.decode(response.bodyBytes));
-
+      ResponseLoginModel data =  ResponseLoginModel.fromBack(json.decode(utf8.decode(response.bodyBytes)));
+      //print(json.decode(utf8.decode(response.bodyBytes)));
+      //print(data.toJson());
       if (response.statusCode == 200) {
         //Fazer login no global service
-        userStore.login(data['token'], email, email, data['user']['m_tec'], data['user']['m_tec_nogi'], data['user']['prop_tec'], data['user']['libs'] ?? []);
+        userStore.login(data.token, email, email,data.user!.myLib, data.user!.myLibNogi, data.user!.propTec, data.user!.agrupamento);
 
         if(ctrl){
           //salva login e senha localmente

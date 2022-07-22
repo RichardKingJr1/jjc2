@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:jjc/global_services/global.dart' as global;
+import 'package:jjc/models/aula_model.dart';
 import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
 
@@ -35,9 +36,10 @@ class headerAula_controller {
         .then((response) {
 
       if(globalStore.gi){
-        userStore.addMyLib(aula);
+        print(aula);
+        userStore.addMyLib(AulaModel.fromJson(aula));
       }else{
-        userStore.addMyLibNoGi(aula);
+        userStore.addMyLibNoGi(AulaModel.fromJson(aula));
       }  
 
       existe.value = true;
@@ -49,9 +51,9 @@ class headerAula_controller {
     int index;   
 
     if(globalStore.gi){
-      index = userStore.getPosicoes(true).indexWhere((item) =>  item['idVideo'] == aula['idVideo']);
+      index = userStore.getPosicoes(true).indexWhere((item) =>  item.idVideo == aula['idVideo']);
     }else{
-      index = userStore.getPosicoes(false).indexWhere((item) =>  item['idVideo'] == aula['idVideo']);
+      index = userStore.getPosicoes(false).indexWhere((item) =>  item.idVideo == aula['idVideo']);
     }
 
     Map dataObj = {

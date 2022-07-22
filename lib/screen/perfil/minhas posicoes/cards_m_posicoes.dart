@@ -31,7 +31,7 @@ class CardsMPosicoes extends StatelessWidget {
                 child: TextButton(
                   onPressed: () {
                     Navigator.of(context)
-                        .pushNamed('/aula', arguments: jsonEncode(userStore.user.prop_tec[index]));
+                        .pushNamed('/aula', arguments: jsonEncode(userStore.user.propTec[index]));
                   },
                   child: Container(
                     alignment: Alignment.topLeft,

@@ -19,7 +19,7 @@ class AddController {
   aulaRepository repositorio;
   AddController({required this.repositorio});
 
-  aulaModel aula = aulaModel();
+  AulaModel aula = AulaModel();
 
   final TextEditingController controllerNome = TextEditingController();
   final TextEditingController controllerId = TextEditingController();
@@ -39,12 +39,12 @@ class AddController {
   set inicio(String value) => aula.inicio = value;
   set fim(String value) => aula.fim = value;
   set passo(String value) => aula.passo = value;
-  set gi(String value) => aula.gi = value;
+  set gi(bool value) => aula.gi = value;
 
-  String get gi => aula.gi;
-  String get tec => aula.tec;
-  String get nivel => aula.nivel;
-  String get sub => aula.sub;
+  bool get gi => aula.gi!;
+  String get tec => aula.tec!;
+  String get nivel => aula.nivel!;
+  String get sub => aula.sub!;
   
 
   atualizar() async {

@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:jjc/global_services/global.dart' as global;
+import 'package:jjc/models/aula_model.dart';
 import 'package:jjc/screen/aula/headerAula_controller.dart';
 import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/dropDownsValues.dart';
 
 class Cartoes_mlib extends StatelessWidget {
-  final posicoes;
+  final List<AulaModel> posicoes;
   Cartoes_mlib({ Key? key, required this.posicoes }) : super(key: key);
 
   var dropDowns = DropDownValue();
@@ -49,7 +49,7 @@ class Cartoes_mlib extends StatelessWidget {
                   child: Stack(children: [
                     Container(
                       child: Text(
-                        posicoes[index]["nome"],
+                        posicoes[index].nome!,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
                             color: Colors.black, fontSize: 18),
@@ -59,11 +59,11 @@ class Cartoes_mlib extends StatelessWidget {
                       margin: EdgeInsets.only(top: 25),
                       child: Row(children: [
                         Text(
-                          faixa[posicoes[index]["nivel"]],
+                          faixa[posicoes[index].nivel],
                           style: TextStyle(color: Colors.grey, fontSize: 15),
                         ),
                         Text(
-                          ' - ' + subdiv[posicoes[index]["sub"]],
+                          ' - ' + subdiv[posicoes[index].sub],
                           style: TextStyle(color: Colors.grey, fontSize: 15),
                         ),
                       ]),

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jjc/screen/aula/contador_reps.dart';
 import 'package:jjc/screen/aula/headerAula.dart';
 import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
@@ -18,6 +19,7 @@ class Aula extends StatefulWidget {
 
   dynamic aula = 0;
   bool existe = false;
+  int index = -1;
 
   var userStore = GetIt.I.get<UserStore>();
   var globalStore = GetIt.I.get<GlobalStore>();
@@ -25,23 +27,23 @@ class Aula extends StatefulWidget {
   Aula(dynamic aula) {
     this.aula = jsonDecode(aula);
 
-    dynamic teste;
+    
      
     if(globalStore.gi){
-      teste = userStore.user.myLib.firstWhere(
-        (itemToCheck) =>
-            itemToCheck['id_posicao'] ==
-            this.aula['id_posicao'],
-        orElse: () => false);
+      index = userStore.user.myLib!.indexWhere(
+        (itemToCheck) {
+          return  itemToCheck.id_posicao == this.aula['id_posicao'];
+        },
+      );
     }else{
-      teste = userStore.user.myLibNogi.firstWhere(
-        (itemToCheck) =>
-            itemToCheck['id_posicao'] ==
-            this.aula['id_posicao'],
-        orElse: () => false);
+      index = userStore.user.myLibNogi!.indexWhere(
+        (itemToCheck) {
+          return  itemToCheck.id_posicao == this.aula['id_posicao'];
+        },
+      );
     }
 
-    if (teste != false) {
+    if (index != -1) {
       existe = true;
     }
   }
@@ -88,7 +90,8 @@ class _AulaState extends State<Aula> {
                 existe: widget.existe,
                 aula: widget.aula,
               ),
-              //contador(reps: aula_info['reps'] ?? 0),
+              if(widget.existe)
+                Contador(index: widget.index, gi: widget.globalStore.gi),
               Text(
                 aula_info['passo'] ?? '',
                 style: const TextStyle(color: Colors.black, fontSize: 15),

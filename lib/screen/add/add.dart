@@ -111,7 +111,7 @@ class _addPosicaoState extends State<addPosicao> {
 
   Widget dropDown_gi() {
     return DropdownButton<String>(
-      value: instance.gi,
+      value: instance.gi.toString(),
       icon: const Icon(Icons.arrow_downward),
       style: const TextStyle(color: Color(2583691263)),
       underline: Container(
@@ -120,12 +120,17 @@ class _addPosicaoState extends State<addPosicao> {
       ),
       onChanged: (String? newValue) {
         setState(() {
-          instance.gi = newValue!;
+          if(newValue == ''){
+            instance.gi = true;
+          }else{
+            instance.gi = false;
+          }
+          
         });
       },
       items: [
-        {'nome': 'GI', 'valor': ''},
-        {'nome': 'NOGI', 'valor': '-nogi'},
+        {'nome': 'GI', 'valor': true},
+        {'nome': 'NOGI', 'valor': false},
       ].map<DropdownMenuItem<String>>((Map value) {
         return DropdownMenuItem<String>(
           value: value['valor'],

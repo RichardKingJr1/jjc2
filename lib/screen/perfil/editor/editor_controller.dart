@@ -13,7 +13,7 @@ class EditorController {
   var userStore = GetIt.I.get<UserStore>();
   var globalStore = GetIt.I.get<GlobalStore>();
   var respositorio = aulaRepository();
-  late aulaModel aula; 
+  late AulaModel aula; 
 
   late TextEditingController controllerNome;
   late TextEditingController controllerId;
@@ -26,17 +26,17 @@ class EditorController {
   int indexPosicao;
 
   EditorController(this.indexPosicao) {
-    aula = aulaModel(
-      id_posicao: userStore.user.prop_tec[indexPosicao]['id_posicao'], 
-      nome: userStore.user.prop_tec[indexPosicao]['nome'], 
-      idVideo: userStore.user.prop_tec[indexPosicao]['idVideo'], 
-      tec: userStore.user.prop_tec[indexPosicao]['tec'], 
-      sub: userStore.user.prop_tec[indexPosicao]['sub'], 
-      nivel: userStore.user.prop_tec[indexPosicao]['nivel'], 
-      observacoes: userStore.user.prop_tec[indexPosicao]['observacoes'], 
-      inicio: userStore.user.prop_tec[indexPosicao]['inicio'], 
-      fim: userStore.user.prop_tec[indexPosicao]['fim'], 
-      passo: userStore.user.prop_tec[indexPosicao]['passo']
+    aula = AulaModel(
+      id_posicao: userStore.user.propTec[indexPosicao].id_posicao, 
+      nome: userStore.user.propTec[indexPosicao].nome, 
+      idVideo: userStore.user.propTec[indexPosicao].idVideo, 
+      tec: userStore.user.propTec[indexPosicao].tec, 
+      sub: userStore.user.propTec[indexPosicao].sub, 
+      nivel: userStore.user.propTec[indexPosicao].nivel, 
+      observacoes: userStore.user.propTec[indexPosicao].observacoes, 
+      inicio: userStore.user.propTec[indexPosicao].inicio, 
+      fim: userStore.user.propTec[indexPosicao].fim, 
+      passo: userStore.user.propTec[indexPosicao].passo
     );
     controllerNome = TextEditingController(text: aula.nome);
     controllerId  = TextEditingController(text: aula.idVideo);
@@ -57,10 +57,10 @@ class EditorController {
   set fim(String value) => aula.fim = value;
   set passo(String value) => aula.passo = value;
 
-  String get gi => aula.gi;
-  String get tec => aula.tec;
-  String get nivel => aula.nivel;
-  String get sub => aula.sub;
+  bool get gi => aula.gi!;
+  String get tec => aula.tec!;
+  String get nivel => aula.nivel!;
+  String get sub => aula.sub!;
 
 
   void update(overlay, cont) async {

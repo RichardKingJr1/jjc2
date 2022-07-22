@@ -1,3 +1,4 @@
+import 'package:jjc/models/aula_model.dart';
 import 'package:jjc/models/user_model.dart';
 import 'package:mobx/mobx.dart';
 part 'userStore.g.dart';
@@ -7,7 +8,7 @@ class UserStore = UserStoreBase with _$UserStore;
 abstract class UserStoreBase with Store {
 
   @observable
-  userModel user = userModel();
+  UserModel user = UserModel(myLib: [], myLibNogi: [], propTec: [] ,agrupamento: []);
 
   @observable
   bool logado = false;
@@ -19,12 +20,12 @@ abstract class UserStoreBase with Store {
   List _libCarregada = [];
 
   @action
-  void login(token, String id_user, String email, List myLib, List myLibNogi, List prop_tec, List agrupamento){
+  void login(token, String id_user, String email, List<AulaModel> myLib, List<AulaModel> myLibNogi, List<AulaModel> prop_tec, List<String> agrupamento){
     user.id_user = id_user;
     user.email = email;
     user.myLib = myLib;
     user.myLibNogi = myLibNogi;
-    user.prop_tec = prop_tec;
+    user.propTec = prop_tec;
     agrupamento.add(email);
     user.agrupamento = agrupamento;
 
@@ -39,7 +40,7 @@ abstract class UserStoreBase with Store {
     user.email = 'email';
     user.myLib = [];
     user.myLibNogi = [];
-    user.prop_tec = [];
+    user.propTec = [];
     user.agrupamento = ['2'];
 
     logado = false;
@@ -58,12 +59,12 @@ abstract class UserStoreBase with Store {
 
   @action
   void updateMyTec(tec){
-    user.prop_tec = tec;
+    user.propTec = tec;
     user = user;
   }
 
   @action
-  void addMyLib(aula){
+  void addMyLib( AulaModel aula){
     user.myLib.add(aula);
     user = user;
   }
@@ -90,7 +91,16 @@ abstract class UserStoreBase with Store {
     _libCarregada = lib;
   }
 
-  List getPosicoes(gi) {
+  @action
+  void contarRep(int index, int valor, bool gi){
+    if(gi){
+      user.myLib[index].reps  = user.myLib[index].reps! + valor;
+    }else{
+      user.myLibNogi[index].reps = user.myLibNogi[index].reps! + valor;
+    }
+  }
+
+  List<AulaModel> getPosicoes(gi) {
     if(gi){
       return user.myLib;
     }else{
@@ -98,7 +108,7 @@ abstract class UserStoreBase with Store {
     }
   }
 
-  List get getMyTec => user.prop_tec;
+  List get getMyTec => user.propTec;
   String get getEmail => user.email;
   String get getToken => token;
   List get libCarregada => _libCarregada;

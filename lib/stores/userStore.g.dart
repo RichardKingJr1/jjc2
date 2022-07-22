@@ -12,15 +12,31 @@ mixin _$UserStore on UserStoreBase, Store {
   late final _$userAtom = Atom(name: 'UserStoreBase.user', context: context);
 
   @override
-  userModel get user {
+  UserModel get user {
     _$userAtom.reportRead();
     return super.user;
   }
 
   @override
-  set user(userModel value) {
+  set user(UserModel value) {
     _$userAtom.reportWrite(value, super.user, () {
       super.user = value;
+    });
+  }
+
+  late final _$logadoAtom =
+      Atom(name: 'UserStoreBase.logado', context: context);
+
+  @override
+  bool get logado {
+    _$logadoAtom.reportRead();
+    return super.logado;
+  }
+
+  @override
+  set logado(bool value) {
+    _$logadoAtom.reportWrite(value, super.logado, () {
+      super.logado = value;
     });
   }
 
@@ -39,6 +55,22 @@ mixin _$UserStore on UserStoreBase, Store {
     });
   }
 
+  late final _$_libCarregadaAtom =
+      Atom(name: 'UserStoreBase._libCarregada', context: context);
+
+  @override
+  List<dynamic> get _libCarregada {
+    _$_libCarregadaAtom.reportRead();
+    return super._libCarregada;
+  }
+
+  @override
+  set _libCarregada(List<dynamic> value) {
+    _$_libCarregadaAtom.reportWrite(value, super._libCarregada, () {
+      super._libCarregada = value;
+    });
+  }
+
   late final _$UserStoreBaseActionController =
       ActionController(name: 'UserStoreBase', context: context);
 
@@ -47,10 +79,10 @@ mixin _$UserStore on UserStoreBase, Store {
       dynamic token,
       String id_user,
       String email,
-      List<dynamic> myLib,
-      List<dynamic> myLibNogi,
-      List<dynamic> prop_tec,
-      List<dynamic> agrupamento) {
+      List<AulaModel> myLib,
+      List<AulaModel> myLibNogi,
+      List<AulaModel> prop_tec,
+      List<String> agrupamento) {
     final _$actionInfo = _$UserStoreBaseActionController.startAction(
         name: 'UserStoreBase.login');
     try {
@@ -95,9 +127,76 @@ mixin _$UserStore on UserStoreBase, Store {
   }
 
   @override
+  void addMyLib(dynamic aula) {
+    final _$actionInfo = _$UserStoreBaseActionController.startAction(
+        name: 'UserStoreBase.addMyLib');
+    try {
+      return super.addMyLib(aula);
+    } finally {
+      _$UserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void addMyLibNoGi(dynamic aula) {
+    final _$actionInfo = _$UserStoreBaseActionController.startAction(
+        name: 'UserStoreBase.addMyLibNoGi');
+    try {
+      return super.addMyLibNoGi(aula);
+    } finally {
+      _$UserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic removeMyLib(dynamic index) {
+    final _$actionInfo = _$UserStoreBaseActionController.startAction(
+        name: 'UserStoreBase.removeMyLib');
+    try {
+      return super.removeMyLib(index);
+    } finally {
+      _$UserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void removeMyLibNoGi(dynamic index) {
+    final _$actionInfo = _$UserStoreBaseActionController.startAction(
+        name: 'UserStoreBase.removeMyLibNoGi');
+    try {
+      return super.removeMyLibNoGi(index);
+    } finally {
+      _$UserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setLibCarregada(dynamic lib) {
+    final _$actionInfo = _$UserStoreBaseActionController.startAction(
+        name: 'UserStoreBase.setLibCarregada');
+    try {
+      return super.setLibCarregada(lib);
+    } finally {
+      _$UserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void contarRep(int index, int valor, bool gi) {
+    final _$actionInfo = _$UserStoreBaseActionController.startAction(
+        name: 'UserStoreBase.contarRep');
+    try {
+      return super.contarRep(index, valor, gi);
+    } finally {
+      _$UserStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 user: ${user},
+logado: ${logado},
 token: ${token}
     ''';
   }

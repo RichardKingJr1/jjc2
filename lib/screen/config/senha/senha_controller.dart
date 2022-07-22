@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
-import 'package:jjc/screen/login/recuperar_senha.dart';
 import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/alertDialog.dart';
 import 'package:mobx/mobx.dart';
