@@ -32,8 +32,8 @@ class loginController {
     .then((response) async {
 
       ResponseLoginModel data =  ResponseLoginModel.fromBack(json.decode(utf8.decode(response.bodyBytes)));
-      //print(json.decode(utf8.decode(response.bodyBytes)));
-      //print(data.toJson());
+      print(json.decode(utf8.decode(response.bodyBytes)));
+
       if (response.statusCode == 200) {
         //Fazer login no global service
         userStore.login(data.token, email, email,data.user!.myLib, data.user!.myLibNogi, data.user!.propTec, data.user!.agrupamento);
