@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:jjc/screen/login/login/login_controller.dart';
 import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
-import 'package:provider/provider.dart';
 import 'package:jjc/global_services/global.dart' as global;
 import 'package:http/http.dart' as http;
 

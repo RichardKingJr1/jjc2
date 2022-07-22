@@ -8,9 +8,6 @@ import 'package:jjc/widgets/menuDrawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
-import 'package:jjc/global_services/global.dart' as global;
-import 'package:mobx/mobx.dart';
-
 class MBibliotecas extends StatefulWidget {
   const MBibliotecas({Key? key}) : super(key: key);
 

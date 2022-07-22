@@ -25,7 +25,7 @@ class _SenhaState extends State<Senha> {
   Widget build(BuildContext context) {
     return Scaffold(
       //backgroundColor: Colors.white,
-      endDrawer: global.token != '' ? menuDrawer() : null,
+      endDrawer: senhaController.userStore.token != '' ? menuDrawer() : null,
       appBar: AppBar(
         title: Text(AppLocalizations.of(context)!.senhaTrocar),
       ),

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:jjc/widgets/app_botton.dart';
 import 'package:jjc/widgets/menuDrawer.dart';
 
-import 'package:jjc/global_services/global.dart' as global;
-
 class t_plans extends StatefulWidget {
   const t_plans({Key? key}) : super(key: key);
 
@@ -15,7 +13,7 @@ class _t_plansState extends State<t_plans> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      endDrawer: global.token != '' ? menuDrawer() : null,
+      //endDrawer: global.token != '' ? menuDrawer() : null,
       appBar: AppBar(
         title: const Text('Jiu Jitsu Club'),
       ),
