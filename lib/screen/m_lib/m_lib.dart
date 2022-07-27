@@ -20,9 +20,9 @@ class _MLibState extends State<MLib> {
   
   @override
   Widget build(BuildContext context) {
+    //print(object)
     return ScaffoldStandart(
       bodyElement: Observer(builder: (_) => Cartoes_mlib(posicoes: storeUser.getPosicoes(storeGlobal.gi))),
-      //bodyElement: Cartoes_mlib(posicoes: floatinAction_controller.instance.posicoes),
       titulo: AppLocalizations.of(context)!.meusMovimentos,
       index: 1,
       button: true,

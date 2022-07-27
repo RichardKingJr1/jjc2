@@ -6,7 +6,6 @@ class  ResponseLoginModel {
 
   ResponseLoginModel({this.user, this.token});
 
-  //'':  == null ? null : ,
   Map<String, dynamic> toJson() => {
     'token': token == null ? null : token,
     'user': user == null ? null : user!.toJson(),
@@ -15,12 +14,10 @@ class  ResponseLoginModel {
   //Extract post from Map Object
   factory ResponseLoginModel.fromJson(Map<String, dynamic> json) => ResponseLoginModel(
     token: json["token"] == null ? null : json["token"],
-    user: json['user'] == null ? null : UserModel.fromBack(json['user']),
+    user: json['user'] == null ? null : UserModel.fromJson(json['user']),
   );
 
   factory ResponseLoginModel.fromBack(Map<String, dynamic> json) {
-    //print('teste');
-    print(UserModel.fromBack(json['user']).toJson());
     return ResponseLoginModel(
       token: json["token"] == null ? null : json["token"],
       user: json['user'] == null ? null : UserModel.fromBack(json['user']),

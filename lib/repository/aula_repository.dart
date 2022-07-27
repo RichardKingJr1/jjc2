@@ -38,4 +38,11 @@ class aulaRepository {
         body: jsonEncode(dataObj));
 
   }
+
+  contarRep(dataObj) async {
+    return await http
+    .post(Uri.parse(global.endereco + 'contar_rep'),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(dataObj));
+  }
 }

@@ -110,29 +110,24 @@ class _addPosicaoState extends State<addPosicao> {
   /* DropsDowns */
 
   Widget dropDown_gi() {
-    return DropdownButton<String>(
-      value: instance.gi.toString(),
+    return DropdownButton<bool>(
+      value: instance.gi,
       icon: const Icon(Icons.arrow_downward),
       style: const TextStyle(color: Color(2583691263)),
       underline: Container(
         height: 1,
         color: Color(2583691263),
       ),
-      onChanged: (String? newValue) {
+      onChanged: (bool? newValue) {
         setState(() {
-          if(newValue == ''){
-            instance.gi = true;
-          }else{
-            instance.gi = false;
-          }
-          
+          instance.gi = newValue!;
         });
       },
       items: [
         {'nome': 'GI', 'valor': true},
         {'nome': 'NOGI', 'valor': false},
-      ].map<DropdownMenuItem<String>>((Map value) {
-        return DropdownMenuItem<String>(
+      ].map<DropdownMenuItem<bool>>((Map value) {
+        return DropdownMenuItem<bool>(
           value: value['valor'],
           child: Text(value['nome']),
         );

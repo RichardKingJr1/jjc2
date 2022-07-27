@@ -1,5 +1,6 @@
 import 'package:jjc/models/aula_model.dart';
 import 'package:jjc/models/user_model.dart';
+import 'package:jjc/repository/aula_repository.dart';
 import 'package:mobx/mobx.dart';
 part 'userStore.g.dart';
 
@@ -7,8 +8,10 @@ class UserStore = UserStoreBase with _$UserStore;
 
 abstract class UserStoreBase with Store {
 
+  var respositorio = aulaRepository();
+
   @observable
-  UserModel user = UserModel(myLib: [], myLibNogi: [], propTec: [] ,agrupamento: []);
+  UserModel user = UserModel(myLib: [], myLibNogi: [], propTec: [] ,agrupamento: ['2']);
 
   @observable
   bool logado = false;
@@ -58,7 +61,7 @@ abstract class UserStoreBase with Store {
   }
 
   @action
-  void updateMyTec(tec){
+  void updateMyTec(List<AulaModel> tec){
     user.propTec = tec;
     user = user;
   }
@@ -86,6 +89,7 @@ abstract class UserStoreBase with Store {
     user = user;
   }
 
+
   @action
   void setLibCarregada(lib){
     _libCarregada = lib;
@@ -95,9 +99,20 @@ abstract class UserStoreBase with Store {
   void contarRep(int index, int valor, bool gi){
     if(gi){
       user.myLib[index].reps  = user.myLib[index].reps! + valor;
+      
     }else{
       user.myLibNogi[index].reps = user.myLibNogi[index].reps! + valor;
     }
+
+    var dataObj = {
+      'email': user.email,
+      'gi': gi,
+      'index': index,
+      'reps': gi ? user.myLib[index].reps : user.myLibNogi[index].reps,
+    };
+
+    respositorio.contarRep(dataObj);
+    user = user;
   }
 
   List<AulaModel> getPosicoes(gi) {
@@ -108,7 +123,7 @@ abstract class UserStoreBase with Store {
     }
   }
 
-  List get getMyTec => user.propTec;
+  List<AulaModel> get getMyTec => user.propTec;
   String get getEmail => user.email;
   String get getToken => token;
   List get libCarregada => _libCarregada;

@@ -116,7 +116,7 @@ mixin _$UserStore on UserStoreBase, Store {
   }
 
   @override
-  void updateMyTec(dynamic tec) {
+  void updateMyTec(List<AulaModel> tec) {
     final _$actionInfo = _$UserStoreBaseActionController.startAction(
         name: 'UserStoreBase.updateMyTec');
     try {
@@ -127,7 +127,7 @@ mixin _$UserStore on UserStoreBase, Store {
   }
 
   @override
-  void addMyLib(dynamic aula) {
+  void addMyLib(AulaModel aula) {
     final _$actionInfo = _$UserStoreBaseActionController.startAction(
         name: 'UserStoreBase.addMyLib');
     try {

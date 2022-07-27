@@ -28,6 +28,7 @@ class headerAula_controller {
     Map dataObj = aula;
     dataObj['email'] = userStore.user.email;
     dataObj['gi'] = globalStore.gi;
+    dataObj['reps'] = 0;
 
     await http
         .post(url1,
@@ -36,7 +37,6 @@ class headerAula_controller {
         .then((response) {
 
       if(globalStore.gi){
-        print(aula);
         userStore.addMyLib(AulaModel.fromJson(aula));
       }else{
         userStore.addMyLibNoGi(AulaModel.fromJson(aula));

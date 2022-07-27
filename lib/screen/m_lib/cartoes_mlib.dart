@@ -24,6 +24,8 @@ class Cartoes_mlib extends StatelessWidget {
       Map faixa = dropDowns.getFaixa(context);
       Map subdiv = dropDowns.getSub(context);
 
+      print(posicoes.length);
+
       return ListView.builder(
       itemCount: posicoes.length,
       itemBuilder: (BuildContext context, int index) {

@@ -57,7 +57,7 @@ class EditorController {
   set fim(String value) => aula.fim = value;
   set passo(String value) => aula.passo = value;
 
-  bool get gi => aula.gi!;
+  bool get gi => aula.gi;
   String get tec => aula.tec!;
   String get nivel => aula.nivel!;
   String get sub => aula.sub!;
@@ -130,10 +130,11 @@ class EditorController {
       respositorio.getTec(dataObj)
       .then((response) {
       dynamic data = json.decode(utf8.decode(response.bodyBytes));
+      List<AulaModel> dataTreated = List<AulaModel>.from((data['prop_tec'] as List).map((x) => AulaModel.fromJson(x)));
 
       if (response.statusCode == 200) {
         
-        userStore.updateMyTec(data['prop_tec']);
+        userStore.updateMyTec(dataTreated);
       }
     });
   }

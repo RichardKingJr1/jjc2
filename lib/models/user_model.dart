@@ -52,7 +52,6 @@ class UserModel {
 
 
 //: json[""] == null ? null : json[""],
-  //Extract post from Map Object
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     id_user: json["id_user"],
     email: json["email"],
@@ -77,9 +76,9 @@ class UserModel {
     return UserModel(
       id_user: json["email"],
       email: json["email"],
-      myLib: List<AulaModel>.from((json['m_tec'] as List).map((x) => AulaModel.fromJson(json))),
-      myLibNogi:List<AulaModel>.from((json['m_tec_nogi'] as List).map((x) => AulaModel.fromJson(json))),
-      propTec: List<AulaModel>.from((json['prop_tec'] as List).map((x) => AulaModel.fromJson(json))),
+      myLib: List<AulaModel>.from((json['m_tec'] as List).map((x) => AulaModel.fromJson(x))),
+      myLibNogi:List<AulaModel>.from((json['m_tec_nogi'] as List).map((x) => AulaModel.fromJson(x))),
+      propTec: List<AulaModel>.from((json['prop_tec'] as List).map((x) => AulaModel.fromJson(x))),
       //agrupamento: List<String>.from((json['agrupamento'] as List).map((x) => x)),
       agrupamento: List<String>.from((json['libs'] as List).map((x) => x)),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:jjc/screen/aula/contador_reps_controller.dart';
 import 'package:jjc/stores/userStore.dart';
 
 class Contador extends StatefulWidget {
@@ -32,10 +32,14 @@ class _ContadorState extends State<Contador> {
               onPressed: () => userStore.contarRep(widget.index, -1, widget.gi),
             ),
           ),
-          SizedBox(
-            width: 100,
-            child: Center(child: Text(userStore.user.myLib![widget.index].reps.toString(), style: TextStyle(color: Colors.black, fontSize: 18),))
-            //child: Center(child: Text(widget.reps.toString(), style: TextStyle(color: Colors.black, fontSize: 18),))
+          Observer(
+            builder: (_) {
+              return SizedBox(
+                width: 100,
+                child: Center(child: Text(userStore.user.myLib[widget.index].reps.toString(), style: TextStyle(color: Colors.black, fontSize: 18),))
+                //child: Center(child: Text(widget.reps.toString(), style: TextStyle(color: Colors.black, fontSize: 18),))
+              );
+            }
           ),
           SizedBox(
             width: 40,

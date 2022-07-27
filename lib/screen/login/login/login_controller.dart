@@ -32,7 +32,7 @@ class loginController {
     .then((response) async {
 
       ResponseLoginModel data =  ResponseLoginModel.fromBack(json.decode(utf8.decode(response.bodyBytes)));
-      print(json.decode(utf8.decode(response.bodyBytes)));
+      //print(data.toJson());
 
       if (response.statusCode == 200) {
         //Fazer login no global service

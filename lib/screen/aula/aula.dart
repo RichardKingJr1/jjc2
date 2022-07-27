@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jjc/screen/aula/contador_reps.dart';
 import 'package:jjc/screen/aula/headerAula.dart';
@@ -30,13 +31,13 @@ class Aula extends StatefulWidget {
     
      
     if(globalStore.gi){
-      index = userStore.user.myLib!.indexWhere(
+      index = userStore.user.myLib.indexWhere(
         (itemToCheck) {
           return  itemToCheck.id_posicao == this.aula['id_posicao'];
         },
       );
     }else{
-      index = userStore.user.myLibNogi!.indexWhere(
+      index = userStore.user.myLibNogi.indexWhere(
         (itemToCheck) {
           return  itemToCheck.id_posicao == this.aula['id_posicao'];
         },
@@ -65,6 +66,7 @@ class _AulaState extends State<Aula> {
 
   @override
   Widget build(BuildContext context) {
+    print(aula_info);
     const player = YoutubePlayerIFrame();
     return YoutubePlayerControllerProvider(
         // Passing controller to widgets below.
@@ -83,23 +85,26 @@ class _AulaState extends State<Aula> {
         player,
         Container(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-          child: Column(
-            children: [
-              headerAula(
-                nomeAula: aula_info['nome'],
-                existe: widget.existe,
-                aula: widget.aula,
-              ),
-              if(widget.existe)
-                Contador(index: widget.index, gi: widget.globalStore.gi),
-              Text(
-                aula_info['passo'] ?? '',
-                style: const TextStyle(color: Colors.black, fontSize: 15),
-              ),
-            ],
+          child: Observer(
+            builder: (_) {
+              return Column(
+                children: [
+                  headerAula(
+                    nomeAula: aula_info['nome'],
+                    existe: widget.existe,
+                    aula: widget.aula,
+                  ),
+                  if(widget.existe)
+                    Contador(index: widget.index, gi: widget.globalStore.gi),
+                  Text(
+                    aula_info['passo'] ?? '',
+                    style: const TextStyle(color: Colors.black, fontSize: 15),
+                  ),
+                ],
+              );
+            }
           ),
         ),
-        //contador(),
       ],
     ));
   }
@@ -115,7 +120,7 @@ class _AulaState extends State<Aula> {
     _controller = YoutubePlayerController(
       initialVideoId: aula_info['idVideo'],
       params: YoutubePlayerParams(
-        startAt: Duration(seconds: (int.parse(aula_info['inicio']))),
+        startAt: Duration(seconds: (int.parse(aula_info['inicio'] ?? '0'))),
         showControls: true,
         showFullscreenButton: true,
         desktopMode: false,

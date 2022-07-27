@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jjc/models/aula_model.dart';
 import 'package:jjc/stores/userStore.dart';
 
 class CardsMPosicoes extends StatelessWidget {
   
-  final List posicoes;
+  final List<AulaModel> posicoes;
   CardsMPosicoes({ Key? key, required this.posicoes }) : super(key: key);
 
   final userStore =GetIt.I.get<UserStore>();
@@ -42,7 +43,7 @@ class CardsMPosicoes extends StatelessWidget {
                           child: Stack(children: [
                             Container(
                               child: Text(
-                                posicoes[index]["nome"],
+                                posicoes[index].nome!,
                                 style: const TextStyle(
                                   overflow: TextOverflow.ellipsis,
                                   color: Colors.black, fontSize: 18),
@@ -52,11 +53,11 @@ class CardsMPosicoes extends StatelessWidget {
                               margin: EdgeInsets.only(top: 25),
                               child: Row(children: [
                                 Text(
-                                  posicoes[index]["nivel"],
+                                  posicoes[index].nivel!,
                                   style: TextStyle(color: Colors.grey, fontSize: 15),
                                 ),
                                 Text(
-                                  ' - ' + posicoes[index]["sub"],
+                                  ' - ' + posicoes[index].sub!,
                                   style: TextStyle(color: Colors.grey, fontSize: 15),
                                 ),
                               ]),

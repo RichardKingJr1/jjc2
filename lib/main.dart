@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jjc/repository/analytics_repository.dart';
 import 'package:jjc/router_generator.dart';
 import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
@@ -12,6 +13,7 @@ void main() {
   GetIt getIt = GetIt.I;
   getIt.registerSingleton<UserStore>(UserStore());
   getIt.registerSingleton<GlobalStore>(GlobalStore());
+  getIt.registerSingleton<AnalyticsService>(AnalyticsService());
 
   runApp(MyApp());
 }
@@ -42,6 +44,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
 
+    var analyticsService = GetIt.I.get<AnalyticsService>();
+
     return GlobalLoaderOverlay(
       child:  MaterialApp(
         localizationsDelegates:
@@ -51,6 +55,9 @@ class _MyAppState extends State<MyApp> {
         locale: _locale,
         initialRoute: '/pre',
         onGenerateRoute: RouteGenerator.generateRoute,
+        navigatorObservers: [
+          analyticsService.getAnalyticsObserver(),
+        ],
         theme: ThemeData.dark().copyWith(
             primaryColor: Colors.lightBlue,
             scaffoldBackgroundColor: Colors.white),
