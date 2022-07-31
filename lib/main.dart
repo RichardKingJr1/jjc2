@@ -6,9 +6,13 @@ import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   
   GetIt getIt = GetIt.I;
   getIt.registerSingleton<UserStore>(UserStore());
@@ -48,6 +52,7 @@ class _MyAppState extends State<MyApp> {
 
     return GlobalLoaderOverlay(
       child:  MaterialApp(
+        debugShowCheckedModeBanner: false,
         localizationsDelegates:
             AppLocalizations.localizationsDelegates, // important
         supportedLocales: AppLocalizations.supportedLocales,
@@ -57,7 +62,7 @@ class _MyAppState extends State<MyApp> {
         onGenerateRoute: RouteGenerator.generateRoute,
         navigatorObservers: [
           analyticsService.getAnalyticsObserver(),
-        ],
+        ], 
         theme: ThemeData.dark().copyWith(
             primaryColor: Colors.lightBlue,
             scaffoldBackgroundColor: Colors.white),

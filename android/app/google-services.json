@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "377756626541",
+    "project_id": "jjc---000",
+    "storage_bucket": "jjc---000.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:377756626541:android:6cd639b13bff1772eed964",
+        "android_client_info": {
+          "package_name": "com.jiujitsuclub.jiujitsuclub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "377756626541-4dieb658di1sbqho9ne4g2tvtutuiqt7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiwi5jwgG7PsOrVYUVc8eETOs6X6h-jSg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "377756626541-4dieb658di1sbqho9ne4g2tvtutuiqt7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

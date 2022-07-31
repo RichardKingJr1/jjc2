@@ -30,7 +30,8 @@ dependencies:
   flutter_mobx:
   provider:
   get_it:
-  firebase_analytics: ^5.0.11
+  firebase_core: ^1.20.0
+  firebase_analytics: ^9.3.0
 
 dev_dependencies:
   flutter_test:

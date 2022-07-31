@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:jjc/repository/analytics_repository.dart';
 import 'package:jjc/screen/atualize/atualiza.dart';
 import 'package:jjc/screen/home/cartoes.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -17,9 +18,15 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  //List<Widget> cards = new List.generate(20, (i) => new Cartoes()).toList();
 
-  //var globalStore = GetIt.I.get<GlobalStore>();
+  var analyticsService = GetIt.I.get<AnalyticsService>();
+
+  /* @override
+  void initState() {
+    // TODO: implement initState
+    _sendAnalytics();
+    super.initState();
+  } */
 
   @override
   Widget build(BuildContext context) {  
@@ -30,6 +37,10 @@ class _HomeState extends State<Home> {
       index: 0,
       button: true,
     );
+  }
+
+  Future<Null> _sendAnalytics() async {
+    await analyticsService.analytics.logEvent(name: 'name');
   }
 
 }
