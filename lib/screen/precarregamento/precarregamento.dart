@@ -41,7 +41,6 @@ class PreCarregamento extends StatelessWidget {
         globalStore.setUpToDate(true);
         
         await instance.login();
-
         Navigator.of(cont).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
 
       } else {

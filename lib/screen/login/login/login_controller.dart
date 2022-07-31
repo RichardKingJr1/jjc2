@@ -21,14 +21,14 @@ class loginController {
   TextEditingController controller_senha = TextEditingController();
   final localStorage = new FlutterSecureStorage();
 
-  void submit(cont, email, senha, overlayCont, ctrl) async {
+  Future<void> submit(cont, email, senha, overlayCont, ctrl) async {
     Map dataObj = {'email': email, 'senha': senha};
 
     if(ctrl){
       overlayCont.show();
     }
     
-    repository.loginRequest(dataObj)
+    await repository.loginRequest(dataObj)
     .then((response) async {
 
       ResponseLoginModel data =  ResponseLoginModel.fromBack(json.decode(utf8.decode(response.bodyBytes)));
@@ -67,7 +67,7 @@ class loginController {
 
       var valores = jsonDecode(credenciais);
 
-      submit('cont', valores['email'], valores['senha'], 'overlayCont', false);
+      await submit('cont', valores['email'], valores['senha'], 'overlayCont', false);
       
     }
     return ;

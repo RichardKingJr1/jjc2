@@ -24,7 +24,6 @@ class RouteGenerator {
     // Getting arguments passed in while calling Navigator.pushNamed
     final args = settings.arguments;
     var userStore = GetIt.I.get<UserStore>();
-    print(userStore.logado);
 
     switch (settings.name) {
 
