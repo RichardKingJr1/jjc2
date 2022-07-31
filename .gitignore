@@ -1,0 +1,70 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Web related
+lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+README.md
+
+lib/generated_plugin_registrant.dart
+ios/Runner/GeneratedPluginRegistrant.m
+ios/Runner/GeneratedPluginRegistrant.h
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+build/683a223b2249c2d86526835f64555848/outputs.json
+build/683a223b2249c2d86526835f64555848/gen_localizations.stamp
+build/683a223b2249c2d86526835f64555848/gen_localizations.d
+build/683a223b2249c2d86526835f64555848/gen_l10n_inputs_and_outputs.json
+android/local.properties
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+build/.last_build_id
+build/683a223b2249c2d86526835f64555848/.filecache
+.dart_tool/flutter_gen/gen_l10n/app_localizations_en.dart
+.dart_tool/flutter_gen/gen_l10n/app_localizations_pt.dart
+.dart_tool/flutter_gen/gen_l10n/app_localizations.dart
+.dart_tool/package_config.json
+.dart_tool/package_config_subset
+.packages
+.flutter-plugins-dependencies
+.flutter-plugins
