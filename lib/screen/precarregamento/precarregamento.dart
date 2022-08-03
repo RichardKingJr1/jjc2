@@ -35,22 +35,23 @@ class PreCarregamento extends StatelessWidget {
     //var instance = loginController(userStore: Provider.of<UserStore>(cont)); 
     //var globalStore = Provider.of<GlobalStore>(cont);
 
-    await http.get(Uri.parse(global.endereco + 'versao?versao=' + global.versao))
-    .then((response) async {
-      if (response.statusCode == 200) {
-        globalStore.setUpToDate(true);
-        
-        await instance.login();
-        Navigator.of(cont).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+    try{
+      await http.get(Uri.parse(global.endereco + 'versao?versao=' + global.versao))
+      .then((response) async {
+        if (response.statusCode == 200) {
+          globalStore.setUpToDate(true);
+          
+          await instance.login();
+          Navigator.of(cont).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
 
-      } else {
-        globalStore.setUpToDate(false);
-        Navigator.of(cont)
-              .pushNamedAndRemoveUntil('/atualiza', (Route<dynamic> route) => false);
-      }
-      
-    });
-
+        } else {
+          globalStore.setUpToDate(false);
+          Navigator.of(cont).pushNamedAndRemoveUntil('/atualiza', (Route<dynamic> route) => false);
+        }
+      });       
+    }finally{
+      Navigator.of(cont).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+    }       
     return true;
   }
 }
