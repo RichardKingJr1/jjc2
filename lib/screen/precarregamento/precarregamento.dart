@@ -13,9 +13,11 @@ class PreCarregamento extends StatelessWidget {
   var instance = loginController(userStore: GetIt.I.get<UserStore>()); 
   var globalStore = GetIt.I.get<GlobalStore>();
 
+  
   @override
   Widget build(BuildContext context) {
     getData(context);
+    
     return Container(
       color: Colors.black,
       child: const Center(
@@ -54,4 +56,6 @@ class PreCarregamento extends StatelessWidget {
     }       
     return true;
   }
+
+  
 }

@@ -32,6 +32,7 @@ dependencies:
   get_it:
   firebase_core: ^1.20.0
   firebase_analytics: ^9.3.0
+  flutter_local_notifications: ^9.7.0
 
 dev_dependencies:
   flutter_test:
