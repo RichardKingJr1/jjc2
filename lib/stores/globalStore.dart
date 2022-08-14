@@ -15,6 +15,12 @@ abstract class GlobalStoreBase with Store {
   @observable
   bool _gi = true;
 
+  @observable
+  bool _existe = false;
+
+  @observable
+  int _index = -1;
+
   @action
   setUpToDate(bool value){
     _uptodate = value;
@@ -25,8 +31,20 @@ abstract class GlobalStoreBase with Store {
     _gi = !_gi;
   }
 
+  @action
+  void setExiste(value){
+    _existe = value;
+  }
+
+  @action
+  void setIndex(value){
+    _index = value;
+  }
+
   bool? get uptodate => _uptodate; 
   bool get gi => _gi; 
+  bool get existe => _existe; 
+  int get index => _index; 
   String get regiao => _regiao;
 
 }

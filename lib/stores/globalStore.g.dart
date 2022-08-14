@@ -40,6 +40,38 @@ mixin _$GlobalStore on GlobalStoreBase, Store {
     });
   }
 
+  late final _$_existeAtom =
+      Atom(name: 'GlobalStoreBase._existe', context: context);
+
+  @override
+  bool get _existe {
+    _$_existeAtom.reportRead();
+    return super._existe;
+  }
+
+  @override
+  set _existe(bool value) {
+    _$_existeAtom.reportWrite(value, super._existe, () {
+      super._existe = value;
+    });
+  }
+
+  late final _$_indexAtom =
+      Atom(name: 'GlobalStoreBase._index', context: context);
+
+  @override
+  int get _index {
+    _$_indexAtom.reportRead();
+    return super._index;
+  }
+
+  @override
+  set _index(int value) {
+    _$_indexAtom.reportWrite(value, super._index, () {
+      super._index = value;
+    });
+  }
+
   late final _$GlobalStoreBaseActionController =
       ActionController(name: 'GlobalStoreBase', context: context);
 
@@ -60,6 +92,28 @@ mixin _$GlobalStore on GlobalStoreBase, Store {
         name: 'GlobalStoreBase.setGi');
     try {
       return super.setGi();
+    } finally {
+      _$GlobalStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setExiste(dynamic value) {
+    final _$actionInfo = _$GlobalStoreBaseActionController.startAction(
+        name: 'GlobalStoreBase.setExiste');
+    try {
+      return super.setExiste(value);
+    } finally {
+      _$GlobalStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setIndex(dynamic value) {
+    final _$actionInfo = _$GlobalStoreBaseActionController.startAction(
+        name: 'GlobalStoreBase.setIndex');
+    try {
+      return super.setIndex(value);
     } finally {
       _$GlobalStoreBaseActionController.endAction(_$actionInfo);
     }
