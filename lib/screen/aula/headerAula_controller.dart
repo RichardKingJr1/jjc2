@@ -26,24 +26,36 @@ class headerAula_controller {
 
   dynamic adicionarPosicao(aula) async {
     Map dataObj = aula;
-    dataObj['email'] = userStore.user.email;
-    dataObj['gi'] = globalStore.gi;
-    dataObj['reps'] = 0;
 
-    await http
-        .post(url1,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
+    if(userStore.logado == true){
+      dataObj['email'] = userStore.user.email;
+      dataObj['gi'] = globalStore.gi;
+      dataObj['reps'] = 0;
 
-      if(globalStore.gi){
-        userStore.addMyLib(AulaModel.fromJson(aula));
-      }else{
-        userStore.addMyLibNoGi(AulaModel.fromJson(aula));
-      }  
+      await http
+          .post(url1,
+              headers: {"Content-Type": "application/json"},
+              body: jsonEncode(dataObj))
+          .then((response) {
 
-      existe.value = true;
-    });
+        addLocalmente(aula);
+
+        existe.value = true;
+      });
+    }else{
+      addLocalmente(aula);
+    }
+    
+  }
+
+  void addLocalmente(aula) {
+    if(globalStore.gi){
+      userStore.addMyLib(AulaModel.fromJson(aula));
+    }else{
+      userStore.addMyLibNoGi(AulaModel.fromJson(aula));
+    } 
+
+    existe.value = true;
   }
 
   dynamic excluirPosicao(aula) async {
@@ -56,25 +68,36 @@ class headerAula_controller {
       index = userStore.getPosicoes(false).indexWhere((item) =>  item.idVideo == aula['idVideo']);
     }
 
-    Map dataObj = {
-      'index': index,
-      'email':userStore.getEmail,
-      'gi': globalStore.gi
-    };
+    if(userStore.logado == true){
+      Map dataObj = {
+        'index': index,
+        'email':userStore.getEmail,
+        'gi': globalStore.gi
+      };
 
-    await http
-        .post(url2,
-            headers: {"Content-Type": "application/json"},
-            body: jsonEncode(dataObj))
-        .then((response) {
+      await http
+          .post(url2,
+              headers: {"Content-Type": "application/json"},
+              body: jsonEncode(dataObj))
+          .then((response) {
 
-      if(globalStore.gi){
-        userStore.removeMyLib(index);
-      }else{
-        userStore.removeMyLibNoGi(index);
-      }
-      existe.value = false;
-    });
+            removeLocalmente(index);
+
+      });
+    }else{
+      removeLocalmente(index);
+    }
+    
+  }
+
+  void removeLocalmente(index){
+    if(globalStore.gi){
+      userStore.removeMyLib(index);
+    }else{
+      userStore.removeMyLibNoGi(index);
+    }
+
+    existe.value = false;
   }
 
 }

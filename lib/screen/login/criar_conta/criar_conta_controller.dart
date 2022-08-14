@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:jjc/repository/user_repository.dart';
+import 'package:jjc/stores/userStore.dart';
 
 import 'package:jjc/widgets/alertDialog.dart';
 
 class criarContaController {
+
+  UserStore userStore = GetIt.I.get<UserStore>();
 
   var repository = userRepository();
 
@@ -14,7 +18,7 @@ class criarContaController {
 
   void submit(overlay, cont) async {
     if (senha == csenha) {
-      Map dataObj = {'email': email, 'senha': senha};
+      Map dataObj = {'email': email, 'senha': senha, 'myLib': userStore.user.myLib, 'myLibNogi': userStore.user.myLibNogi};
       overlay.show();
       //String S_dataObj = jsonEncode(dataObj);
 

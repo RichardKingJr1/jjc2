@@ -37,11 +37,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => Home());
 
       case '/lib':
-        if (userStore.logado == true) {
-          return MaterialPageRoute(builder: (_) => MLib());
-        } else {
-          return MaterialPageRoute(builder: (_) => Login());
-        }
+        return MaterialPageRoute(builder: (_) => MLib());
 
       case '/posicoes':
         if (args is String) {
