@@ -19,33 +19,31 @@ class Aula extends StatefulWidget {
   final url = Uri.parse(global.endereco + 'aula');
 
   dynamic aula = 0;
-  bool existe = false;
-  int index = -1;
 
   var userStore = GetIt.I.get<UserStore>();
   var globalStore = GetIt.I.get<GlobalStore>();
 
   Aula(dynamic aula) {
     this.aula = jsonDecode(aula);
-
+    globalStore.setExiste(false);
     
      
     if(globalStore.gi){
-      index = userStore.user.myLib.indexWhere(
+      globalStore.setIndex(userStore.user.myLib.indexWhere(
         (itemToCheck) {
           return  itemToCheck.id_posicao == this.aula['id_posicao'];
         },
-      );
+      ));
     }else{
-      index = userStore.user.myLibNogi.indexWhere(
+      globalStore.setIndex(userStore.user.myLibNogi.indexWhere(
         (itemToCheck) {
           return  itemToCheck.id_posicao == this.aula['id_posicao'];
         },
-      );
+      ));
     }
 
-    if (index != -1) {
-      existe = true;
+    if (globalStore.index != -1) {
+      globalStore.setExiste(true);
     }
   }
 
@@ -66,7 +64,7 @@ class _AulaState extends State<Aula> {
 
   @override
   Widget build(BuildContext context) {
-    print(aula_info);
+    //print(aula_info);
     const player = YoutubePlayerIFrame();
     return YoutubePlayerControllerProvider(
         // Passing controller to widgets below.
@@ -87,15 +85,16 @@ class _AulaState extends State<Aula> {
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
           child: Observer(
             builder: (_) {
+              print('****INDEX: '+widget.globalStore.index.toString());
               return Column(
                 children: [
                   headerAula(
                     nomeAula: aula_info['nome'],
-                    existe: widget.existe,
+                    //existe: widget.globalStore.existe,
                     aula: widget.aula,
                   ),
-                  if(widget.existe)
-                    Contador(index: widget.index, gi: widget.globalStore.gi),
+                  if(widget.globalStore.existe)
+                    Contador(index: widget.globalStore.index, gi: widget.globalStore.gi),
                   Text(
                     aula_info['passo'] ?? '',
                     style: const TextStyle(color: Colors.black, fontSize: 15),

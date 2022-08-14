@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jjc/models/aula_model.dart';
-import 'package:jjc/screen/aula/headerAula_controller.dart';
 import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/dropDownsValues.dart';
@@ -19,17 +19,16 @@ class Cartoes_mlib extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(valueListenable: headerAula_controller.instance.existe, builder: (context, value, child){
 
-      Map faixa = dropDowns.getFaixa(context);
-      Map subdiv = dropDowns.getSub(context);
+    Map faixa = dropDowns.getFaixa(context);
+    Map subdiv = dropDowns.getSub(context);
 
-      print(posicoes.length);
-
-      return ListView.builder(
-      itemCount: posicoes.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Container(
+    return Observer(
+      builder: (context) {
+        return ListView.builder(
+          itemCount: posicoes.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
               margin: const EdgeInsets.only(bottom: 5),
               height: 80,
               decoration: const BoxDecoration(
@@ -74,8 +73,8 @@ class Cartoes_mlib extends StatelessWidget {
                 ),
               ),
             );
-      },
+        });
+      }
     );
-    });
   }
 }

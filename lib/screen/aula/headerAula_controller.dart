@@ -15,14 +15,12 @@ class headerAula_controller {
   var userStore = GetIt.I.get<UserStore>();
   var globalStore = GetIt.I.get<GlobalStore>();
 
+  bool get existe => globalStore.existe; 
+
   final url1 = Uri.parse(global.endereco + 'add_to_lib');
   final url2 = Uri.parse(global.endereco + 'exclude_from_lib');
   
-  final existe = ValueNotifier<bool>(false);
-
-  void setExiste(value){
-    existe.value = value;
-  }
+  //final existe = ValueNotifier<bool>(false);
 
   dynamic adicionarPosicao(aula) async {
     Map dataObj = aula;
@@ -40,22 +38,26 @@ class headerAula_controller {
 
         addLocalmente(aula);
 
-        existe.value = true;
+        globalStore.setExiste(true);
+        //existe.value = true;
       });
     }else{
       addLocalmente(aula);
     }
-    
   }
 
   void addLocalmente(aula) {
+    var length;
     if(globalStore.gi){
       userStore.addMyLib(AulaModel.fromJson(aula));
+      length = userStore.user.myLib.length;
     }else{
       userStore.addMyLibNoGi(AulaModel.fromJson(aula));
+      length = userStore.user.myLibNogi.length;
     } 
-
-    existe.value = true;
+    globalStore.setExiste(true);
+    globalStore.setIndex(length-1);
+    //existe.value = true;
   }
 
   dynamic excluirPosicao(aula) async {
@@ -97,7 +99,8 @@ class headerAula_controller {
       userStore.removeMyLibNoGi(index);
     }
 
-    existe.value = false;
+    globalStore.setExiste(false);
+    //existe.value = false;
   }
 
 }

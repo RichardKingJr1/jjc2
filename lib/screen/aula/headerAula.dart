@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:jjc/global_services/global.dart' as global;
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:jjc/screen/aula/headerAula_controller.dart';
 /* import 'package:http/http.dart' as http;
 import 'dart:convert'; */
 
 class headerAula extends StatefulWidget {
-  bool existe;
+  //bool existe;
   final dynamic aula;
   final String nomeAula;
 
@@ -15,7 +15,6 @@ class headerAula extends StatefulWidget {
   headerAula(
       {Key? key,
       required this.nomeAula,
-      required this.existe,
       required this.aula})
       : super(key: key);
 
@@ -28,47 +27,47 @@ class _headerAulaState extends State<headerAula> {
 
   @override
   Widget build(BuildContext context) {  
-    headerAula_controller.instance.setExiste(widget.existe);
 
-    return ValueListenableBuilder(valueListenable: headerAula_controller.instance.existe, builder: (context, value, child){
-      return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 9,
-            child: Text(
-              widget.nomeAula,
-              style: const TextStyle(color: Colors.black, fontSize: 21),
+    return Observer(
+      builder: (context) {
+        return Container(
+        margin: const EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 9,
+              child: Text(
+                widget.nomeAula,
+                style: const TextStyle(color: Colors.black, fontSize: 21),
+              ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(child: () {
-              if (!headerAula_controller.instance.existe.value) {
-                return ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.all(0),
-                      minimumSize: const Size.fromHeight(40)),
-                  // fromHeight use double.1infinity as width and 40 is the height
-                  child: const Center(child: Text('+')),
-                  onPressed: () => headerAula_controller.instance.adicionarPosicao(widget.aula),
-                );
-              } else {
-                return ElevatedButton(
-                  style: ElevatedButton.styleFrom(
+            Expanded(
+              flex: 1,
+              child: Container(child: () {
+                if (!headerAula_controller.instance.existe) {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(0),
-                      minimumSize: const Size.fromHeight(40)),
-                  // fromHeight use double.1infinity as width and 40 is the height
-                  child: const Center(child: Text('-')),
-                  onPressed: () => headerAula_controller.instance.excluirPosicao(widget.aula),
-                );
-              }
-            }()),
-          ),
-        ],
-      ),
-    );
+                        minimumSize: const Size.fromHeight(40)),
+                    // fromHeight use double.1infinity as width and 40 is the height
+                    child: const Center(child: Text('+')),
+                    onPressed: () => headerAula_controller.instance.adicionarPosicao(widget.aula),
+                  );
+                } else {
+                  return ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.all(0),
+                        minimumSize: const Size.fromHeight(40)),
+                    // fromHeight use double.1infinity as width and 40 is the height
+                    child: const Center(child: Text('-')),
+                    onPressed: () => headerAula_controller.instance.excluirPosicao(widget.aula),
+                  );
+                }
+              }()),
+            ),
+          ],
+        ),
+      );
     });
   }
 }
