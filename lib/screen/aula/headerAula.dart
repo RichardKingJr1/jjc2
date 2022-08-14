@@ -45,7 +45,7 @@ class _headerAulaState extends State<headerAula> {
           Expanded(
             flex: 1,
             child: Container(child: () {
-              if (!headerAula_controller.instance.existe.value & headerAula_controller.instance.userStore.logado == true) {
+              if (!headerAula_controller.instance.existe.value) {
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.all(0),
@@ -54,7 +54,7 @@ class _headerAulaState extends State<headerAula> {
                   child: const Center(child: Text('+')),
                   onPressed: () => headerAula_controller.instance.adicionarPosicao(widget.aula),
                 );
-              } else if(headerAula_controller.instance.userStore.logado == true){
+              } else {
                 return ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       padding: EdgeInsets.all(0),

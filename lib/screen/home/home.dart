@@ -119,11 +119,12 @@ class _HomeState extends State<Home> {
     await _notifications.initialize(initializationSettings);
 
     tz.initializeTimeZones();
-    await _notifications.cancelAll().then((value) => print('asdxcv'));
+    //await _notifications.cancelAll().then((value) => print('asdxcv'));
+    await _notifications.cancelAll();
     await setWeekMonthNotifications();
     final List<PendingNotificationRequest> pendingNotificationRequests =
     await _notifications.pendingNotificationRequests();
-    print(pendingNotificationRequests);
+    //print(pendingNotificationRequests);
   }
 
 

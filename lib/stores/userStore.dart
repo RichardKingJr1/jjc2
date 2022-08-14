@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:jjc/models/aula_model.dart';
 import 'package:jjc/models/user_model.dart';
 import 'package:jjc/repository/aula_repository.dart';
@@ -9,6 +12,11 @@ class UserStore = UserStoreBase with _$UserStore;
 abstract class UserStoreBase with Store {
 
   var respositorio = aulaRepository();
+  final localStorage = FlutterSecureStorage();
+
+  UserStoreBase(){
+    carregarTecnicasLocais();
+  }
 
   @observable
   UserModel user = UserModel(myLib: [], myLibNogi: [], propTec: [] ,agrupamento: ['2']);
@@ -48,6 +56,8 @@ abstract class UserStoreBase with Store {
 
     logado = false;
     token = '';
+
+    localStorage.delete(key: 'user');
     
   }
 
@@ -57,7 +67,6 @@ abstract class UserStoreBase with Store {
     user.agrupamento.add(email);
 
     user = user;
-    //print(user);
   }
 
   @action
@@ -70,23 +79,27 @@ abstract class UserStoreBase with Store {
   void addMyLib( AulaModel aula){
     user.myLib.add(aula);
     user = user;
+    atualizaUserLocal(user);
   }
 
   @action
   void addMyLibNoGi(aula){
     user.myLibNogi.add(aula);
     user = user;
+    atualizaUserLocal(user);
   }
 
   @action removeMyLib(index){
     user.myLib.removeAt(index);
     user = user;
+    atualizaUserLocal(user);
   }
 
   @action
   void removeMyLibNoGi(index){
     user.myLibNogi.removeAt(index);
     user = user;
+    atualizaUserLocal(user);
   }
 
 
@@ -121,6 +134,24 @@ abstract class UserStoreBase with Store {
     }else{
       return user.myLibNogi;
     }
+  }
+
+  void carregarTecnicasLocais() async {
+    String? userLocalString = await localStorage.read(key: 'user');
+    UserModel? userLocal;
+
+    if(userLocalString == null){
+     userLocal =  UserModel(myLib: [], myLibNogi: [], propTec: [] ,agrupamento: ['2']);
+    }else{
+      userLocal = UserModel.fromJson(json.decode(userLocalString));
+    }
+    
+    user = userLocal;
+  }
+
+  void atualizaUserLocal(UserModel user) {
+    String userString = json.encode(user.toJson()); 
+    localStorage.write(key: 'user', value: userString);
   }
 
   List<AulaModel> get getMyTec => user.propTec;

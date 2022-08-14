@@ -37,7 +37,7 @@ class AulaModel {
   };
 
   factory AulaModel.fromJson(Map<String, dynamic> json) {
-    print(json);
+    //print(json);
     
     return AulaModel(
       agrupamento: json["agrupamento"] == null ? null : json["agrupamento"],
@@ -53,7 +53,7 @@ class AulaModel {
       fim: json["fim"] == null ? null : json["fim"],
       passo: json["passo"] == null ? null : json["passo"],
       gi: json["gi"] == null ? true : json["gi"] == 'true' ? true : json["gi"] == 'false' ? false : json["gi"] == true ? true : false,
-      reps: json["reps"] == null ? null : json["reps"],
+      reps: json["reps"] == null ? 0 : json["reps"],
   );
   }
 

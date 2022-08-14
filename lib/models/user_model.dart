@@ -55,9 +55,9 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     id_user: json["id_user"],
     email: json["email"],
-    myLib: List<AulaModel>.from((json['myLib'] as List).map((x) => AulaModel.fromJson(json))),
-    myLibNogi: List<AulaModel>.from((json['myLibNogi'] as List).map((x) => AulaModel.fromJson(json))),
-    propTec: List<AulaModel>.from((json['propTec'] as List).map((x) => AulaModel.fromJson(json))),
+    myLib: List<AulaModel>.from((json['myLib'] as List).map((x) => AulaModel.fromJson(x))),
+    myLibNogi: List<AulaModel>.from((json['myLibNogi'] as List).map((x) => AulaModel.fromJson(x))),
+    propTec: List<AulaModel>.from((json['propTec'] as List).map((x) => AulaModel.fromJson(x))),
     agrupamento: List<String>.from((json['agrupamento'] as List).map((x) => x)),
   );  
 
