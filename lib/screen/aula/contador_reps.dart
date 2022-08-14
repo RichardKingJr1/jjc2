@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Contador extends StatefulWidget {
   final int index;
@@ -24,7 +25,7 @@ class _ContadorState extends State<Contador> {
     return Container(
       child: Row(
         children: [
-           const Text("Repetições: ", style: TextStyle(color: Colors.black, fontSize: 18),),
+           Text(AppLocalizations.of(context)!.reps, style: TextStyle(color: Colors.black, fontSize: 18),),
           SizedBox(
             width: 40,
             child: ElevatedButton(
@@ -37,7 +38,7 @@ class _ContadorState extends State<Contador> {
           ),
           Observer(
             builder: (_) {   
-              print('****INDEX: '+widget.globalStore.index.toString()); 
+              //print('****INDEX: '+widget.globalStore.index.toString()); 
               if(widget.globalStore.existe) {
                 return SizedBox(
                   width: 100,
