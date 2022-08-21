@@ -80,7 +80,7 @@ class UserModel {
       myLibNogi:List<AulaModel>.from((json['m_tec_nogi'] as List).map((x) => AulaModel.fromJson(x))),
       propTec: List<AulaModel>.from((json['prop_tec'] as List).map((x) => AulaModel.fromJson(x))),
       //agrupamento: List<String>.from((json['agrupamento'] as List).map((x) => x)),
-      agrupamento: List<String>.from((json['libs'] as List).map((x) => x)),
+      agrupamento: json['libs'] == null ? ['2'] : List<String>.from((json['libs'] as List).map((x) => x)),
     );
   }
 

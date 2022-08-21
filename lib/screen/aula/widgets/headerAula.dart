@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:jjc/screen/aula/headerAula_controller.dart';
+import 'package:jjc/screen/aula/widgets/headerAula_controller.dart';
 /* import 'package:http/http.dart' as http;
 import 'dart:convert'; */
 
