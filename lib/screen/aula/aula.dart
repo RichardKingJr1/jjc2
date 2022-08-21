@@ -1,17 +1,18 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:jjc/screen/aula/contador_reps.dart';
-import 'package:jjc/screen/aula/headerAula.dart';
+import 'package:jjc/screen/aula/widgets/contador_reps.dart';
+import 'package:jjc/screen/aula/widgets/headerAula.dart';
+import 'package:jjc/screen/aula/widgets/recomendacoes.dart';
 import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
 import 'package:jjc/widgets/scaffoldStandartBack.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:jjc/global_services/global.dart' as global;
-import 'dart:developer';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Aula extends StatefulWidget {
@@ -64,7 +65,6 @@ class _AulaState extends State<Aula> {
 
   @override
   Widget build(BuildContext context) {
-    //print(aula_info);
     const player = YoutubePlayerIFrame();
     return YoutubePlayerControllerProvider(
         // Passing controller to widgets below.
@@ -78,35 +78,55 @@ class _AulaState extends State<Aula> {
   //Body do elemento
   Container corpoElemento1(player) {
     return Container(
-        child: Column(
-      children: [
-        player,
-        Container(
-          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
-          child: Observer(
-            builder: (_) {
-              print('****INDEX: '+widget.globalStore.index.toString());
-              return Column(
-                children: [
-                  headerAula(
-                    nomeAula: aula_info['nome'],
-                    //existe: widget.globalStore.existe,
-                    aula: widget.aula,
+      child: Column(
+        children: [
+          player,
+          Expanded(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 12),
+              child: ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                child: SingleChildScrollView(
+                  child: Observer(
+                    builder: (context) {
+                      return Column( 
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          headerAula(
+                            nomeAula: aula_info['nome'],
+                            //existe: widget.globalStore.existe,
+                            aula: widget.aula,
+                          ),
+                          if(widget.globalStore.existe)
+                            Contador(index: widget.globalStore.index, gi: widget.globalStore.gi),
+                          SizedBox(height: 10),
+                          Text(
+                            aula_info['passo'] ?? '',
+                            style: const TextStyle(color: Colors.black, fontSize: 15),
+                          ),
+                          SizedBox(height: 15),
+                          Text(
+                            'Recomendações',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
+                          ),
+                          SizedBox(height: 2),
+                          Recomendacoes(),
+                        ],
+                      );
+                    }
                   ),
-                  if(widget.globalStore.existe)
-                    Contador(index: widget.globalStore.index, gi: widget.globalStore.gi),
-                  Text(
-                    aula_info['passo'] ?? '',
-                    style: const TextStyle(color: Colors.black, fontSize: 15),
-                  ),
-                ],
-              );
-            }
+                ),
+              ),
+            ),
           ),
-        ),
-      ],
-    ));
+        ],
+      )
+    );
   }
+
 
   dynamic getData() async {
     setState(() {
@@ -132,10 +152,10 @@ class _AulaState extends State<Aula> {
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ]);
-      log('Entered Fullscreen');
+      //log('Entered Fullscreen');
     };
     _controller.onExitFullscreen = () {
-      log('Exited Fullscreen');
+      //log('Exited Fullscreen');
     };
   }
 
