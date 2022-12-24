@@ -12,8 +12,8 @@ class ScaffoldStandart extends StatelessWidget {
   Widget bodyElement;
   String titulo;
   int index;
-  bool button;
-  ScaffoldStandart({Key? key, required this.bodyElement, required this.titulo, required this.index, required this.button})
+  bool? button;
+  ScaffoldStandart({Key? key, required this.bodyElement, required this.titulo, required this.index, this.button})
       : super(key: key);
 
   @override
@@ -32,7 +32,7 @@ class ScaffoldStandart extends StatelessWidget {
           child: bodyElement,
         ),
         bottomNavigationBar: appBotton(cont: context, selectedIndex: index),
-        floatingActionButton:floating(button: button),
+        floatingActionButton:button != null ? floating(button: button!) : Container(),
         //floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       );
     });

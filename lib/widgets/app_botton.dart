@@ -24,6 +24,8 @@ class _appBottonState extends State<appBotton> {
         BottomNavigationBarItem(
             icon: Icon(Icons.local_library), label: ''),
         BottomNavigationBarItem(
+            icon: Icon(Icons.auto_awesome_motion), label: ''),
+        BottomNavigationBarItem(
             icon: Icon(Icons.library_add), label: ''),
         /* BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today), title: Container(height: 0.0)) */
@@ -47,9 +49,13 @@ class _appBottonState extends State<appBotton> {
           break;
         case 2:
           Navigator.of(widget.cont)
-              .pushNamedAndRemoveUntil('/add', (Route<dynamic> route) => false);
+              .pushNamedAndRemoveUntil('/review', (Route<dynamic> route) => false);
           break;
         case 3:
+          Navigator.of(widget.cont)
+              .pushNamedAndRemoveUntil('/add', (Route<dynamic> route) => false);
+          break;
+        case 4:
           Navigator.of(widget.cont).pushNamedAndRemoveUntil(
               '/plans', (Route<dynamic> route) => false);
           break;

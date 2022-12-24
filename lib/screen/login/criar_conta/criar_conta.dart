@@ -5,15 +5,15 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-class criarConta extends StatefulWidget {
+class CriarConta extends StatefulWidget {
 
-  criarConta({Key? key}) : super(key: key);
+  const CriarConta({Key? key}) : super(key: key);
 
   @override
-  _criarContaState createState() => _criarContaState();
+  _CriarContaState createState() => _CriarContaState();
 }
 
-class _criarContaState extends State<criarConta> {
+class _CriarContaState extends State<CriarConta> {
   
   var instance = criarContaController();
 

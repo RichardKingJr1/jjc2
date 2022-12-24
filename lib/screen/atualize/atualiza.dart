@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class atualize extends StatefulWidget {
-  const atualize({Key? key}) : super(key: key);
+class Atualize extends StatefulWidget {
+  const Atualize({Key? key}) : super(key: key);
 
   @override
-  _atualizeState createState() => _atualizeState();
+  _AtualizeState createState() => _AtualizeState();
 }
 
-class _atualizeState extends State<atualize> {
+class _AtualizeState extends State<Atualize> {
   @override
   Widget build(BuildContext context) {
     return Container(

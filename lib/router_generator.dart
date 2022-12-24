@@ -16,6 +16,8 @@ import 'package:jjc/screen/perfil/minhas%20posicoes/minhas_posicoes.dart';
 import 'package:jjc/screen/posicoes/posicoes.dart';
 import 'package:jjc/screen/atualize/atualiza.dart';
 import 'package:jjc/screen/precarregamento/precarregamento.dart';
+import 'package:jjc/screen/review_cards/review_card.dart';
+import 'package:jjc/screen/review_cards/review_cards_backup.dart';
 import 'package:jjc/screen/t_plans/t_plans.dart';
 import 'package:jjc/stores/userStore.dart';
 
@@ -31,7 +33,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => PreCarregamento());
 
       case '':
-        return MaterialPageRoute(builder: (_) => atualize());
+        return MaterialPageRoute(builder: (_) => Atualize());
 
       case '/':
         return MaterialPageRoute(builder: (_) => Home());
@@ -53,12 +55,16 @@ class RouteGenerator {
 
       case '/add':
         if (userStore.logado == true) {
-          return MaterialPageRoute(builder: (_) => addPosicao());
+          return MaterialPageRoute(builder: (_) => AddPosicao());
         } else {
           return MaterialPageRoute(builder: (_) => Login());
         }
+
+      case '/review':
+        return MaterialPageRoute(builder: (_) => ReviewCard());
+
       case '/plans':
-        return MaterialPageRoute(builder: (_) => t_plans());
+        return MaterialPageRoute(builder: (_) => TPlans());
 
       /* Area de Login */
       case '/recuperar_senha':
@@ -66,7 +72,7 @@ class RouteGenerator {
       case '/login':
         return MaterialPageRoute(builder: (_) => Login());
       case '/criar_conta':
-        return MaterialPageRoute(builder: (_) => criarConta());
+        return MaterialPageRoute(builder: (_) => CriarConta());
 
       /* Area Perfil */
       case '/perfil':

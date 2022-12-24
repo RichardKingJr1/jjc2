@@ -5,15 +5,15 @@ import 'package:jjc/widgets/scaffoldStandart.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class addPosicao extends StatefulWidget {
+class AddPosicao extends StatefulWidget {
 
-  addPosicao({Key? key}) : super(key: key);
+  AddPosicao({Key? key}) : super(key: key);
 
   @override
-  _addPosicaoState createState() => _addPosicaoState();
+  _AddPosicaoState createState() => _AddPosicaoState();
 }
 
-class _addPosicaoState extends State<addPosicao> {
+class _AddPosicaoState extends State<AddPosicao> {
 
   AddController instance = AddController(repositorio: aulaRepository());
 

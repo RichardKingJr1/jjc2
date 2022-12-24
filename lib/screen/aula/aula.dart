@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,12 +66,12 @@ class _AulaState extends State<Aula> {
   Widget build(BuildContext context) {
     const player = YoutubePlayerIFrame();
     return YoutubePlayerControllerProvider(
-        // Passing controller to widgets below.
-        controller: _controller,
-        child: ScaffoldStandartBack(
-          bodyElement: corpoElemento1(player),
-          titulo: AppLocalizations.of(context)!.aula,
-        ));
+      // Passing controller to widgets below.
+      controller: _controller,
+      child: ScaffoldStandartBack(
+        bodyElement: corpoElemento1(player),
+        titulo: AppLocalizations.of(context)!.aula,
+    ));
   }
 
   //Body do elemento

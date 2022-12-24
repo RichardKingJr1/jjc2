@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jjc/repository/analytics_repository.dart';
 import 'package:jjc/router_generator.dart';
+import 'package:jjc/screen/review_cards/reviewStore.dart';
 import 'package:jjc/stores/globalStore.dart';
 import 'package:jjc/stores/userStore.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -18,6 +19,7 @@ Future<void> main() async {
   getIt.registerSingleton<UserStore>(UserStore());
   getIt.registerSingleton<GlobalStore>(GlobalStore());
   getIt.registerSingleton<AnalyticsService>(AnalyticsService());
+  getIt.registerSingleton<ReviewStore>(ReviewStore(UserStore().user.myLib.length, UserStore().user.myLibNogi.length));
 
   runApp(MyApp());
 }

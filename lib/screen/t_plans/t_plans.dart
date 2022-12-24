@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:jjc/widgets/app_botton.dart';
 import 'package:jjc/widgets/menuDrawer.dart';
 
-class t_plans extends StatefulWidget {
-  const t_plans({Key? key}) : super(key: key);
+class TPlans extends StatefulWidget {
+  const TPlans({Key? key}) : super(key: key);
 
   @override
-  _t_plansState createState() => _t_plansState();
+  _TPlansState createState() => _TPlansState();
 }
 
-class _t_plansState extends State<t_plans> {
+class _TPlansState extends State<TPlans> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

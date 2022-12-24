@@ -19,13 +19,13 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   var analyticsService = GetIt.I.get<AnalyticsService>();
-  final _notifications = FlutterLocalNotificationsPlugin();
+  //final _notifications = FlutterLocalNotificationsPlugin();
 
   final Mensagens mensagens = Mensagens();
 
   @override
   void initState() {
-    initNotifications();
+    //initNotifications();
     super.initState();
   } 
 
@@ -46,7 +46,7 @@ class _HomeState extends State<Home> {
     await analyticsService.analytics.logEvent(name: 'name');
   }
 
-  Future<void> showScheduledNotification({
+  /* Future<void> showScheduledNotification({
     int id = 0,
     title, 
     body, 
@@ -60,9 +60,9 @@ class _HomeState extends State<Home> {
     notificationDetails,
     uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime, 
     androidAllowWhileIdle: true
-  );
+  ); */
 
-  Future<void> setWeekMonthNotifications()async{
+  /* Future<void> setWeekMonthNotifications()async{
 
     DateTime now = new DateTime.now();
 
@@ -101,9 +101,9 @@ class _HomeState extends State<Home> {
             fullScreenIntent: true))
     );
 
-  }
+  } */
 
-  void initNotifications() async {
+  /* void initNotifications() async {
 
     const AndroidInitializationSettings initializationSettingsAndroid =
     AndroidInitializationSettings('@mipmap/ic_launcher');
@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
     final List<PendingNotificationRequest> pendingNotificationRequests =
     await _notifications.pendingNotificationRequests();
     //print(pendingNotificationRequests);
-  }
+  } */
 
 
 }
