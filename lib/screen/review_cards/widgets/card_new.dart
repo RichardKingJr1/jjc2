@@ -1,12 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jjc/models/aula_model.dart';
-import 'package:provider/provider.dart';
+import 'package:jjc/screen/review_cards/reviewStore.dart';
 
-class CardWidget extends StatelessWidget {
+class CardWidget extends StatefulWidget {
   final AulaModel aula;
   final bool isFront;
-
 
   const CardWidget({
     required this.aula,
@@ -15,56 +17,104 @@ class CardWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    //final swipingDirection = provider.swipingDirection;
-    final size = MediaQuery.of(context).size;
+  State<CardWidget> createState() => _CardWidgetState();
+}
 
-    return Container(
-      height: size.height * 0.8,
-      width: size.width * 0.95,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        image: DecorationImage(
-          //image: AssetImage(aula.idVideo ?? ''),
-          image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png'),
-          fit: BoxFit.cover,
-        ),
+class _CardWidgetState extends State<CardWidget> {
+  var reviewStore = GetIt.I.get<ReviewStore>();
+
+  @override
+  Widget build(BuildContext context) {
+    //final swipingDirection = provider.swipingDirection
+    final size = MediaQuery.of(context).size;
+    return widget.isFront? buildFrontCard(context, size) : buildCard(size);
+  }
+
+  Widget buildFrontCard(BuildContext context, Size size){
+
+    return GestureDetector(
+      child:  LayoutBuilder(
+        builder: (context, constraints) {
+          return Observer(
+            builder: (context) {
+
+              final position = reviewStore.position;
+              final miliseconds = reviewStore.isDraggin ? 0 : 400;
+
+              final center = constraints.smallest.center(Offset.zero);
+              final angle = reviewStore.angle * pi / 600;
+              final rotatedMatrix = Matrix4.identity()
+              ..translate(-center.dx, -center.dy)
+              ..rotateZ(angle)
+              ..translate(center.dx, center.dy);
+
+              return Container(
+                child: AnimatedContainer(
+                  curve: Curves.easeInOut,
+                  duration: Duration(microseconds: miliseconds),
+                  transform: rotatedMatrix..translate(position.dx, position.dy),
+                  child: Container(
+                    height: size.height * 0.8,
+                    width: size.width * 0.95,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        //image: AssetImage(aula.idVideo ?? ''),
+                        image: NetworkImage(widget.aula.idVideo ?? ""),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black12, spreadRadius: 0.5),
+                        ],
+                        gradient: LinearGradient(
+                          colors: [Colors.black12, Colors.black87],
+                          begin: Alignment.center,
+                          stops: [0.4, 1],
+                          end: Alignment.bottomCenter,
+                        ),
+                      ),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            right: 10,
+                            left: 10,
+                            bottom: 10,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                buildUserInfo(aula: widget.aula),
+                                Padding(
+                                  padding: EdgeInsets.only(bottom: 16, right: 8),
+                                  child: Icon(Icons.info, color: Colors.white),
+                                )
+                              ],
+                            ),
+                          ),
+                          //if (isUserInFocus) buildLikeBadge(swipingDirection)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            }
+          );
+        },
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(color: Colors.black12, spreadRadius: 0.5),
-          ],
-          gradient: LinearGradient(
-            colors: [Colors.black12, Colors.black87],
-            begin: Alignment.center,
-            stops: [0.4, 1],
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: Stack(
-          children: [
-            Positioned(
-              right: 10,
-              left: 10,
-              bottom: 10,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildUserInfo(aula: aula),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 16, right: 8),
-                    child: Icon(Icons.info, color: Colors.white),
-                  )
-                ],
-              ),
-            ),
-            //if (isUserInFocus) buildLikeBadge(swipingDirection)
-          ],
-        ),
-      ),
+      onPanStart: (details) {
+      reviewStore.startPosition(details);
+      },
+      onPanUpdate: (details) {
+        reviewStore.updatePosition(details);
+      },
+      onPanEnd: (_) {
+        reviewStore.endPosition();
+      },
     );
   }
 
@@ -129,4 +179,54 @@ class CardWidget extends StatelessWidget {
           ],
         ),
       );
+
+  Widget buildCard(Size size) {
+    return Container(
+      height: size.height * 0.8,
+      width: size.width * 0.95,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        image: DecorationImage(
+          //image: AssetImage(aula.idVideo ?? ''),
+          image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(color: Colors.black12, spreadRadius: 0.5),
+          ],
+          gradient: LinearGradient(
+            colors: [Colors.black12, Colors.black87],
+            begin: Alignment.center,
+            stops: [0.4, 1],
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              right: 10,
+              left: 10,
+              bottom: 10,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildUserInfo(aula: widget.aula),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 16, right: 8),
+                    child: Icon(Icons.info, color: Colors.white),
+                  )
+                ],
+              ),
+            ),
+            //if (isUserInFocus) buildLikeBadge(swipingDirection)
+          ],
+        ),
+      ),
+    );
+  }
 }

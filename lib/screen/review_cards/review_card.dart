@@ -21,7 +21,6 @@ class ReviewCard extends StatefulWidget {
 class _ReviewCardState extends State<ReviewCard> {
 
   late YoutubePlayerController _controller;
-  //CardController cardController = CardController();
   var reviewStore = GetIt.I.get<ReviewStore>();
 
   @override
@@ -74,48 +73,11 @@ class _ReviewCardState extends State<ReviewCard> {
       controller: _controller,
       child: ScaffoldStandart(
         //bodyElement: Stack(children: reviewStore.aulas.map(buildCard).toList()),
-        bodyElement: buildFrontCard(),
+        bodyElement: buildCard(),
         titulo: "JJC",
         index: 2,
     ));
   } 
-
-  Widget buildFrontCard() => GestureDetector(
-    child:  LayoutBuilder(
-      builder: (context, constraints) {
-        return Observer(
-          builder: (context) {
-
-            final position = reviewStore.position;
-            final miliseconds = reviewStore.isDraggin ? 0 : 400;
-
-            final center = constraints.smallest.center(Offset.zero);
-            final angle = reviewStore.angle * pi / 600;
-            final rotatedMatrix = Matrix4.identity()
-              ..translate(-center.dx, -center.dy)
-              ..rotateZ(angle)
-              ..translate(center.dx, center.dy);
-            return AnimatedContainer(
-              curve: Curves.easeInOut,
-              duration: Duration(microseconds: miliseconds),
-              transform: rotatedMatrix..translate(position.dx, position.dy),
-              child: buildCard(),
-            );
-          }
-        );
-      }
-    ),
-
-    onPanStart: (details) {
-      reviewStore.startPosition(details);
-    },
-    onPanUpdate: (details) {
-      reviewStore.updatePosition(details);
-    },
-    onPanEnd: (_) {
-      reviewStore.endPosition();
-    },
-  );
 
   Widget buildCard()  {
     List<AulaModel> aulas = reviewStore.aulas;
@@ -130,8 +92,5 @@ class _ReviewCardState extends State<ReviewCard> {
       }).toList(),
     );
 
-   /*  return Center(
-      child: CardWidget(aula: aula),
-    ); */
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:jjc/models/aula_model.dart';
+import 'package:jjc/screen/review_cards/enum/cardEnum.dart';
 import 'package:mobx/mobx.dart';
 part 'reviewStore.g.dart';
 
@@ -14,10 +15,12 @@ class ReviewStore = ReviewStoreBase with _$ReviewStore;
 abstract class ReviewStoreBase with Store {
 
   @observable
-  List<AulaModel> aulas = [AulaModel(nome: '1'), AulaModel(nome: '2'), AulaModel(nome: '3')];
+  List<AulaModel> aulas = [
+    AulaModel(nome: '1', idVideo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png"), 
+    AulaModel(nome: '2', idVideo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png"), 
+    AulaModel(nome: '3', idVideo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/220px-Image_created_with_a_mobile_phone.png")
+  ];
 
-  //await localStorage.write(key: "credenciais", value: json.encode(dataObj));
-  //await localStorage.read(key: 'credenciais');
   @observable
   bool isDraggin = false; 
   @observable
@@ -42,17 +45,54 @@ abstract class ReviewStoreBase with Store {
 
   @action
   void endPosition(){
-    isDraggin = false; 
+
+    final status = getStatus();
+
+    switch(status){
+      case CardStatus.like:
+        like();
+        break;
+
+      case CardStatus.dislike:
+        dislike();
+        break;
+
+      default: 
+        break;
+    }
+    
     resetPosition();
   }
 
   void resetPosition(){
-    
+
+
+    isDraggin = false; 
     position  = Offset.zero;
     angle = 0;
   }
 
   void setScreenSize(value) => screenSize = value;
+
+  CardStatus? getStatus() {
+    final endPosition = position.dx;
+
+    final delta = 100;
+
+    if(endPosition >= delta){
+      return CardStatus.like;
+    } else if(endPosition >= -delta){
+      return CardStatus.dislike;
+    }
+  } 
+
+  void like() {
+
+  }
+
+  void dislike() {
+
+  }
 
   final localStorage = new FlutterSecureStorage();
 
